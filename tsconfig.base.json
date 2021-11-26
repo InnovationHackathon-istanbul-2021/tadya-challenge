@@ -16,5 +16,6 @@
     "baseUrl": ".",
     "paths": {}
   },
+  "include": ["tailwind.config.js","postcss.config.js"],
   "exclude": ["node_modules", "tmp"]
 }
