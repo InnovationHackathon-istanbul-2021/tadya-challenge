@@ -2,13 +2,14 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Welcome } from '../pages';
 import { CreateProducer } from '../pages/producers/create';
+import { ListProducers } from '../pages/producers/list';
 
 const AppRouter = () => {
   return (
     <Routes>
       <Route path={'/producers'}>
         <Route path={'create'} element={<CreateProducer />} />
-        <Route path={'*'} element={<>Manage Producers</>} />
+        <Route path={'list'} element={<ListProducers/>} />
       </Route>
       <Route path={'/products'}>
         <Route path={'create'} element={<>Create Products</>} />
