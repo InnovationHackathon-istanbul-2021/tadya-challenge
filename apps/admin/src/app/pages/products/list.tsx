@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client/react/hooks';
-
 import styled from 'styled-components';
-import { LIST_PRODUCERS } from './graphql/query';
-import {
-  ListProducersQueryVariables,
-  useListProducersQuery,
-} from '../../generated/graphql';
+
 import { Table } from '../../components/ui/table/table';
 import { Link } from 'react-router-dom';
+import { useListProductsQuery } from '../../generated/graphql';
 const Content = styled.div``;
 
-export const ListProducers = () => {
+export const ListProducts = () => {
   const [total, setTotal] = useState(0);
   const [pageLimit, setPageLimit] = useState(10);
   const [offset, setOffset] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
-  const [producerList, setProducerList] = useState([] as any[]);
+  const [productsList, setProductsList] = useState([] as any[]);
 
-  const { data, loading, error } = useListProducersQuery({
+  const { data, loading, error } = useListProductsQuery({
     variables: {
       offset, // value for 'offset'
       limit: pageLimit, // value for 'limit'
@@ -26,8 +21,8 @@ export const ListProducers = () => {
   });
   useEffect(() => {
     if (data) {
-      setProducerList(data.producers);
-      setTotal(data?.producers_aggregate.aggregate?.count as number);
+      setProductsList(data.products);
+      setTotal(data?.products_aggregate.aggregate?.count as number);
     }
   }, [data]);
   const columns = React.useMemo(
@@ -37,30 +32,28 @@ export const ListProducers = () => {
         accessor: 'id',
       },
       {
+        Header: 'Producer',
+        accessor: 'producer.title',
+      },
+      {
         Header: 'Title',
         accessor: 'title',
       },
       {
-        Header: 'Name',
+        Header: 'Quantity',
         Cell: ({ row }: any) => {
           return (
-            <div>
-              {row.original.user.first_name + ' ' + row.original.user.last_name}
-            </div>
+            <div>{row.original.quantity + ' ' + row.original.measure_unit}</div>
           );
         },
       },
       {
-        Header: 'Email',
-        accessor: 'user.email',
-      },
-      {
-        Header: 'Phone Number',
-        accessor: 'user.phone_number',
+        Header: 'Price',
+        accessor: 'price',
       },
       {
         Header: 'Action',
-        width: "20%",
+        width: '20%',
         Cell: ({ row }: any) => {
           return (
             <div className="inline-flex space-x-2 text-blue-300	">
@@ -75,18 +68,18 @@ export const ListProducers = () => {
         },
       },
     ],
-    [producerList]
+    [productsList]
   );
 
   return (
     <Content className="flex h-full mx-auto pt-8">
       <div className="container bg-white shadow rounded">
         <div>
-        <div className="sm:px-6 w-full">
+          <div className="sm:px-6 w-full">
             <div className="px-4 md:px-10 py-4 md:py-7">
               <div className="lg:flex items-center justify-between">
                 <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
-                  List Producers
+                  List Products
                 </p>
                 <div className="md:flex items-center mt-6 lg:mt-0">
                   <div className="flex items-center">
@@ -125,15 +118,17 @@ export const ListProducers = () => {
                     <div className="w-40 py-2 px-3 bg-white lg:ml-3 border rounded border-gray-200">
                       <select className="w-full text-sm leading-3 text-gray-500 focus:outline-none">
                         <option>Producer</option>
+                        <option>Name</option>
                         <option>ID</option>
+                        <option>Active</option>
                       </select>
                     </div>
                     <Link
-                      to="/producers/create"
+                      to="/products/create"
                       className="inline-flex ml-1.5 items-start justify-start px-6 py-3 bg-blue-500 hover:bg-blue-600 focus:outline-none rounded"
                     >
                       <p className="text-sm font-medium leading-none text-white">
-                        Add Producer
+                        Add Product
                       </p>
                     </Link>
                   </div>
@@ -156,7 +151,7 @@ export const ListProducers = () => {
                 pageIndex={pageIndex}
                 perPage={pageLimit}
                 columns={columns}
-                data={producerList}
+                data={productsList}
               />
             </div>
           </div>

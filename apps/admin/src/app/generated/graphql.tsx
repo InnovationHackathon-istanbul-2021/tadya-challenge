@@ -2993,6 +2993,13 @@ export type Producers_Mutation_Response = {
   returning: Array<Producers>;
 };
 
+/** input type for inserting object relation for remote table "producers" */
+export type Producers_Obj_Rel_Insert_Input = {
+  data: Producers_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Producers_On_Conflict>;
+};
+
 /** on conflict condition type for table "producers" */
 export type Producers_On_Conflict = {
   constraint: Producers_Constraint;
@@ -3124,18 +3131,21 @@ export type Products = {
   __typename?: 'products';
   alias: Scalars['String'];
   base_id?: Maybe<Scalars['Int']>;
-  category_id: Scalars['Int'];
+  category_id?: Maybe<Scalars['Int']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   image?: Maybe<Scalars['String']>;
   measure_unit: Scalars['String'];
+  packing_type?: Maybe<Scalars['String']>;
   price: Scalars['numeric'];
+  /** An object relationship */
+  producer: Producers;
   producer_id: Scalars['Int'];
   quantity: Scalars['numeric'];
+  quote_on_call?: Maybe<Scalars['Boolean']>;
   sku: Scalars['String'];
   thumbnail?: Maybe<Scalars['String']>;
   title: Scalars['String'];
-  weight: Scalars['numeric'];
 };
 
 /** aggregated selection of "products" */
@@ -3177,7 +3187,6 @@ export type Products_Avg_Fields = {
   price?: Maybe<Scalars['Float']>;
   producer_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  weight?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "products". All fields are combined with a logical 'AND'. */
@@ -3192,13 +3201,15 @@ export type Products_Bool_Exp = {
   id?: InputMaybe<Int_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
   measure_unit?: InputMaybe<String_Comparison_Exp>;
+  packing_type?: InputMaybe<String_Comparison_Exp>;
   price?: InputMaybe<Numeric_Comparison_Exp>;
+  producer?: InputMaybe<Producers_Bool_Exp>;
   producer_id?: InputMaybe<Int_Comparison_Exp>;
   quantity?: InputMaybe<Numeric_Comparison_Exp>;
+  quote_on_call?: InputMaybe<Boolean_Comparison_Exp>;
   sku?: InputMaybe<String_Comparison_Exp>;
   thumbnail?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
-  weight?: InputMaybe<Numeric_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "products" */
@@ -3215,7 +3226,6 @@ export type Products_Inc_Input = {
   price?: InputMaybe<Scalars['numeric']>;
   producer_id?: InputMaybe<Scalars['Int']>;
   quantity?: InputMaybe<Scalars['numeric']>;
-  weight?: InputMaybe<Scalars['numeric']>;
 };
 
 /** input type for inserting data into table "products" */
@@ -3227,13 +3237,15 @@ export type Products_Insert_Input = {
   id?: InputMaybe<Scalars['Int']>;
   image?: InputMaybe<Scalars['String']>;
   measure_unit?: InputMaybe<Scalars['String']>;
+  packing_type?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['numeric']>;
+  producer?: InputMaybe<Producers_Obj_Rel_Insert_Input>;
   producer_id?: InputMaybe<Scalars['Int']>;
   quantity?: InputMaybe<Scalars['numeric']>;
+  quote_on_call?: InputMaybe<Scalars['Boolean']>;
   sku?: InputMaybe<Scalars['String']>;
   thumbnail?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
-  weight?: InputMaybe<Scalars['numeric']>;
 };
 
 /** aggregate max on columns */
@@ -3246,13 +3258,13 @@ export type Products_Max_Fields = {
   id?: Maybe<Scalars['Int']>;
   image?: Maybe<Scalars['String']>;
   measure_unit?: Maybe<Scalars['String']>;
+  packing_type?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['numeric']>;
   producer_id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
   sku?: Maybe<Scalars['String']>;
   thumbnail?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  weight?: Maybe<Scalars['numeric']>;
 };
 
 /** aggregate min on columns */
@@ -3265,13 +3277,13 @@ export type Products_Min_Fields = {
   id?: Maybe<Scalars['Int']>;
   image?: Maybe<Scalars['String']>;
   measure_unit?: Maybe<Scalars['String']>;
+  packing_type?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['numeric']>;
   producer_id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
   sku?: Maybe<Scalars['String']>;
   thumbnail?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  weight?: Maybe<Scalars['numeric']>;
 };
 
 /** response of any mutation on the table "products" */
@@ -3299,13 +3311,15 @@ export type Products_Order_By = {
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
   measure_unit?: InputMaybe<Order_By>;
+  packing_type?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
+  producer?: InputMaybe<Producers_Order_By>;
   producer_id?: InputMaybe<Order_By>;
   quantity?: InputMaybe<Order_By>;
+  quote_on_call?: InputMaybe<Order_By>;
   sku?: InputMaybe<Order_By>;
   thumbnail?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
-  weight?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: products */
@@ -3330,19 +3344,21 @@ export enum Products_Select_Column {
   /** column name */
   MeasureUnit = 'measure_unit',
   /** column name */
+  PackingType = 'packing_type',
+  /** column name */
   Price = 'price',
   /** column name */
   ProducerId = 'producer_id',
   /** column name */
   Quantity = 'quantity',
   /** column name */
+  QuoteOnCall = 'quote_on_call',
+  /** column name */
   Sku = 'sku',
   /** column name */
   Thumbnail = 'thumbnail',
   /** column name */
-  Title = 'title',
-  /** column name */
-  Weight = 'weight'
+  Title = 'title'
 }
 
 /** input type for updating data in table "products" */
@@ -3354,13 +3370,14 @@ export type Products_Set_Input = {
   id?: InputMaybe<Scalars['Int']>;
   image?: InputMaybe<Scalars['String']>;
   measure_unit?: InputMaybe<Scalars['String']>;
+  packing_type?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['numeric']>;
   producer_id?: InputMaybe<Scalars['Int']>;
   quantity?: InputMaybe<Scalars['numeric']>;
+  quote_on_call?: InputMaybe<Scalars['Boolean']>;
   sku?: InputMaybe<Scalars['String']>;
   thumbnail?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
-  weight?: InputMaybe<Scalars['numeric']>;
 };
 
 /** aggregate stddev on columns */
@@ -3372,7 +3389,6 @@ export type Products_Stddev_Fields = {
   price?: Maybe<Scalars['Float']>;
   producer_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  weight?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -3384,7 +3400,6 @@ export type Products_Stddev_Pop_Fields = {
   price?: Maybe<Scalars['Float']>;
   producer_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  weight?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -3396,7 +3411,6 @@ export type Products_Stddev_Samp_Fields = {
   price?: Maybe<Scalars['Float']>;
   producer_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  weight?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
@@ -3408,7 +3422,6 @@ export type Products_Sum_Fields = {
   price?: Maybe<Scalars['numeric']>;
   producer_id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
-  weight?: Maybe<Scalars['numeric']>;
 };
 
 /** update columns of table "products" */
@@ -3428,19 +3441,21 @@ export enum Products_Update_Column {
   /** column name */
   MeasureUnit = 'measure_unit',
   /** column name */
+  PackingType = 'packing_type',
+  /** column name */
   Price = 'price',
   /** column name */
   ProducerId = 'producer_id',
   /** column name */
   Quantity = 'quantity',
   /** column name */
+  QuoteOnCall = 'quote_on_call',
+  /** column name */
   Sku = 'sku',
   /** column name */
   Thumbnail = 'thumbnail',
   /** column name */
-  Title = 'title',
-  /** column name */
-  Weight = 'weight'
+  Title = 'title'
 }
 
 /** aggregate var_pop on columns */
@@ -3452,7 +3467,6 @@ export type Products_Var_Pop_Fields = {
   price?: Maybe<Scalars['Float']>;
   producer_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  weight?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
@@ -3464,7 +3478,6 @@ export type Products_Var_Samp_Fields = {
   price?: Maybe<Scalars['Float']>;
   producer_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  weight?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
@@ -3476,7 +3489,6 @@ export type Products_Variance_Fields = {
   price?: Maybe<Scalars['Float']>;
   producer_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  weight?: Maybe<Scalars['Float']>;
 };
 
 export type Query_Root = {
@@ -4489,6 +4501,15 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type ListProductsByProducerQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  producer_id?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type ListProductsByProducerQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'products', id: number, image?: string | null | undefined, measure_unit: string, packing_type?: string | null | undefined, price: any, quantity: any, quote_on_call?: boolean | null | undefined, sku: string, thumbnail?: string | null | undefined, title: string }> };
+
 export type Insert_ProducerMutationVariables = Exact<{
   payload: Producers_Insert_Input;
 }>;
@@ -4504,7 +4525,73 @@ export type ListProducersQueryVariables = Exact<{
 
 export type ListProducersQuery = { __typename?: 'query_root', producers: Array<{ __typename?: 'producers', title: string, is_active: boolean, create_offer: boolean, ref: any, id: number, alias: string, create_at: any, user: { __typename?: 'users', email: string, phone_number: string, username: string, password: string, last_name: string, is_active: boolean, id: number, first_name: string, city?: string | null | undefined, alias: string } }>, producers_aggregate: { __typename?: 'producers_aggregate', aggregate?: { __typename?: 'producers_aggregate_fields', count: number } | null | undefined } };
 
+export type InsertProductMutationVariables = Exact<{
+  payload: Products_Insert_Input;
+}>;
 
+
+export type InsertProductMutation = { __typename?: 'mutation_root', insert_products_one?: { __typename?: 'products', title: string, thumbnail?: string | null | undefined, sku: string, quote_on_call?: boolean | null | undefined, quantity: any, producer_id: number, price: any, packing_type?: string | null | undefined, measure_unit: string, image?: string | null | undefined, description?: string | null | undefined, category_id?: number | null | undefined, base_id?: number | null | undefined, alias: string } | null | undefined };
+
+export type ListProductsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type ListProductsQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'products', alias: string, description?: string | null | undefined, id: number, image?: string | null | undefined, measure_unit: string, packing_type?: string | null | undefined, price: any, producer_id: number, quantity: any, quote_on_call?: boolean | null | undefined, sku: string, thumbnail?: string | null | undefined, title: string, category_id?: number | null | undefined, base_id?: number | null | undefined, producer: { __typename?: 'producers', title: string } }>, products_aggregate: { __typename?: 'products_aggregate', aggregate?: { __typename?: 'products_aggregate_fields', count: number } | null | undefined } };
+
+
+export const ListProductsByProducerDocument = gql`
+    query ListProductsByProducer($limit: Int = 100, $offset: Int = 0, $producer_id: Int = 3) {
+  products(
+    limit: $limit
+    offset: $offset
+    order_by: {id: desc}
+    where: {producer_id: {_eq: $producer_id}}
+  ) {
+    id
+    image
+    measure_unit
+    packing_type
+    price
+    quantity
+    quote_on_call
+    sku
+    thumbnail
+    title
+  }
+}
+    `;
+
+/**
+ * __useListProductsByProducerQuery__
+ *
+ * To run a query within a React component, call `useListProductsByProducerQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListProductsByProducerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListProductsByProducerQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      producer_id: // value for 'producer_id'
+ *   },
+ * });
+ */
+export function useListProductsByProducerQuery(baseOptions?: Apollo.QueryHookOptions<ListProductsByProducerQuery, ListProductsByProducerQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListProductsByProducerQuery, ListProductsByProducerQueryVariables>(ListProductsByProducerDocument, options);
+      }
+export function useListProductsByProducerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListProductsByProducerQuery, ListProductsByProducerQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListProductsByProducerQuery, ListProductsByProducerQueryVariables>(ListProductsByProducerDocument, options);
+        }
+export type ListProductsByProducerQueryHookResult = ReturnType<typeof useListProductsByProducerQuery>;
+export type ListProductsByProducerLazyQueryHookResult = ReturnType<typeof useListProductsByProducerLazyQuery>;
+export type ListProductsByProducerQueryResult = Apollo.QueryResult<ListProductsByProducerQuery, ListProductsByProducerQueryVariables>;
 export const Insert_ProducerDocument = gql`
     mutation INSERT_PRODUCER($payload: producers_insert_input!) {
   insert_producers_one(object: $payload) {
@@ -4603,3 +4690,107 @@ export function useListProducersLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type ListProducersQueryHookResult = ReturnType<typeof useListProducersQuery>;
 export type ListProducersLazyQueryHookResult = ReturnType<typeof useListProducersLazyQuery>;
 export type ListProducersQueryResult = Apollo.QueryResult<ListProducersQuery, ListProducersQueryVariables>;
+export const InsertProductDocument = gql`
+    mutation InsertProduct($payload: products_insert_input!) {
+  insert_products_one(object: $payload) {
+    title
+    thumbnail
+    sku
+    quote_on_call
+    quantity
+    producer_id
+    price
+    packing_type
+    measure_unit
+    image
+    description
+    category_id
+    base_id
+    alias
+  }
+}
+    `;
+export type InsertProductMutationFn = Apollo.MutationFunction<InsertProductMutation, InsertProductMutationVariables>;
+
+/**
+ * __useInsertProductMutation__
+ *
+ * To run a mutation, you first call `useInsertProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertProductMutation, { data, loading, error }] = useInsertProductMutation({
+ *   variables: {
+ *      payload: // value for 'payload'
+ *   },
+ * });
+ */
+export function useInsertProductMutation(baseOptions?: Apollo.MutationHookOptions<InsertProductMutation, InsertProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertProductMutation, InsertProductMutationVariables>(InsertProductDocument, options);
+      }
+export type InsertProductMutationHookResult = ReturnType<typeof useInsertProductMutation>;
+export type InsertProductMutationResult = Apollo.MutationResult<InsertProductMutation>;
+export type InsertProductMutationOptions = Apollo.BaseMutationOptions<InsertProductMutation, InsertProductMutationVariables>;
+export const ListProductsDocument = gql`
+    query ListProducts($limit: Int = 10, $offset: Int = 0) {
+  products(limit: $limit, offset: $offset, order_by: {id: desc}) {
+    alias
+    description
+    id
+    image
+    measure_unit
+    packing_type
+    price
+    producer_id
+    quantity
+    quote_on_call
+    sku
+    thumbnail
+    title
+    category_id
+    base_id
+    producer {
+      title
+    }
+  }
+  products_aggregate {
+    aggregate {
+      count(distinct: true, columns: id)
+    }
+  }
+}
+    `;
+
+/**
+ * __useListProductsQuery__
+ *
+ * To run a query within a React component, call `useListProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListProductsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useListProductsQuery(baseOptions?: Apollo.QueryHookOptions<ListProductsQuery, ListProductsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListProductsQuery, ListProductsQueryVariables>(ListProductsDocument, options);
+      }
+export function useListProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListProductsQuery, ListProductsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListProductsQuery, ListProductsQueryVariables>(ListProductsDocument, options);
+        }
+export type ListProductsQueryHookResult = ReturnType<typeof useListProductsQuery>;
+export type ListProductsLazyQueryHookResult = ReturnType<typeof useListProductsLazyQuery>;
+export type ListProductsQueryResult = Apollo.QueryResult<ListProductsQuery, ListProductsQueryVariables>;

@@ -45,6 +45,7 @@ export const CreateProducer = () => {
   };
   return (
     <Content className="flex h-full mx-auto pt-8">
+
       <div>
         <div>
           <Formik
@@ -68,7 +69,7 @@ export const CreateProducer = () => {
                   <div className="xl:w-full border-b border-gray-300 dark:border-gray-700 py-5">
                     <div className="flex items-center w-11/12 mx-auto">
                       <p className="text-lg text-gray-800 dark:text-gray-100 font-bold">
-                        Add Producer Information
+                        Add New Producer
                       </p>
                     </div>
                   </div>
