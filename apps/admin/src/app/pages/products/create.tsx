@@ -128,7 +128,7 @@ export const CreateProduct = () => {
                     </button>
                     <button
                       //onClick={() => handleSubmit()}
-                      className="bg-blue-700 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm focus:outline-none"
+                      className="bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm focus:outline-none"
                       type="submit"
                     >
                       Save
