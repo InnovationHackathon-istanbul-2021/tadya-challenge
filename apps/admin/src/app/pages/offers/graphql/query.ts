@@ -24,3 +24,29 @@ export const FIND_PRODUCTS_BY_PRODUCERS = gql`
     }
   }
 `;
+
+export const LIST_OFFERS = gql`
+  query LIST_OFFERS($limit: Int = 10, $offset: Int = 0) {
+    offers(limit: $limit, offset: $offset, order_by: { id: desc }) {
+      created_ate
+      end_date
+      id
+      is_active
+      offer_products {
+        id
+        is_active
+        offer_id
+        price
+        product_id
+        quantity
+      }
+      producer_id
+      start_date
+    }
+    offers_aggregate {
+      aggregate {
+        count(columns: id)
+      }
+    }
+  }
+`;

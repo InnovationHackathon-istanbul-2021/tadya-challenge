@@ -21,7 +21,7 @@ export const ListProducts = () => {
 
   const { data, loading, error } = useListProductsQuery({
     variables: {
-      offset, // value for 'offset'
+      offset: offset* pageLimit, // value for 'offset'
       limit: pageLimit, // value for 'limit'
     },
   });

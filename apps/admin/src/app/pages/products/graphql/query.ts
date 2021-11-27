@@ -29,3 +29,12 @@ export const LIST_PRODUCTS = gql`
     }
   }
 `;
+
+export const GET_PRODUCER_BY_TITLE = gql`
+  query GET_PRODUCER_BY_TITLE($payload: String = "") {
+    producers(where: { title: { _eq: $payload } }) {
+      id
+      title
+    }
+  }
+`;

@@ -797,6 +797,7 @@ export type Feedback_Form_Variance_Fields = {
 /** columns and relationships of "feedback_questions" */
 export type Feedback_Questions = {
   __typename?: 'feedback_questions';
+  category?: Maybe<Scalars['String']>;
   feedback_form_id: Scalars['Int'];
   id: Scalars['Int'];
   is_active: Scalars['Boolean'];
@@ -845,6 +846,7 @@ export type Feedback_Questions_Bool_Exp = {
   _and?: InputMaybe<Array<Feedback_Questions_Bool_Exp>>;
   _not?: InputMaybe<Feedback_Questions_Bool_Exp>;
   _or?: InputMaybe<Array<Feedback_Questions_Bool_Exp>>;
+  category?: InputMaybe<String_Comparison_Exp>;
   feedback_form_id?: InputMaybe<Int_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   is_active?: InputMaybe<Boolean_Comparison_Exp>;
@@ -865,6 +867,7 @@ export type Feedback_Questions_Inc_Input = {
 
 /** input type for inserting data into table "feedback_questions" */
 export type Feedback_Questions_Insert_Input = {
+  category?: InputMaybe<Scalars['String']>;
   feedback_form_id?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['Int']>;
   is_active?: InputMaybe<Scalars['Boolean']>;
@@ -874,6 +877,7 @@ export type Feedback_Questions_Insert_Input = {
 /** aggregate max on columns */
 export type Feedback_Questions_Max_Fields = {
   __typename?: 'feedback_questions_max_fields';
+  category?: Maybe<Scalars['String']>;
   feedback_form_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
@@ -882,6 +886,7 @@ export type Feedback_Questions_Max_Fields = {
 /** aggregate min on columns */
 export type Feedback_Questions_Min_Fields = {
   __typename?: 'feedback_questions_min_fields';
+  category?: Maybe<Scalars['String']>;
   feedback_form_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
@@ -905,6 +910,7 @@ export type Feedback_Questions_On_Conflict = {
 
 /** Ordering options when selecting data from "feedback_questions". */
 export type Feedback_Questions_Order_By = {
+  category?: InputMaybe<Order_By>;
   feedback_form_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   is_active?: InputMaybe<Order_By>;
@@ -919,6 +925,8 @@ export type Feedback_Questions_Pk_Columns_Input = {
 /** select columns of table "feedback_questions" */
 export enum Feedback_Questions_Select_Column {
   /** column name */
+  Category = 'category',
+  /** column name */
   FeedbackFormId = 'feedback_form_id',
   /** column name */
   Id = 'id',
@@ -930,6 +938,7 @@ export enum Feedback_Questions_Select_Column {
 
 /** input type for updating data in table "feedback_questions" */
 export type Feedback_Questions_Set_Input = {
+  category?: InputMaybe<Scalars['String']>;
   feedback_form_id?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['Int']>;
   is_active?: InputMaybe<Scalars['Boolean']>;
@@ -966,6 +975,8 @@ export type Feedback_Questions_Sum_Fields = {
 
 /** update columns of table "feedback_questions" */
 export enum Feedback_Questions_Update_Column {
+  /** column name */
+  Category = 'category',
   /** column name */
   FeedbackFormId = 'feedback_form_id',
   /** column name */
@@ -1892,6 +1903,7 @@ export type Offer_Products = {
   id: Scalars['Int'];
   is_active: Scalars['Boolean'];
   offer_id: Scalars['Int'];
+  price?: Maybe<Scalars['numeric']>;
   product_id: Scalars['Int'];
   quantity?: Maybe<Scalars['numeric']>;
 };
@@ -1931,6 +1943,7 @@ export type Offer_Products_Avg_Fields = {
   __typename?: 'offer_products_avg_fields';
   id?: Maybe<Scalars['Float']>;
   offer_id?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
   product_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
 };
@@ -1943,6 +1956,7 @@ export type Offer_Products_Bool_Exp = {
   id?: InputMaybe<Int_Comparison_Exp>;
   is_active?: InputMaybe<Boolean_Comparison_Exp>;
   offer_id?: InputMaybe<Int_Comparison_Exp>;
+  price?: InputMaybe<Numeric_Comparison_Exp>;
   product_id?: InputMaybe<Int_Comparison_Exp>;
   quantity?: InputMaybe<Numeric_Comparison_Exp>;
 };
@@ -1957,6 +1971,7 @@ export enum Offer_Products_Constraint {
 export type Offer_Products_Inc_Input = {
   id?: InputMaybe<Scalars['Int']>;
   offer_id?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['numeric']>;
   product_id?: InputMaybe<Scalars['Int']>;
   quantity?: InputMaybe<Scalars['numeric']>;
 };
@@ -1966,6 +1981,7 @@ export type Offer_Products_Insert_Input = {
   id?: InputMaybe<Scalars['Int']>;
   is_active?: InputMaybe<Scalars['Boolean']>;
   offer_id?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['numeric']>;
   product_id?: InputMaybe<Scalars['Int']>;
   quantity?: InputMaybe<Scalars['numeric']>;
 };
@@ -1975,6 +1991,7 @@ export type Offer_Products_Max_Fields = {
   __typename?: 'offer_products_max_fields';
   id?: Maybe<Scalars['Int']>;
   offer_id?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['numeric']>;
   product_id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
 };
@@ -1984,6 +2001,7 @@ export type Offer_Products_Min_Fields = {
   __typename?: 'offer_products_min_fields';
   id?: Maybe<Scalars['Int']>;
   offer_id?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['numeric']>;
   product_id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
 };
@@ -1995,6 +2013,13 @@ export type Offer_Products_Mutation_Response = {
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Offer_Products>;
+};
+
+/** input type for inserting object relation for remote table "offer_products" */
+export type Offer_Products_Obj_Rel_Insert_Input = {
+  data: Offer_Products_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Offer_Products_On_Conflict>;
 };
 
 /** on conflict condition type for table "offer_products" */
@@ -2009,6 +2034,7 @@ export type Offer_Products_Order_By = {
   id?: InputMaybe<Order_By>;
   is_active?: InputMaybe<Order_By>;
   offer_id?: InputMaybe<Order_By>;
+  price?: InputMaybe<Order_By>;
   product_id?: InputMaybe<Order_By>;
   quantity?: InputMaybe<Order_By>;
 };
@@ -2027,6 +2053,8 @@ export enum Offer_Products_Select_Column {
   /** column name */
   OfferId = 'offer_id',
   /** column name */
+  Price = 'price',
+  /** column name */
   ProductId = 'product_id',
   /** column name */
   Quantity = 'quantity'
@@ -2037,6 +2065,7 @@ export type Offer_Products_Set_Input = {
   id?: InputMaybe<Scalars['Int']>;
   is_active?: InputMaybe<Scalars['Boolean']>;
   offer_id?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['numeric']>;
   product_id?: InputMaybe<Scalars['Int']>;
   quantity?: InputMaybe<Scalars['numeric']>;
 };
@@ -2046,6 +2075,7 @@ export type Offer_Products_Stddev_Fields = {
   __typename?: 'offer_products_stddev_fields';
   id?: Maybe<Scalars['Float']>;
   offer_id?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
   product_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
 };
@@ -2055,6 +2085,7 @@ export type Offer_Products_Stddev_Pop_Fields = {
   __typename?: 'offer_products_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
   offer_id?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
   product_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
 };
@@ -2064,6 +2095,7 @@ export type Offer_Products_Stddev_Samp_Fields = {
   __typename?: 'offer_products_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
   offer_id?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
   product_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
 };
@@ -2073,6 +2105,7 @@ export type Offer_Products_Sum_Fields = {
   __typename?: 'offer_products_sum_fields';
   id?: Maybe<Scalars['Int']>;
   offer_id?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['numeric']>;
   product_id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
 };
@@ -2086,6 +2119,8 @@ export enum Offer_Products_Update_Column {
   /** column name */
   OfferId = 'offer_id',
   /** column name */
+  Price = 'price',
+  /** column name */
   ProductId = 'product_id',
   /** column name */
   Quantity = 'quantity'
@@ -2096,6 +2131,7 @@ export type Offer_Products_Var_Pop_Fields = {
   __typename?: 'offer_products_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
   offer_id?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
   product_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
 };
@@ -2105,6 +2141,7 @@ export type Offer_Products_Var_Samp_Fields = {
   __typename?: 'offer_products_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
   offer_id?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
   product_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
 };
@@ -2114,6 +2151,7 @@ export type Offer_Products_Variance_Fields = {
   __typename?: 'offer_products_variance_fields';
   id?: Maybe<Scalars['Float']>;
   offer_id?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
   product_id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
 };
@@ -2125,6 +2163,8 @@ export type Offers = {
   end_date: Scalars['timestamp'];
   id: Scalars['Int'];
   is_active: Scalars['Boolean'];
+  /** An object relationship */
+  offer_products?: Maybe<Offer_Products>;
   producer_id: Scalars['Int'];
   start_date: Scalars['timestamp'];
 };
@@ -2175,6 +2215,7 @@ export type Offers_Bool_Exp = {
   end_date?: InputMaybe<Timestamp_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   is_active?: InputMaybe<Boolean_Comparison_Exp>;
+  offer_products?: InputMaybe<Offer_Products_Bool_Exp>;
   producer_id?: InputMaybe<Int_Comparison_Exp>;
   start_date?: InputMaybe<Timestamp_Comparison_Exp>;
 };
@@ -2199,6 +2240,7 @@ export type Offers_Insert_Input = {
   end_date?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['Int']>;
   is_active?: InputMaybe<Scalars['Boolean']>;
+  offer_products?: InputMaybe<Offer_Products_Obj_Rel_Insert_Input>;
   producer_id?: InputMaybe<Scalars['Int']>;
   start_date?: InputMaybe<Scalars['timestamp']>;
 };
@@ -2245,6 +2287,7 @@ export type Offers_Order_By = {
   end_date?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   is_active?: InputMaybe<Order_By>;
+  offer_products?: InputMaybe<Offer_Products_Order_By>;
   producer_id?: InputMaybe<Order_By>;
   start_date?: InputMaybe<Order_By>;
 };
@@ -3143,7 +3186,7 @@ export type Products = {
   producer_id: Scalars['Int'];
   quantity: Scalars['numeric'];
   quote_on_call?: Maybe<Scalars['Boolean']>;
-  sku: Scalars['String'];
+  sku?: Maybe<Scalars['String']>;
   thumbnail?: Maybe<Scalars['String']>;
   title: Scalars['String'];
 };
@@ -4516,6 +4559,13 @@ export type ListCategoriesQueryVariables = Exact<{
 
 export type ListCategoriesQuery = { __typename?: 'query_root', categories: Array<{ __typename?: 'categories', id: number, is_active: boolean, name: string, parent_id?: number | null | undefined, category_type?: string | null | undefined }>, categories_aggregate: { __typename?: 'categories_aggregate', aggregate?: { __typename?: 'categories_aggregate_fields', count: number } | null | undefined } };
 
+export type InsertOfferMutationVariables = Exact<{
+  object: Offers_Insert_Input;
+}>;
+
+
+export type InsertOfferMutation = { __typename?: 'mutation_root', insert_offers_one?: { __typename?: 'offers', id: number, is_active: boolean, producer_id: number, end_date: any, created_ate: any, offer_products?: { __typename?: 'offer_products', id: number, is_active: boolean, quantity?: any | null | undefined, price?: any | null | undefined } | null | undefined } | null | undefined };
+
 export type ListProductsByProducerQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -4523,7 +4573,15 @@ export type ListProductsByProducerQueryVariables = Exact<{
 }>;
 
 
-export type ListProductsByProducerQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'products', id: number, image?: string | null | undefined, measure_unit: string, packing_type?: string | null | undefined, price: any, quantity: any, quote_on_call?: boolean | null | undefined, sku: string, thumbnail?: string | null | undefined, title: string }> };
+export type ListProductsByProducerQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'products', id: number, image?: string | null | undefined, measure_unit: string, packing_type?: string | null | undefined, price: any, quantity: any, quote_on_call?: boolean | null | undefined, sku?: string | null | undefined, thumbnail?: string | null | undefined, title: string }> };
+
+export type List_OffersQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type List_OffersQuery = { __typename?: 'query_root', offers: Array<{ __typename?: 'offers', created_ate: any, end_date: any, id: number, is_active: boolean, producer_id: number, start_date: any, offer_products?: { __typename?: 'offer_products', id: number, is_active: boolean, offer_id: number, price?: any | null | undefined, product_id: number, quantity?: any | null | undefined } | null | undefined }>, offers_aggregate: { __typename?: 'offers_aggregate', aggregate?: { __typename?: 'offers_aggregate_fields', count: number } | null | undefined } };
 
 export type Insert_ProducerMutationVariables = Exact<{
   payload: Producers_Insert_Input;
@@ -4545,7 +4603,7 @@ export type InsertProductMutationVariables = Exact<{
 }>;
 
 
-export type InsertProductMutation = { __typename?: 'mutation_root', insert_products_one?: { __typename?: 'products', title: string, thumbnail?: string | null | undefined, sku: string, quote_on_call?: boolean | null | undefined, quantity: any, producer_id: number, price: any, packing_type?: string | null | undefined, measure_unit: string, image?: string | null | undefined, description?: string | null | undefined, category_id?: number | null | undefined, base_id?: number | null | undefined, alias: string } | null | undefined };
+export type InsertProductMutation = { __typename?: 'mutation_root', insert_products_one?: { __typename?: 'products', title: string, thumbnail?: string | null | undefined, sku?: string | null | undefined, quote_on_call?: boolean | null | undefined, quantity: any, producer_id: number, price: any, packing_type?: string | null | undefined, measure_unit: string, image?: string | null | undefined, description?: string | null | undefined, category_id?: number | null | undefined, base_id?: number | null | undefined, alias: string } | null | undefined };
 
 export type ListProductsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -4553,7 +4611,14 @@ export type ListProductsQueryVariables = Exact<{
 }>;
 
 
-export type ListProductsQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'products', alias: string, description?: string | null | undefined, id: number, image?: string | null | undefined, measure_unit: string, packing_type?: string | null | undefined, price: any, producer_id: number, quantity: any, quote_on_call?: boolean | null | undefined, sku: string, thumbnail?: string | null | undefined, title: string, category_id?: number | null | undefined, base_id?: number | null | undefined, producer: { __typename?: 'producers', title: string } }>, products_aggregate: { __typename?: 'products_aggregate', aggregate?: { __typename?: 'products_aggregate_fields', count: number } | null | undefined } };
+export type ListProductsQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'products', alias: string, description?: string | null | undefined, id: number, image?: string | null | undefined, measure_unit: string, packing_type?: string | null | undefined, price: any, producer_id: number, quantity: any, quote_on_call?: boolean | null | undefined, sku?: string | null | undefined, thumbnail?: string | null | undefined, title: string, category_id?: number | null | undefined, base_id?: number | null | undefined, producer: { __typename?: 'producers', title: string } }>, products_aggregate: { __typename?: 'products_aggregate', aggregate?: { __typename?: 'products_aggregate_fields', count: number } | null | undefined } };
+
+export type Get_Producer_By_TitleQueryVariables = Exact<{
+  payload?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type Get_Producer_By_TitleQuery = { __typename?: 'query_root', producers: Array<{ __typename?: 'producers', id: number, title: string }> };
 
 
 export const InsertCategoryDocument = gql`
@@ -4637,6 +4702,49 @@ export function useListCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type ListCategoriesQueryHookResult = ReturnType<typeof useListCategoriesQuery>;
 export type ListCategoriesLazyQueryHookResult = ReturnType<typeof useListCategoriesLazyQuery>;
 export type ListCategoriesQueryResult = Apollo.QueryResult<ListCategoriesQuery, ListCategoriesQueryVariables>;
+export const InsertOfferDocument = gql`
+    mutation InsertOffer($object: offers_insert_input!) {
+  insert_offers_one(object: $object) {
+    id
+    is_active
+    producer_id
+    end_date
+    created_ate
+    offer_products {
+      id
+      is_active
+      quantity
+      price
+    }
+  }
+}
+    `;
+export type InsertOfferMutationFn = Apollo.MutationFunction<InsertOfferMutation, InsertOfferMutationVariables>;
+
+/**
+ * __useInsertOfferMutation__
+ *
+ * To run a mutation, you first call `useInsertOfferMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertOfferMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertOfferMutation, { data, loading, error }] = useInsertOfferMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useInsertOfferMutation(baseOptions?: Apollo.MutationHookOptions<InsertOfferMutation, InsertOfferMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertOfferMutation, InsertOfferMutationVariables>(InsertOfferDocument, options);
+      }
+export type InsertOfferMutationHookResult = ReturnType<typeof useInsertOfferMutation>;
+export type InsertOfferMutationResult = Apollo.MutationResult<InsertOfferMutation>;
+export type InsertOfferMutationOptions = Apollo.BaseMutationOptions<InsertOfferMutation, InsertOfferMutationVariables>;
 export const ListProductsByProducerDocument = gql`
     query ListProductsByProducer($limit: Int = 100, $offset: Int = 0, $producer_id: Int = 3) {
   products(
@@ -4688,6 +4796,60 @@ export function useListProductsByProducerLazyQuery(baseOptions?: Apollo.LazyQuer
 export type ListProductsByProducerQueryHookResult = ReturnType<typeof useListProductsByProducerQuery>;
 export type ListProductsByProducerLazyQueryHookResult = ReturnType<typeof useListProductsByProducerLazyQuery>;
 export type ListProductsByProducerQueryResult = Apollo.QueryResult<ListProductsByProducerQuery, ListProductsByProducerQueryVariables>;
+export const List_OffersDocument = gql`
+    query LIST_OFFERS($limit: Int = 10, $offset: Int = 0) {
+  offers(limit: $limit, offset: $offset, order_by: {id: desc}) {
+    created_ate
+    end_date
+    id
+    is_active
+    offer_products {
+      id
+      is_active
+      offer_id
+      price
+      product_id
+      quantity
+    }
+    producer_id
+    start_date
+  }
+  offers_aggregate {
+    aggregate {
+      count(columns: id)
+    }
+  }
+}
+    `;
+
+/**
+ * __useList_OffersQuery__
+ *
+ * To run a query within a React component, call `useList_OffersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useList_OffersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useList_OffersQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useList_OffersQuery(baseOptions?: Apollo.QueryHookOptions<List_OffersQuery, List_OffersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<List_OffersQuery, List_OffersQueryVariables>(List_OffersDocument, options);
+      }
+export function useList_OffersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<List_OffersQuery, List_OffersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<List_OffersQuery, List_OffersQueryVariables>(List_OffersDocument, options);
+        }
+export type List_OffersQueryHookResult = ReturnType<typeof useList_OffersQuery>;
+export type List_OffersLazyQueryHookResult = ReturnType<typeof useList_OffersLazyQuery>;
+export type List_OffersQueryResult = Apollo.QueryResult<List_OffersQuery, List_OffersQueryVariables>;
 export const Insert_ProducerDocument = gql`
     mutation INSERT_PRODUCER($payload: producers_insert_input!) {
   insert_producers_one(object: $payload) {
@@ -4890,3 +5052,39 @@ export function useListProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type ListProductsQueryHookResult = ReturnType<typeof useListProductsQuery>;
 export type ListProductsLazyQueryHookResult = ReturnType<typeof useListProductsLazyQuery>;
 export type ListProductsQueryResult = Apollo.QueryResult<ListProductsQuery, ListProductsQueryVariables>;
+export const Get_Producer_By_TitleDocument = gql`
+    query GET_PRODUCER_BY_TITLE($payload: String = "") {
+  producers(where: {title: {_eq: $payload}}) {
+    id
+    title
+  }
+}
+    `;
+
+/**
+ * __useGet_Producer_By_TitleQuery__
+ *
+ * To run a query within a React component, call `useGet_Producer_By_TitleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGet_Producer_By_TitleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGet_Producer_By_TitleQuery({
+ *   variables: {
+ *      payload: // value for 'payload'
+ *   },
+ * });
+ */
+export function useGet_Producer_By_TitleQuery(baseOptions?: Apollo.QueryHookOptions<Get_Producer_By_TitleQuery, Get_Producer_By_TitleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Get_Producer_By_TitleQuery, Get_Producer_By_TitleQueryVariables>(Get_Producer_By_TitleDocument, options);
+      }
+export function useGet_Producer_By_TitleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Get_Producer_By_TitleQuery, Get_Producer_By_TitleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Get_Producer_By_TitleQuery, Get_Producer_By_TitleQueryVariables>(Get_Producer_By_TitleDocument, options);
+        }
+export type Get_Producer_By_TitleQueryHookResult = ReturnType<typeof useGet_Producer_By_TitleQuery>;
+export type Get_Producer_By_TitleLazyQueryHookResult = ReturnType<typeof useGet_Producer_By_TitleLazyQuery>;
+export type Get_Producer_By_TitleQueryResult = Apollo.QueryResult<Get_Producer_By_TitleQuery, Get_Producer_By_TitleQueryVariables>;

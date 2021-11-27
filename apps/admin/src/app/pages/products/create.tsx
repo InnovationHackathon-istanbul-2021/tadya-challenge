@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Form, Formik } from 'formik';
-import { useInsertProductMutation, useListProducersQuery } from '../../generated/graphql';
+import { useGet_Producer_By_TitleLazyQuery, useInsertProductMutation, useListProducersQuery } from '../../generated/graphql';
 import TextInput from '../../components/ui/form/TextInput';
 import SelectInput from '../../components/ui/form/SelectInput';
 import SwitchInput from '../../components/ui/form/SwitchInput';
 import TextAreaInput from '../../components/ui/form/TextareaInput';
 import Notification from '../../components/ui/Notification';
-
+import _  from 'lodash';
 const Content = styled.div``;
 
 export const CreateProduct = () => {
@@ -19,7 +19,10 @@ export const CreateProduct = () => {
   const [toggle, setToggle] = useState(false);
   const [producerList, setProducerList] = useState([] as any[]);
 
-   const [insertProductMutation, { data, loading, error }] = useInsertProductMutation();
+  const [insertProductMutation, { data, loading, error }] = useInsertProductMutation();
+  const [getProducerByTitle ,{data: producerData}] = useGet_Producer_By_TitleLazyQuery();
+
+
   const handleQuery = (values: any, resetForm: any) => {
 
     insertProductMutation({
@@ -66,6 +69,510 @@ export const CreateProduct = () => {
       })
     }, 3000);
   };
+  const productData  = [
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Ayva",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kesekağıdı",
+      "price": 12,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Kuru Soğan (küçük boy baş)",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kesekağıdı",
+      "price": 8,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Soyulmuş Tatlı kabağı",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kesekağıdı",
+      "price": 10,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Yaprak Sarması (Toprak Güveçte Pişmiş, Kunduru Bulgurundan)",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "paket",
+      "price": 65,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Yaprak Sarması (Çiğ, Kunduru bulgurundan)",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "paket",
+      "price": 65,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Kunduru Tam Buğday Unu",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "bez torba",
+      "price": 12,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Kara Sarımsak",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kesekağıdı",
+      "price": 50,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Dolma Biber kurusu",
+      "quantity": 20,
+      "unit": "adet",
+      "packing": "dizge",
+      "price": 18,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Kekik Kurusu",
+      "quantity": 50,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 10,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Isırgan Kurusu,",
+      "quantity": 100,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 20,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Papatya Kurusu",
+      "quantity": 50,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 20,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Madımak Kurusu",
+      "quantity": 50,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 10,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Dağ Adaçayı",
+      "quantity": 50,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 15,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Sumak (öğütülmüş)",
+      "quantity": 100,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 20,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Domates Salçası",
+      "quantity": 660,
+      "unit": "ml",
+      "packing": "cam kavanoz",
+      "price": 25,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Cevizli Ayva Reçeli",
+      "quantity": 425,
+      "unit": "ml",
+      "packing": "cam kavanoz",
+      "price": 25,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Ayva Reçeli",
+      "quantity": 425,
+      "unit": "ml",
+      "packing": "cam kavanoz",
+      "price": 25,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Ayva Reçeli",
+      "quantity": 600,
+      "unit": "ml",
+      "packing": "cam kavanoz",
+      "price": 30,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Erişte - Kunduru Buğdayından",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "bez torba",
+      "price": 40,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Arpa Tarhanası - Kunduru Buğdayı ve arpa unundan",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "bez torba",
+      "price": 40,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Araç Ailesi",
+      "product_name": "Ekşi Erik Pestili",
+      "quantity": 200,
+      "unit": "gr",
+      "packing": "tabaka",
+      "price": 25,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Rahime Çevik",
+      "product_name": "Kuru Nane",
+      "quantity": 20,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 3,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Rahime Çevik",
+      "product_name": "Elma Kurusu",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "paket",
+      "price": 40,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Rahime Çevik",
+      "product_name": "Karışık Turşu",
+      "quantity": 1000,
+      "unit": "ml",
+      "packing": "cam kavanoz",
+      "price": 20,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Rahime Çevik",
+      "product_name": "Domates Kurusu",
+      "quantity": 100,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 10,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Rahime Çevik",
+      "product_name": "Dağ Adaçayı",
+      "quantity": 50,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 15,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Rahime Çevik",
+      "product_name": "Kahvaltılık ezme",
+      "quantity": 660,
+      "unit": "ml",
+      "packing": "cam kavanoz",
+      "price": 40,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Rahime Çevik",
+      "product_name": "Melemenlik sos",
+      "quantity": 660,
+      "unit": "ml",
+      "packing": "cam kavanoz",
+      "price": 19,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Rahime Çevik",
+      "product_name": "Acılı Sos",
+      "quantity": 660,
+      "unit": "ml",
+      "packing": "cam kavanoz",
+      "price": 30,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Rahime Çevik",
+      "product_name": "Kuşburnu Marmelatı",
+      "quantity": 660,
+      "unit": "ml",
+      "packing": "cam kavanoz",
+      "price": 40,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Akyüz Ailesi",
+      "product_name": "Süt (dondurulmuş)",
+      "quantity": 5,
+      "unit": "lt",
+      "packing": "pet şişe",
+      "price": 30,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Akyüz Ailesi",
+      "product_name": "Süt (dondurulmuş)",
+      "quantity": 3,
+      "unit": "lt",
+      "packing": "pet şişe",
+      "price": 20,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Akyüz Ailesi",
+      "product_name": "Süzme Yoğurt",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "poşet",
+      "price": 35,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Akyüz Ailesi",
+      "product_name": "Köy Horozu, 1200 - 1500 gr",
+      "quantity": 1,
+      "unit": "adet",
+      "packing": "",
+      "price": 70,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Akyüz Ailesi",
+      "product_name": "Köy Tavuğu, 1200 - 1500 gr",
+      "quantity": 1,
+      "unit": "adet",
+      "packing": "",
+      "price": 70,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Akyüz Ailesi",
+      "product_name": "Ayva",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kese kağıdı",
+      "price": 12,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Arslan Ailesi",
+      "product_name": "Köy Ekmeği (Bazlama 200 - 250 gr)",
+      "quantity": 1,
+      "unit": "adet",
+      "packing": "kağıt ambalaj",
+      "price": 6,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Arslan Ailesi",
+      "product_name": "Gözleme",
+      "quantity": 1,
+      "unit": "adet",
+      "packing": "kağıt ambalaj",
+      "price": 12,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Arslan Ailesi",
+      "product_name": "Köy Çöreği, Nane, Yumurta, Pul Biber 400 gr",
+      "quantity": 1,
+      "unit": "adet",
+      "packing": "kağıt ambalaj",
+      "price": 15,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Arslan Ailesi",
+      "product_name": "Domates",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kese kağıdı",
+      "price": 12,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Arslan Ailesi",
+      "product_name": "Kış Elması Kırmızı",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kese kağıdı",
+      "price": 12,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Arslan Ailesi",
+      "product_name": "Ayva",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kese kağıdı",
+      "price": 12,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Arslan Ailesi",
+      "product_name": "Çeri Domates",
+      "quantity": 600,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 10,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Minaz Ailesi",
+      "product_name": "Ceviz",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kese kağıdı",
+      "price": 45,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Minaz Ailesi",
+      "product_name": "Elma",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kese kağıdı",
+      "price": 12,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Minaz Ailesi",
+      "product_name": "Ayva",
+      "quantity": 1,
+      "unit": "kg",
+      "packing": "kese kağıdı",
+      "price": 15,
+      "stock": "",
+      "product_link": ""
+    },
+    {
+      "producer": "Minaz Ailesi",
+      "product_name": "İğde",
+      "quantity": 500,
+      "unit": "gr",
+      "packing": "paket",
+      "price": 15,
+      "stock": "",
+      "product_link": ""
+    }
+   ]
+  const handleJsonProductImport = () => {
+
+    const producers = _.uniqBy(productData, 'producer').map(d => d.producer);
+    producers.forEach(async producer => {
+      const data = await getProducerByTitle({
+        variables:{
+          payload: producer
+        }
+      })
+
+      const products = productData.filter(d => d.producer === producer)
+      products.forEach((p) => {
+        const payload = {
+          title: p.product_name,
+          alias: p.product_name.toString().toLowerCase().replace(/ /g, '-'),
+          price: p.price,
+          measure_unit: p.unit.toUpperCase(),
+          quantity: p.quantity,
+          producer_id: data.data?.producers[0].id,
+          packing_type: p.packing.toUpperCase(),
+          quote_on_call: p.price ? false: true
+        }
+        insertProductMutation({
+          variables:{
+            payload:payload
+          }
+        })
+      })
+
+    })
+  }
+
 
   const toggleClass = ' transform translate-x-5';
   const { data: producersData } = useListProducersQuery({
@@ -150,9 +657,9 @@ export const CreateProduct = () => {
                       Cancel
                     </button>
                     <button
-                      //onClick={() => handleSubmit()}
+                      onClick={() => handleJsonProductImport()}
                       className="bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm focus:outline-none"
-                      type="submit"
+                      type="button"
                     >
                       Save
                     </button>
