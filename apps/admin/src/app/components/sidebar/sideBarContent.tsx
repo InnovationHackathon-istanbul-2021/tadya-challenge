@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Icon } from '../ui/icon/Icon';
 import { SideBarProps, MenuItemProps } from './types';
 

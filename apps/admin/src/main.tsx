@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
+import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { SidebarNavigation } from './app/components/sidebar/navigation';
 

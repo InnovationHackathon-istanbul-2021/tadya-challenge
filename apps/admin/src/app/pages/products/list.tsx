@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { Table } from '../../components/ui/table/table';
 import { Link } from 'react-router-dom';
 import { useListProductsQuery } from '../../generated/graphql';
+import SearchInput from '../../components/ui/form/SearchInput';
+import SelectInput from '../../components/ui/form/SelectInput';
+import Select from '../../components/ui/form/Select';
 const Content = styled.div``;
 
 export const ListProducts = () => {
@@ -12,6 +15,8 @@ export const ListProducts = () => {
   const [offset, setOffset] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
   const [productsList, setProductsList] = useState([] as any[]);
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('');
 
   const { data, loading, error } = useListProductsQuery({
     variables: {
@@ -82,46 +87,10 @@ export const ListProducts = () => {
                   List Products
                 </p>
                 <div className="md:flex items-center mt-6 lg:mt-0">
-                  <div className="flex items-center">
-                    <div className="flex items-center pl-3 bg-white border w-64 rounded border-gray-200">
-                      <svg
-                        className="text-gray-500"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={20}
-                        height={20}
-                        viewBox="0 0 20 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M8.33333 13.1667C11.555 13.1667 14.1667 10.555 14.1667 7.33333C14.1667 4.11167 11.555 1.5 8.33333 1.5C5.11167 1.5 2.5 4.11167 2.5 7.33333C2.5 10.555 5.11167 13.1667 8.33333 13.1667Z"
-                          stroke="currentColor"
-                          strokeWidth="1.25"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M17.5 17.5L12.5 12.5"
-                          stroke="currentColor"
-                          strokeWidth="1.25"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <input
-                        type="text"
-                        className="py-2.5 pl-1 w-full focus:outline-none text-sm rounded text-gray-600 placeholder-gray-500"
-                        placeholder="Search"
-                      />
-                    </div>
-                  </div>
+                  <SearchInput placeholder="Search" value={search} onChange={setSearch} />
                   <div className="flex items-center mt-4 md:mt-0 md:ml-3 lg:ml-0">
                     <div className="w-40 py-2 px-3 bg-white lg:ml-3 border rounded border-gray-200">
-                      <select className="w-full text-sm leading-3 text-gray-500 focus:outline-none">
-                        <option>Producer</option>
-                        <option>Name</option>
-                        <option>ID</option>
-                        <option>Active</option>
-                      </select>
+                      <Select value={filter} onChange={setFilter} options={['Producer', 'Name', 'ID', 'Active']} />
                     </div>
                     <Link
                       to="/products/create"

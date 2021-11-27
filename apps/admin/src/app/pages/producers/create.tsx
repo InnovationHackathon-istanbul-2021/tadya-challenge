@@ -1,8 +1,11 @@
 import { Field, Form, Formik } from 'formik';
+import React from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
 import { INSERT_PRODUCER } from './graphql/mutation';
 import { Insert_ProducerMutationVariables } from '../../generated/graphql';
+import TextInput  from '../../components/ui/form/TextInput';
+import SelectInput from '../../components/ui/form/SelectInput';
 
 const Content = styled.div``;
 
@@ -43,6 +46,31 @@ export const CreateProducer = () => {
       console.log(err);
     });
   };
+
+  const emailIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-mail"
+      width={20}
+      height={20}
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      >
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <rect
+        x={3}
+        y={5}
+        width={18}
+        height={14}
+        rx={2}
+      />
+      <polyline points="3 7 12 13 21 7" />
+    </svg>
+  )
   return (
     <Content className="flex h-full mx-auto pt-8">
 
@@ -76,204 +104,24 @@ export const CreateProducer = () => {
                   <div className="w-11/12 mx-auto">
                     <div className="container mx-auto">
                       <div className="my-8 mx-auto xl:w-full xl:mx-0">
-                      <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                          <label
-                            htmlFor="title"
-                            className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-                          >
-                            Producer Title
-                          </label>
-                          <Field
-                            type="text"
-                            id="title"
-                            name="title"
-                            required
-                            className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border--700 text-gray-800 dark:text-gray-100"
-                            placeholder="Enter Store Title"
-                          />
-                        </div>
+                        <TextInput type="text" name="title" title="Producer Title" placeholder="Enter Store Title" />
                         <div className="xl:flex lg:flex md:flex flex-wrap justify-between">
-                          <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                            <label
-                              htmlFor="first_name"
-                              className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-                            >
-                              First Name
-                            </label>
-                            <Field
-                              type="text"
-                              name="first_name"
-                              required
-                              id="first_name"
-
-                              placeholder="Enter First Name"
-                              className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-blue-700 text-gray-800 dark:text-gray-100"
-                            />
-                          </div>
-                          <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                            <label
-                              htmlFor="last_name"
-                              className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-                            >
-                              Last Name
-                            </label>
-                            <Field
-                              type="text"
-                              id="last_name"
-                              name="last_name"
-                              placeholder="Enter Last Name"
-                              required
-                              className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-blue-700 text-gray-800 dark:text-gray-100"
-                            />
-                          </div>
-                          <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                            <label
-                              htmlFor="email2"
-                              className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-                            >
-                              Email
-                            </label>
-                            <div className="relative">
-                              <div className="absolute text-gray-600 dark:text-gray-400 flex items-center px-4 border-r h-full">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-mail"
-                                  width={20}
-                                  height={20}
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="currentColor"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <rect
-                                    x={3}
-                                    y={5}
-                                    width={18}
-                                    height={14}
-                                    rx={2}
-                                  />
-                                  <polyline points="3 7 12 13 21 7" />
-                                </svg>
-                              </div>
-                              <Field
-                                id="email2"
-                                name="email"
-                                required
-                                className="w-full border-gray-300  bg-transparent text-gray-800 dark:text-gray-100 focus:outline-none focus:border focus:border-blue-700 font-normal py-3 flex items-center pl-16 text-sm rounded border shadow"
-                                placeholder="example@gmail.com"
-                              />
-                            </div>
-                          </div>
-                          <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                            <label
-                              htmlFor="City"
-                              className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-                            >
-                              City
-                            </label>
-                            <div className="border border-gray-300 dark:border-gray-700 shadow-sm rounded flex relative">
-                              <Field
-                                as="select"
-                                name="city"
-                                required
-                                id="City"
-                                placeholder=""
-                                className="bg-white dark:bg-gray-800 appearance-none z-10 pl-3 py-3 w-full text-sm border border-transparent focus:outline-none focus:border-blue-700  text-gray-800 dark:text-gray-100 rounded"
-                              >
-                                <option value="Istanbul">Istanbul</option>
-                                <option value="Ankara">Ankara</option>
-                                <option value="Bursa">Bursa</option>
-                              </Field>
-                              <div
-                                className="px-4 flex items-center border-l border-gray-300 dark:border-gray-700 flex-col justify-center text-gray-500
-                                      dark:text-gray-400 absolute right-0 bottom-0 top-0 mx-auto z-20 pointer-events-none "
-                              >
-                                <svg
-                                  tabIndex={0}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-chevron-up"
-                                  width={16}
-                                  height={16}
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="currentColor"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <polyline points="6 15 12 9 18 15" />
-                                </svg>
-                                <svg
-                                  tabIndex={0}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-chevron-down"
-                                  width={16}
-                                  height={16}
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="currentColor"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <polyline points="6 9 12 15 18 9" />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                            <label
-                              htmlFor="Username"
-                              className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-                            >
-                              Username
-                            </label>
-                            <Field
-                              type="text"
-                              id="Username"
-                              name="username"
-                              required
-                              placeholder="Enter Username"
-                              className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-blue-700 text-gray-800 dark:text-gray-100"
-                            />
-                          </div>
-                          <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                            <label
-                              htmlFor="Password"
-                              className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-                            >
-                              Password
-                            </label>
-                            <Field
-                              type="text"
-                              id="Password"
-                              name="password"
-                              required
-                              className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-blue-700 text-gray-800 dark:text-gray-100"
-                              placeholder="Enter Password"
-                            />
-                          </div>
-                          <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                            <label
-                              htmlFor="phone_number"
-                              className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-                            >
-                              Phone Number
-                            </label>
-                            <Field
-                              type="text"
-                              id="phone_number"
-                              name="phone_number"
-                              required
-                              className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-blue-700 text-gray-800 dark:text-gray-100"
-                              placeholder="Enter Phone Number"
-                            />
-                          </div>
+                          <TextInput type="text" name="first_name" title="First Name" placeholder="Enter First Name" />
+                          <TextInput type="text" name="last_name" title="Last Name" placeholder="Enter Last Name" />
+                          <TextInput type="email" icon={emailIcon} styles="pl-16" name="email" title="Email" placeholder="example@gmail.com" />
+                          <SelectInput
+                            name="city"
+                            title="City"
+                            placeholder=""
+                            options={[
+                              {id: 'Istanbul', title: 'Istanbul'},
+                              {id: 'Ankara', title: 'Ankara'},
+                              {id: 'Bursa', title: 'Bursa'},
+                            ]}
+                          />
+                          <TextInput type="text" name="username" title="Username" placeholder="Enter Username" />
+                          <TextInput type="password" name="password" title="Password" placeholder="Enter Password" />
+                          <TextInput type="text" name="phone_number" title="Phone Number" placeholder="Enter Phone Number" />
                         </div>
 
                       </div>

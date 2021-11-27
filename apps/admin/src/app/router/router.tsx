@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Welcome } from '../pages';
-import { CreateOffers } from '../pages/offers/create';
+// import { CreateOffers } from '../pages/offers/create';
 import { CreateProducer } from '../pages/producers/create';
 import { ListProducers } from '../pages/producers/list';
 import { CreateProduct } from '../pages/products/create';
@@ -35,7 +35,7 @@ const AppRouter = () => {
         <Route path={'*'} element={<>Manage order</>} />
       </Route>
       <Route path={'/offers'}>
-        <Route path={'create'} element={<CreateOffers/>} />
+        {/* <Route path={'create'} element={<CreateOffers/>} /> */}
         <Route path={'*'} element={<>Manage offers</>} />
       </Route>
       <Route path={'*'} element={<Welcome />} />
