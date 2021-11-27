@@ -7,9 +7,9 @@ import { ListProducers } from '../pages/producers/list';
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path={'/producers'}>
+      <Route path={'/producers'} element={<ListProducers/>} />
+      <Route  path={'/producers/*'}>
         <Route path={'create'} element={<CreateProducer />} />
-        <Route path={'list'} element={<ListProducers/>} />
       </Route>
       <Route path={'/products'}>
         <Route path={'create'} element={<>Create Products</>} />
