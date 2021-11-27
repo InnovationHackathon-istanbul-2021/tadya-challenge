@@ -13,6 +13,7 @@ const ProductTableBody = styled.div`
 export const ProductList = ({ products , values, loading }: any) => {
   const [show, setshow] = useState(0);
   products.forEach((product: any) => {
+    console.log(`${product.producer_id}-${product.id}`, product)
     if(!values[`${product.producer_id}-${product.id}`]) {
       values[`${product.producer_id}-${product.id}`] = {price: '0', stock: '0'}
     }
@@ -47,7 +48,7 @@ export const ProductList = ({ products , values, loading }: any) => {
             <tbody className="w-full">
               {!loading ? (products.length > 0 ?
                 products.map((product: any, index: number) => (
-                  <tr className="h-20 ">
+                  <tr key={index} className="h-20 ">
 
                     <td className="w-6 pr-2">
                       <div className="flex dark:text-gray-100 text-gray-800 items-center">

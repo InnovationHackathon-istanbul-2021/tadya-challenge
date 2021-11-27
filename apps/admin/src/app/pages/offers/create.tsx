@@ -9,6 +9,7 @@ import SelectInput from '../../components/ui/form/SelectInput';
 import TextAreaInput from '../../components/ui/form/TextareaInput';
 import DateInput from '../../components/ui/form/DateInput';
 import Notification from '../../components/ui/Notification';
+import { useInsertOfferMutation } from '../../generated/graphql';
 
 const Content = styled.div``;
 
@@ -23,7 +24,7 @@ export const CreateOffers = () => {
   const [endDate, setEndDate] = useState(
     new Date().setDate(startDate.getDate() + 7) as unknown as Date
   );
-  const [proudct, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<any>(null);
 
   useEffect(() => {
     if (startDate > endDate) setStartDate(endDate);
@@ -32,43 +33,53 @@ export const CreateOffers = () => {
   useEffect(() => {
     if (startDate > endDate) setEndDate(startDate);
   }, [startDate]);
+  const [insertOfferMutation, { data, loading, error }] = useInsertOfferMutation();
   const handleQuery = (values: any, resetForm: any) => {
     console.log(values);
-
-    // insertCategoryMutation({
-    //   variables: {
-    //     object: {
-    //       name: values.name,
-    //       category_type: 'Product',
-    //       is_active: true,
-    //     }
-    //   }
-    // }).
-    // then((res: any) => {
-    //   alert('Generated Successfully');
-    //   setNotification({
-    //     title: 'Generated Successfully',
-    //     message: 'New Offer created successfully.',
-    //     type: 'success',
-    //   })
-    //   resetForm();
-    //   window.location.href = '/products';
-    // })
-    // .catch((err: any) => {
-    //   resetForm();
-    //   setNotification({
-    //     title: 'Generated Failed',
-    //     message: 'New Offer created failed.',
-    //     type: 'error',
-    //   })
-    //   console.log(err);
-    // });
+    insertOfferMutation({
+      variables: {
+        object: {
+          start_date: values.start_date,
+          end_date: values.end_date,
+          producer_id: product?.producer_id,
+          is_active: true,
+          offer_products: {
+            data: {
+              id: product?.product_id,
+              price: product?.price,
+              quantity: product?.stock,
+              is_active: true,
+            }
+          }
+        }
+      }
+    }).
+    then((res: any) => {
+      alert('Generated Successfully');
+      setNotification({
+        title: 'Generated Successfully',
+        message: 'New Offer created successfully.',
+        type: 'success',
+      })
+      resetForm();
+      window.location.href = '/products';
+    })
+    .catch((err: any) => {
+      resetForm();
+      setNotification({
+        title: 'Generated Failed',
+        message: 'New Offer created failed.',
+        type: 'error',
+      })
+      console.log(err);
+    });
   };
   const handleSelectProduct = ({ producer_id, ...data }: any) => {
     const selectProducts: any[] = [];
 
     Object.entries(data).forEach(([key, row]: any) => {
       if (row.price > 0) {
+        console.log(key, row, "splitKey")
         const splitKey = key.split('-');
 
         selectProducts.push({
@@ -76,10 +87,10 @@ export const CreateOffers = () => {
           producer_id: splitKey[0],
           product_id: splitKey[1],
         });
-        setProduct(selectProducts);
       }
     });
-    console.log(selectProducts)
+    setProduct(selectProducts);
+    console.log(selectProducts, "selectProducts")
   };
 
   return (
