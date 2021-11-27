@@ -72,7 +72,6 @@ export const CreateOffers = () => {
                   <div className="my-8 mx-auto xl:w-full xl:mx-0">
                     <TextInput type="text" name="title" title="Offer Title" placeholder="Enter Offer Title" />
                     <div className="xl:flex lg:flex md:flex flex-wrap justify-between">
-                      <TextInput type="text" name="title" title="Offer Title" placeholder="Enter Offer Title" />
                       <DateInput name="start_date" title="Start Date" startDate={startDate} endDate={endDate} setDate={setStartDate} selectDate={startDate} />
                       <DateInput name="end_date" title="End Date" startDate={startDate} endDate={endDate} setDate={setEndDate} selectDate={endDate} />
                       <SelectInput name="category_id" title="Category" options={[]} />
