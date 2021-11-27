@@ -43,7 +43,7 @@ export const CreateProducer = () => {
           }
         }
       } as Insert_ProducerMutationVariables
-    }) .then((res: any) => {
+    }).then((res: any) => {
       setNotification({
         title: 'Generated Successfully',
         message: 'New Producer created successfully.',

@@ -19,11 +19,11 @@ export const CreateOffers = () => {
     message: '',
     type: ''
   });
-
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(
     new Date().setDate(startDate.getDate() + 7) as unknown as Date
   );
+  const [proudct, setProduct] = useState<any>(null);
 
   useEffect(() => {
     if (startDate > endDate) setStartDate(endDate);
@@ -35,13 +35,32 @@ export const CreateOffers = () => {
   const handleQuery = (values: any, resetForm: any) => {
     console.log(values);
 
-    // .then((res: any) => {
+    // insertCategoryMutation({
+    //   variables: {
+    //     object: {
+    //       name: values.name,
+    //       category_type: 'Product',
+    //       is_active: true,
+    //     }
+    //   }
+    // }).
+    // then((res: any) => {
     //   alert('Generated Successfully');
+    //   setNotification({
+    //     title: 'Generated Successfully',
+    //     message: 'New Offer created successfully.',
+    //     type: 'success',
+    //   })
     //   resetForm();
     //   window.location.href = '/products';
     // })
     // .catch((err: any) => {
     //   resetForm();
+    //   setNotification({
+    //     title: 'Generated Failed',
+    //     message: 'New Offer created failed.',
+    //     type: 'error',
+    //   })
     //   console.log(err);
     // });
   };
@@ -57,6 +76,7 @@ export const CreateOffers = () => {
           producer_id: splitKey[0],
           product_id: splitKey[1],
         });
+        setProduct(selectProducts);
       }
     });
     console.log(selectProducts)
@@ -115,7 +135,7 @@ export const CreateOffers = () => {
                   Cancel
                 </button>
                 <button
-                  //onClick={() => handleSubmit()}
+                  onClick={() => handleSubmit()}
                   className="bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm focus:outline-none"
                   type="submit"
                 >
