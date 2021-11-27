@@ -93,10 +93,6 @@ export const ListProducers = () => {
                   <div className="flex items-center mt-4 md:mt-0 md:ml-3 lg:ml-0">
                     <div className="w-40 py-2 px-3 bg-white lg:ml-3 border rounded border-gray-200">
                       <Select value={filter} onChange={setFilter} options={['Producer', 'ID']} />
-                      <select className="w-full text-sm leading-3 text-gray-500 focus:outline-none">
-                        <option>Producer</option>
-                        <option>ID</option>
-                      </select>
                     </div>
                     <Link
                       to="/producers/create"

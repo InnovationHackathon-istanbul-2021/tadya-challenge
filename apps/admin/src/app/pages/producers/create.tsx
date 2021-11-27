@@ -47,30 +47,6 @@ export const CreateProducer = () => {
     });
   };
 
-  const emailIcon = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="icon icon-tabler icon-tabler-mail"
-      width={20}
-      height={20}
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      >
-      <path stroke="none" d="M0 0h24v24H0z" />
-      <rect
-        x={3}
-        y={5}
-        width={18}
-        height={14}
-        rx={2}
-      />
-      <polyline points="3 7 12 13 21 7" />
-    </svg>
-  )
   return (
     <Content className="flex h-full mx-auto pt-8">
 
@@ -108,7 +84,7 @@ export const CreateProducer = () => {
                         <div className="xl:flex lg:flex md:flex flex-wrap justify-between">
                           <TextInput type="text" name="first_name" title="First Name" placeholder="Enter First Name" />
                           <TextInput type="text" name="last_name" title="Last Name" placeholder="Enter Last Name" />
-                          <TextInput type="email" icon={emailIcon} styles="pl-16" name="email" title="Email" placeholder="example@gmail.com" />
+                          <TextInput type="email" icon={'HiOutlineMail'} styles="pl-16" name="email" title="Email" placeholder="example@gmail.com" />
                           <SelectInput
                             name="city"
                             title="City"

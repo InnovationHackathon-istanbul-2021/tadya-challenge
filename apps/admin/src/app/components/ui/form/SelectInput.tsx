@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { Field } from 'formik';
+import { Icon } from '../icon/Icon';
 
 const Content = styled.div``;
 
@@ -40,38 +41,7 @@ const SelectInput = ({ options, title, name, value, onChange, styles, placeholde
           className="px-4 flex items-center border-l border-gray-300 dark:border-gray-700 flex-col justify-center text-gray-500
                 dark:text-gray-400 absolute right-0 bottom-0 top-0 mx-auto z-20 pointer-events-none "
         >
-          <svg
-            tabIndex={0}
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-chevron-up"
-            width={16}
-            height={16}
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <polyline points="6 15 12 9 18 15" />
-          </svg>
-          <svg
-            tabIndex={0}
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-chevron-down"
-            width={16}
-            height={16}
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
+          <Icon className="text-gray-500 w-5 h-5" icon={'HiOutlineSelector'} />
         </div>
       </div>
     </div>

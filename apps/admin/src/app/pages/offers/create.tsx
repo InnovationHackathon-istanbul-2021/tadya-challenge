@@ -232,7 +232,7 @@ export const CreateOffers = () => {
           </Form>
         )}
       />
-            {showModal? <ModalExample/>: ''}
+            {showModal? <ModalExample showModal={showModal} setShowModal={setShowModal}/>: ''}
 
     </Content>
   );

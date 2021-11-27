@@ -6,7 +6,12 @@ import {
 } from '../../generated/graphql';
 import { ProductList } from './product_list';
 
-export const ModalExample = () => {
+interface IModal {
+  showModal: boolean,
+  setShowModal: any,
+}
+
+export const ModalExample = ({ showModal, setShowModal }: IModal) => {
   const [producerList, setProducerList] = useState([] as any[]);
   const [productsList, setProductsList] = useState([] as any[]);
 
@@ -165,7 +170,7 @@ export const ModalExample = () => {
                       </div>
                       <div className="w-full py-4 sm:px-12 px-4 bg-gray-100 dark:bg-gray-700 mt-6 flex justify-end rounded-bl rounded-br">
                         <button
-                          onClick={() => resetForm()}
+                          onClick={() => {resetForm(); setShowModal(!showModal)}}
                           className="btn text-sm focus:outline-none text-gray-600 dark:text-gray-400 border border-gray-300 dark:border-gray-500 py-2 px-6 mr-4 rounded hover:bg-gray-200 transition duration-150 ease-in-out"
                         >
                           Cancel
@@ -183,7 +188,7 @@ export const ModalExample = () => {
                 />
               </div>
             </div>
-            <div className="cursor-pointer absolute top-0 right-0 m-3 text-gray-800 dark:text-gray-100 transition duration-150 ease-in-out">
+            <div onClick={() => setShowModal(!showModal)} className="cursor-pointer absolute top-0 right-0 m-3 text-gray-800 dark:text-gray-100 transition duration-150 ease-in-out">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-label="Close"

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { Field } from 'formik';
+import { Icon } from '../icon/Icon';
 
 const Content = styled.div``;
 
@@ -28,7 +29,7 @@ const TextInput = ({ type, title, name, icon, value, onChange, styles, placehold
       <div className="relative">
         {icon && (
           <div className="absolute text-gray-600 dark:text-gray-400 flex items-center px-4 border-r h-full">
-            {icon}
+            <Icon className="text-gray-500 w-5 h-5" icon={icon} />
           </div>
         )}
         <Field
