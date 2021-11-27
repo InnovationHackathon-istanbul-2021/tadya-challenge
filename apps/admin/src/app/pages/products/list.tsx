@@ -10,6 +10,7 @@ import Select from '../../components/ui/form/Select';
 const Content = styled.div``;
 
 export const ListProducts = () => {
+  const [load, setLoad] = useState(true);
   const [total, setTotal] = useState(0);
   const [pageLimit, setPageLimit] = useState(10);
   const [offset, setOffset] = useState(0);
@@ -24,12 +25,21 @@ export const ListProducts = () => {
       limit: pageLimit, // value for 'limit'
     },
   });
+
+  useEffect(() => {
+    loading && setLoad(true);
+  }, [loading]);
+
   useEffect(() => {
     if (data) {
       setProductsList(data.products);
+      setTimeout(() => {
+        setLoad(false);
+      }, 1000)
       setTotal(data?.products_aggregate.aggregate?.count as number);
     }
   }, [data]);
+
   const columns = React.useMemo(
     () => [
       {
@@ -109,7 +119,7 @@ export const ListProducts = () => {
             <div>
               <Table
                 className="product-table"
-                loading={loading}
+                loading={load}
                 numOfPages={Math.ceil(total / pageLimit)}
                 manualPagination={true}
                 onFetchData={(_pageIndex: any, _pageSize: any) => {

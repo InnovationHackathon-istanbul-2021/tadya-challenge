@@ -11,6 +11,7 @@ import {
   useRowSelect,
 } from 'react-table';
 import { Pagination } from './pagination';
+import SpinLoader from '../loader';
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }: any, ref) => {
     const defaultRef = React.useRef();
@@ -140,7 +141,8 @@ export const Table = ({
 
   const rowData = props.manualPagination ? rows : page;
 
-  if (!data.length) return <div className="no-data">No data loaded</div>;
+  if (!loading && !data.length) return <div className="no-data">No data loaded</div>;
+  if (loading) return <SpinLoader type="Bars" />;
 
   // Render the UI for your table
   return (
