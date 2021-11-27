@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { SidebarNavigation } from './app/components/sidebar/navigation';
 
 import AppRouter from './app/router/router';
@@ -12,6 +12,7 @@ import {
   InMemoryCache,
   HttpLink,
 } from '@apollo/client';
+import Login from './app/pages/login/login';
 const createApolloClient = () => {
   return new ApolloClient({
     link: new HttpLink({
@@ -23,13 +24,14 @@ const createApolloClient = () => {
     cache: new InMemoryCache(),
   });
 };
-console.log(process.env.REACT_AUTH_TOKEN,"---")
+console.log(process.env.REACT_AUTH_TOKEN,"---", window.location.pathname)
+const filterPath = window.location.pathname !== '/login' && window.location.pathname !== '/order'
 ReactDOM.render(
   <StrictMode>
     <Router>
-      <SidebarNavigation />
+      {filterPath && (<SidebarNavigation />)}
       <ApolloProvider client={createApolloClient()}>
-        <div className="ml-72 mr-8 h-screen ">
+        <div className={`${filterPath && "ml-72 mr-8 h-screen "}`} >
           <AppRouter />
         </div>
       </ApolloProvider>

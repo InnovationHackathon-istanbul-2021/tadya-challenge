@@ -1,7 +1,11 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Welcome } from '../pages';
+import { CreateCategory } from '../pages/categories/create';
+import { ListCategories } from '../pages/categories/list';
+import Login from '../pages/login/login';
 import { CreateOffers } from '../pages/offers/create';
+import Order from '../pages/order/order';
 import { CreateProducer } from '../pages/producers/create';
 import { ListProducers } from '../pages/producers/list';
 import { CreateProduct } from '../pages/products/create';
@@ -10,6 +14,8 @@ import { ListProducts } from '../pages/products/list';
 const AppRouter = () => {
   return (
     <Routes>
+      <Route path={'/login'} element={<Login/>} />
+      <Route path={'/order'} element={<Order/>} />
       <Route path={'/producers'} element={<ListProducers/>} />
       <Route  path={'/producers/*'}>
         <Route path={'create'} element={<CreateProducer />} />
@@ -19,8 +25,8 @@ const AppRouter = () => {
         <Route path={'create'} element={<CreateProduct/>} />
       </Route>
       <Route path={'/categories'}>
-        <Route path={'create'} element={<>Create Categories</>} />
-        <Route path={'*'} element={<>Manage Categories</>} />
+        <Route path={'create'} element={<CreateCategory/>} />
+        <Route path={'*'} element={<ListCategories/>} />
       </Route>
       <Route path={'/feedback-forms'}>
         <Route path={'create'} element={<>Create Feedback Forms</>} />
