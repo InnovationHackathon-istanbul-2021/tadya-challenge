@@ -6,11 +6,17 @@ import TextInput from '../../components/ui/form/TextInput';
 import SelectInput from '../../components/ui/form/SelectInput';
 import TextAreaInput from '../../components/ui/form/TextareaInput';
 import DateInput from '../../components/ui/form/DateInput';
+import Notification from '../../components/ui/Notification';
 
 const Content = styled.div``;
 
 export const CreateOffers = () => {
   const [showModal, setShowModal] = useState(false);
+  const [notification, setNotification] = useState({
+    title: '',
+    message: '',
+    type: ''
+  });
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(
@@ -41,6 +47,7 @@ export const CreateOffers = () => {
 
   return (
     <Content className="flex pt-8">
+      {notification.title && (<Notification title={notification.title} message={notification.message} type={notification.type} />)}
       <Formik
         initialValues={{
           title: '',

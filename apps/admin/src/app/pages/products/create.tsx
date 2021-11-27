@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { useInsertProductMutation, useListProducersQuery } from '../../generated/graphql';
-import { useMutation } from '@apollo/client';
-import { CREATE_PRODUCT } from './graphql/mutation';
 import TextInput from '../../components/ui/form/TextInput';
 import SelectInput from '../../components/ui/form/SelectInput';
 import SwitchInput from '../../components/ui/form/SwitchInput';
 import TextAreaInput from '../../components/ui/form/TextareaInput';
+import Notification from '../../components/ui/Notification';
 
 const Content = styled.div``;
 
 export const CreateProduct = () => {
+  const [notification, setNotification] = useState({
+    title: '',
+    message: '',
+    type: ''
+  });
   const [toggle, setToggle] = useState(false);
   const [producerList, setProducerList] = useState([] as any[]);
 
@@ -37,16 +41,32 @@ export const CreateProduct = () => {
       }
 
     }).then((res: any) => {
-      alert('Generated Successfully');
+      setNotification({
+        title: 'Generated Successfully',
+        message: 'New Product created successfully.',
+        type: 'success',
+      })
       resetForm();
       window.location.href = "/products"
     })
     .catch((err: any) => {
       resetForm();
+      setNotification({
+        title: 'Generated Failed',
+        message: 'New Product created failed.',
+        type: 'error',
+      })
       console.log(err);
-    })
+    });
+    setTimeout(() => {
+      setNotification({
+        title: '',
+        message: '',
+        type: '',
+      })
+    }, 3000);
   };
-  console.log({ data, loading, error })
+
   const toggleClass = ' transform translate-x-5';
   const { data: producersData } = useListProducersQuery({
     variables: {
@@ -54,13 +74,16 @@ export const CreateProduct = () => {
       limit: 100, // value for 'limit'
     },
   });
+
   useEffect(() => {
     if (producersData) {
       setProducerList(producersData.producers);
     }
   }, [producersData]);
+
   return (
     <Content className="flex h-full mx-auto pt-8">
+      {notification.title && (<Notification title={notification.title} message={notification.message} type={notification.type} />)}
       <div>
         <div>
           <Formik

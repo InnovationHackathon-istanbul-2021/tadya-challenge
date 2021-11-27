@@ -1,15 +1,22 @@
 import { Field, Form, Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
 import { INSERT_PRODUCER } from './graphql/mutation';
 import { Insert_ProducerMutationVariables } from '../../generated/graphql';
 import TextInput  from '../../components/ui/form/TextInput';
 import SelectInput from '../../components/ui/form/SelectInput';
+import Notification from '../../components/ui/Notification';
 
 const Content = styled.div``;
 
 export const CreateCategory = () => {
+  const [notification, setNotification] = useState({
+    title: '',
+    message: '',
+    type: ''
+  });
+
   const [createNewProducer] = useMutation(
     INSERT_PRODUCER,
   );
@@ -37,19 +44,35 @@ export const CreateCategory = () => {
         }
       } as Insert_ProducerMutationVariables
     }) .then((res: any) => {
-      alert('Generated Successfully');
+      setNotification({
+        title: 'Generated Successfully',
+        message: 'New Category created successfully.',
+        type: 'success',
+      })
       resetForm();
       window.location.href = "/producers"
     })
     .catch((err: any) => {
       resetForm();
+      setNotification({
+        title: 'Generated Failed',
+        message: 'New Category created failed.',
+        type: 'error',
+      })
       console.log(err);
     });
+    setTimeout(() => {
+      setNotification({
+        title: '',
+        message: '',
+        type: '',
+      })
+    }, 3000);
   };
 
   return (
     <Content className="flex h-full mx-auto pt-8">
-
+      {notification.title && (<Notification title={notification.title} message={notification.message} type={notification.type} />)}
       <div>
         <div>
           <Formik
