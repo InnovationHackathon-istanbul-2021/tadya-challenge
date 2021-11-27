@@ -1,6 +1,7 @@
 import { Field } from 'formik';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Icon } from '../../components/ui/icon/Icon';
 
 const ProductTableBody = styled.div`
   min-height: 250px;
@@ -40,40 +41,8 @@ export const ProductList = ({ products }: any) => {
                   <tr className="h-20 ">
                     <td className="w-6 pr-2">
                       <div className="flex dark:text-gray-100 text-gray-800 items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-dots-vertical"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z"></path>
-                          <circle cx="12" cy="12" r="1"></circle>
-                          <circle cx="12" cy="19" r="1"></circle>
-                          <circle cx="12" cy="5" r="1"></circle>
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="-ml-3 icon icon-tabler icon-tabler-dots-vertical"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z"></path>
-                          <circle cx="12" cy="12" r="1"></circle>
-                          <circle cx="12" cy="19" r="1"></circle>
-                          <circle cx="12" cy="5" r="1"></circle>
-                        </svg>
+                        <Icon className="text-gray-500 w-5 h-5 -mr-3" icon={'HiDotsVertical'} />
+                        <Icon className="text-gray-500 w-5 h-5" icon={'HiDotsVertical'} />
                       </div>
                     </td>
                     <td className="text-left text-sm text-gray-800  whitespace-no-wrap tracking-normal leading-4 pr-6 w-6">
@@ -83,27 +52,13 @@ export const ProductList = ({ products }: any) => {
                           className="checkbox opacity-0 absolute cursor-pointer w-full h-full"
                         />
                         <div className="check-icon hidden bg-blue-400 text-white rounded-sm">
-                          <svg
-                            className="icon icon-tabler icon-tabler-check"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z"></path>
-                            <path d="M5 12l5 5l10 -10"></path>
-                          </svg>
+                          <Icon className="text-gray-100 w-5 h-5" icon={'HiCheck'} />
                         </div>
                       </div>
                     </td>
                     <td className="pl-6 pr-20">
                       <div className="flex items-center">
-                      <div className="h-10 w-10 mb-4 lg:mb-0 mr-4 bg-gray-700 shadow-md flex justify-center items-center rounded-full">
+                      <div className="h-10 w-12 mb-4 lg:mb-0 mr-4 bg-gray-700 shadow-md flex justify-center items-center rounded-full">
                           <p className="text-white font-bold text-sm">{product.title[0]}</p>
                       </div>
                         <div className="ml-4">

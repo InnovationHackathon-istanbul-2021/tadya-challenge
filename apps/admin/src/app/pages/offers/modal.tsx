@@ -1,5 +1,7 @@
 import { Field, Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
+import SelectInput from '../../components/ui/form/SelectInput';
+import { Icon } from '../../components/ui/icon/Icon';
 import {
   useListProducersQuery,
   useListProductsByProducerLazyQuery,
@@ -86,68 +88,7 @@ export const ModalExample = ({ showModal, setShowModal }: IModal) => {
                         </p>
                         <br />
                         <div className="xl:flex lg:flex md:flex flex-wrap">
-                          <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
-                            <label
-                              htmlFor="producer_id"
-                              className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
-                            >
-                              Producer / Family
-                            </label>
-                            <div className="border border-gray-300 dark:border-gray-700 shadow-sm rounded flex relative">
-                              <Field
-                                as="select"
-                                name="producer_id"
-                                id="producer_id"
-                                placeholder=""
-                                className="bg-white dark:bg-gray-800 appearance-none z-10 pl-3 py-3 w-full text-sm border border-transparent focus:outline-none focus:border-blue-500  text-gray-800 dark:text-gray-100 rounded"
-                              >
-                                <option value="None">Please Select</option>
-                                {producerList.map((producer) => (
-                                  <option key={producer.id} value={producer.id}>
-                                    {producer.title}
-                                  </option>
-                                ))}
-                              </Field>
-                              <div
-                                className="px-4 flex items-center border-l border-gray-300 dark:border-gray-700 flex-col justify-center text-gray-500
-                                      dark:text-gray-400 absolute right-0 bottom-0 top-0 mx-auto z-20 pointer-events-none "
-                              >
-                                <svg
-                                  tabIndex={0}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-chevron-up"
-                                  width={16}
-                                  height={16}
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="currentColor"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <polyline points="6 15 12 9 18 15" />
-                                </svg>
-                                <svg
-                                  tabIndex={0}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-chevron-down"
-                                  width={16}
-                                  height={16}
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="currentColor"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <polyline points="6 9 12 15 18 9" />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-
+                          <SelectInput name="producer_id" title="Producer / Family" options={producerList} />
                           <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col ml-5 mb-6">
                             <label
                               htmlFor="producer_id"
@@ -189,23 +130,7 @@ export const ModalExample = ({ showModal, setShowModal }: IModal) => {
               </div>
             </div>
             <div onClick={() => setShowModal(!showModal)} className="cursor-pointer absolute top-0 right-0 m-3 text-gray-800 dark:text-gray-100 transition duration-150 ease-in-out">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Close"
-                className="icon icon-tabler icon-tabler-x"
-                width={20}
-                height={20}
-                viewBox="0 0 24 24"
-                strokeWidth="2.5"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <line x1={18} y1={6} x2={6} y2={18} />
-                <line x1={6} y1={6} x2={18} y2={18} />
-              </svg>
+              <Icon className="text-gray-500 hover:text-gray-700 w-5 h-5" icon={'HiX'} />
             </div>
           </div>
         </div>
