@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import _ from 'lodash';
 import styled from 'styled-components';
 import { Form, Formik } from 'formik';
 import { ModalExample } from './modal';
@@ -43,7 +45,22 @@ export const CreateOffers = () => {
     //   console.log(err);
     // });
   };
+  const handleSelectProduct = ({ producer_id, ...data }: any) => {
+    const selectProducts: any[] = [];
 
+    Object.entries(data).forEach(([key, row]: any) => {
+      if (row.price > 0) {
+        const splitKey = key.split('-');
+
+        selectProducts.push({
+          ...row,
+          producer_id: splitKey[0],
+          product_id: splitKey[1],
+        });
+      }
+    });
+    console.log(selectProducts)
+  };
 
   return (
     <Content className="flex pt-8">
@@ -51,16 +68,10 @@ export const CreateOffers = () => {
       <Formik
         initialValues={{
           title: '',
-          sku: '',
-          producer_id: 'None',
-          price: '',
-          measure_unit: '',
-          quantity: '',
+          category_id: 'None',
           description: '',
-          thumbnail: '',
-          category_id: '',
-          packing_type: '',
         }}
+        enableReinitialize={true}
         onSubmit={async (values, { resetForm }) => {
           handleQuery(values, resetForm);
         }}
@@ -115,7 +126,15 @@ export const CreateOffers = () => {
           </Form>
         )}
       />
-      {showModal? <ModalExample showModal={showModal} setShowModal={setShowModal}/>: ''}
+      {showModal ? (
+        <ModalExample
+          handleSelectProduct={handleSelectProduct}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
+      ) : (
+        ''
+      )}
     </Content>
   );
 };

@@ -11,9 +11,10 @@ import { ProductList } from './product_list';
 interface IModal {
   showModal: boolean,
   setShowModal: any,
+  handleSelectProduct: any,
 }
 
-export const ModalExample = ({ showModal, setShowModal }: IModal) => {
+export const ModalExample = ({ showModal, setShowModal , handleSelectProduct }: IModal) => {
   const [producerList, setProducerList] = useState([] as any[]);
   const [productsList, setProductsList] = useState([] as any[]);
 
@@ -60,19 +61,10 @@ export const ModalExample = ({ showModal, setShowModal }: IModal) => {
               <div className="w-full">
                 <Formik
                   initialValues={{
-                    title: '',
-                    sku: '',
                     producer_id: 'None',
-                    price: '',
-                    measure_unit: '',
-                    quantity: '',
-                    description: '',
-                    thumbnail: '',
-                    category_id: '',
-                    packing_type: '',
                   }}
                   onSubmit={async (values, { resetForm }) => {
-                    console.log(values);
+
                   }}
                   render={({
                     values,
@@ -80,6 +72,7 @@ export const ModalExample = ({ showModal, setShowModal }: IModal) => {
                     touched,
                     handleSubmit,
                     resetForm,
+                    setFieldValue
                   }) => (
                     <Form>
                       <div className="px-6 w-full pt-8">
@@ -98,7 +91,8 @@ export const ModalExample = ({ showModal, setShowModal }: IModal) => {
                             </label>
                             <button
                               onClick={() =>
-                                handleLoadProducts(values.producer_id)
+                                {
+                                handleLoadProducts(values.producer_id)}
                               }
                               className="bg-blue-500 w-6/12 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white pl-3 py-3  text-sm focus:outline-none"
                             >
@@ -107,7 +101,7 @@ export const ModalExample = ({ showModal, setShowModal }: IModal) => {
                           </div>
                         </div>
 
-                        <ProductList products={productsList} />
+                        <ProductList products={productsList} setFieldValue={setFieldValue} values={values} />
                       </div>
                       <div className="w-full py-4 sm:px-12 px-4 bg-gray-100 dark:bg-gray-700 mt-6 flex justify-end rounded-bl rounded-br">
                         <button
@@ -117,7 +111,9 @@ export const ModalExample = ({ showModal, setShowModal }: IModal) => {
                           Cancel
                         </button>
                         <button
-                          onClick={() => console.log(values)}
+                          onClick={() => {
+                            handleSelectProduct(values)
+                            setShowModal(!showModal)}}
                           className="bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm focus:outline-none"
                           type="submit"
                         >
