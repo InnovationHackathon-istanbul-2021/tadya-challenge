@@ -17,8 +17,9 @@ interface IModal {
 export const ModalExample = ({ showModal, setShowModal , handleSelectProduct }: IModal) => {
   const [producerList, setProducerList] = useState([] as any[]);
   const [productsList, setProductsList] = useState([] as any[]);
+  const [load, setLoad] = useState(false);
 
-  const [loadProducts, { data: productList }] =
+  const [loadProducts, { data: productList, loading }] =
     useListProductsByProducerLazyQuery();
 
   const { data: producersData } = useListProducersQuery({
@@ -27,18 +28,25 @@ export const ModalExample = ({ showModal, setShowModal , handleSelectProduct }: 
       limit: 100, // value for 'limit'
     },
   });
-  console.log(productList);
+
   useEffect(() => {
     if (producersData) {
       setProducerList(producersData.producers);
     }
   }, [producersData]);
+
   useEffect(() => {
     if (productList) {
       setProductsList(productList.products);
+      setLoad(false);
     }
-  }, [productList]);
+  }, [productList, loading]);
+
   const handleLoadProducts = (producerId: string) => {
+    setLoad(true);
+    setTimeout(() => {
+      setLoad(false);
+    }, 2000)
     loadProducts({
       variables: {
         producer_id: parseInt(producerId),
@@ -47,6 +55,7 @@ export const ModalExample = ({ showModal, setShowModal , handleSelectProduct }: 
       },
     });
   };
+
   return (
     <div
       className={`absolute inset-0 z-40 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center`}
@@ -101,7 +110,7 @@ export const ModalExample = ({ showModal, setShowModal , handleSelectProduct }: 
                           </div>
                         </div>
 
-                        <ProductList products={productsList} setFieldValue={setFieldValue} values={values} />
+                        <ProductList loading={load} products={productsList} setFieldValue={setFieldValue} values={values} />
                       </div>
                       <div className="w-full py-4 sm:px-12 px-4 bg-gray-100 dark:bg-gray-700 mt-6 flex justify-end rounded-bl rounded-br">
                         <button

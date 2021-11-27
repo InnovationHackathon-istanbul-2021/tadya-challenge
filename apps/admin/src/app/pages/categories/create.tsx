@@ -1,9 +1,7 @@
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useMutation } from '@apollo/react-hooks';
-import { INSERT_PRODUCER } from './graphql/mutation';
-import { Insert_ProducerMutationVariables } from '../../generated/graphql';
+import { Categories_Insert_Input, useInsertCategoryMutation } from '../../generated/graphql';
 import TextInput  from '../../components/ui/form/TextInput';
 import SelectInput from '../../components/ui/form/SelectInput';
 import Notification from '../../components/ui/Notification';
@@ -17,32 +15,18 @@ export const CreateCategory = () => {
     type: ''
   });
 
-  const [createNewProducer] = useMutation(
-    INSERT_PRODUCER,
-  );
+
+  const [insertCategoryMutation, { data, loading, error }] = useInsertCategoryMutation();
+
   const handleQuery = (values: any, resetForm: any)=> {
-    createNewProducer({
-      variables:{
-        payload: {
-          title: values.title,
+    insertCategoryMutation({
+      variables: {
+        object: {
+          name: values.name,
+          category_type: 'Product',
           is_active: true,
-          create_offer: true,
-          alias : values.title.toString().toLowerCase().replace(/ /g, '-'),
-          user: {
-            data: {
-              first_name: values.first_name,
-              last_name: values.last_name,
-              email: values.email,
-              city: values.city,
-              phone_number: values.phone_number,
-              username: values.username,
-              is_active: true,
-              password: values.password,
-              alias : `${values.first_name.toLowerCase()}-${values.last_name.toLowerCase()}`
-            }
-          }
         }
-      } as Insert_ProducerMutationVariables
+      }
     }) .then((res: any) => {
       setNotification({
         title: 'Generated Successfully',
@@ -50,7 +34,7 @@ export const CreateCategory = () => {
         type: 'success',
       })
       resetForm();
-      window.location.href = "/producers"
+      window.location.href = "/categories"
     })
     .catch((err: any) => {
       resetForm();
@@ -71,20 +55,14 @@ export const CreateCategory = () => {
   };
 
   return (
-    <Content className="flex h-full mx-auto pt-8">
+    <Content className="flex w-full h-full mx-auto pt-8">
       {notification.title && (<Notification title={notification.title} message={notification.message} type={notification.type} />)}
-      <div>
+      <div className="w-full">
         <div>
           <Formik
             initialValues={{
-              first_name: "",
-              last_name: "",
-              email: "",
-              city: "Ankara",
-              username: "",
-              password: "",
-              title: "",
-              phone_number: ""
+              name: '',
+              category_type: ''
             }}
             onSubmit={async (values, { resetForm }) => {
               handleQuery(values, resetForm);
@@ -103,26 +81,7 @@ export const CreateCategory = () => {
                   <div className="w-11/12 mx-auto">
                     <div className="container mx-auto">
                       <div className="my-8 mx-auto xl:w-full xl:mx-0">
-                        <TextInput type="text" name="title" title="Producer Title" placeholder="Enter Store Title" />
-                        <div className="xl:flex lg:flex md:flex flex-wrap justify-between">
-                          <TextInput type="text" name="first_name" title="First Name" placeholder="Enter First Name" />
-                          <TextInput type="text" name="last_name" title="Last Name" placeholder="Enter Last Name" />
-                          <TextInput type="email" icon={'HiOutlineMail'} styles="pl-16" name="email" title="Email" placeholder="example@gmail.com" />
-                          <SelectInput
-                            name="city"
-                            title="City"
-                            placeholder=""
-                            options={[
-                              {id: 'Istanbul', title: 'Istanbul'},
-                              {id: 'Ankara', title: 'Ankara'},
-                              {id: 'Bursa', title: 'Bursa'},
-                            ]}
-                          />
-                          <TextInput type="text" name="username" title="Username" placeholder="Enter Username" />
-                          <TextInput type="password" name="password" title="Password" placeholder="Enter Password" />
-                          <TextInput type="text" name="phone_number" title="Phone Number" placeholder="Enter Phone Number" />
-                        </div>
-
+                        <TextInput type="text" name="name" title="Category Name" placeholder="Enter Category Name" />
                       </div>
                     </div>
                   </div>

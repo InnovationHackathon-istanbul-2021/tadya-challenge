@@ -142,7 +142,7 @@ export const Table = ({
   const rowData = props.manualPagination ? rows : page;
 
   if (!loading && !data.length) return <div className="no-data">No data loaded</div>;
-  if (loading) return <SpinLoader type="Bars" />;
+  if (loading) return <SpinLoader className="mt-40" type="Bars" />;
 
   // Render the UI for your table
   return (
@@ -213,7 +213,6 @@ export const Table = ({
           </div>
         </div>
       </Styles>
-
       <Pagination
         adjacents={3}
         pageCount={pageCount}

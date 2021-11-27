@@ -2,6 +2,7 @@ import { Field } from 'formik';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../../components/ui/icon/Icon';
+import SpinLoader from '../../components/ui/loader';
 
 const ProductTableBody = styled.div`
   min-height: 250px;
@@ -9,7 +10,7 @@ const ProductTableBody = styled.div`
   max-height: 500px;
   overflow-y: scroll;
 `;
-export const ProductList = ({ products , values }: any) => {
+export const ProductList = ({ products , values, loading }: any) => {
   const [show, setshow] = useState(0);
   products.forEach((product: any) => {
     if(!values[`${product.producer_id}-${product.id}`]) {
@@ -23,26 +24,28 @@ export const ProductList = ({ products , values }: any) => {
         <div className="w-full">
           <table className="min-w-full">
             <thead>
-              <th className="w-6 pr-2 text-base text-gray-800 "></th>
-              <th className="text-left text-base text-gray-800 pr-6 w-6">Id</th>
-              <th className=" text-left pl-6 pr-20 text-base text-gray-800">
-                Product Name
-              </th>
-              <th
-                className=" text-left text-base text-gray-800 pr-6 pr-2"
-                style={{ width: '100px' }}
-              >
-                Price
-              </th>
-              <th
-                className="text-left text-base text-gray-800 pr-6 pr-2"
-                style={{ width: '100px' }}
-              >
-                Stock
-              </th>
+              <tr>
+                <th className="w-6 pr-2 text-base text-gray-800 "></th>
+                <th className="text-left text-base text-gray-800 pr-6 w-6">Id</th>
+                <th className=" text-left pl-6 pr-20 text-base text-gray-800">
+                  Product Name
+                </th>
+                <th
+                  className=" text-left text-base text-gray-800 pr-6 pr-2"
+                  style={{ width: '100px' }}
+                >
+                  Price
+                </th>
+                <th
+                  className="text-left text-base text-gray-800 pr-6 pr-2"
+                  style={{ width: '100px' }}
+                >
+                  Stock
+                </th>
+              </tr>
             </thead>
-            <tbody>
-              {products.length > 0 &&
+            <tbody className="w-full">
+              {!loading ? (products.length > 0 ?
                 products.map((product: any, index: number) => (
                   <tr className="h-20 ">
 
@@ -105,7 +108,11 @@ export const ProductList = ({ products , values }: any) => {
 
                     </td>
                   </tr>
-                ))}
+                )):(
+                  <div className="w-full absolute text-center mt-10">No data Found</div>
+                )):(
+                  <SpinLoader className="mt-20 w-full absolute" type="Bars" />
+                )}
             </tbody>
           </table>
         </div>
