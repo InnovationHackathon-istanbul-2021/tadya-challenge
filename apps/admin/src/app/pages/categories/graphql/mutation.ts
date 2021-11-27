@@ -1,14 +1,11 @@
 import gql from 'graphql-tag';
-export const INSERT_PRODUCER = gql`
-  mutation INSERT_PRODUCER($payload: producers_insert_input!) {
-    insert_producers_one(object: $payload) {
+export const INSERT_CATEGORY = gql`
+  mutation InsertCategory($object: categories_insert_input!) {
+    insert_categories_one(object: $object) {
       id
-      alias
-      ref
-      user {
-        id
-        first_name
-      }
+      is_active
+      name
+      category_type
     }
   }
 `;

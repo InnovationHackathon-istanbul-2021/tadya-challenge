@@ -4501,6 +4501,21 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type InsertCategoryMutationVariables = Exact<{
+  object: Categories_Insert_Input;
+}>;
+
+
+export type InsertCategoryMutation = { __typename?: 'mutation_root', insert_categories_one?: { __typename?: 'categories', id: number, is_active: boolean, name: string, category_type?: string | null | undefined } | null | undefined };
+
+export type ListCategoriesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type ListCategoriesQuery = { __typename?: 'query_root', categories: Array<{ __typename?: 'categories', id: number, is_active: boolean, name: string, parent_id?: number | null | undefined, category_type?: string | null | undefined }>, categories_aggregate: { __typename?: 'categories_aggregate', aggregate?: { __typename?: 'categories_aggregate_fields', count: number } | null | undefined } };
+
 export type ListProductsByProducerQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -4541,6 +4556,87 @@ export type ListProductsQueryVariables = Exact<{
 export type ListProductsQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'products', alias: string, description?: string | null | undefined, id: number, image?: string | null | undefined, measure_unit: string, packing_type?: string | null | undefined, price: any, producer_id: number, quantity: any, quote_on_call?: boolean | null | undefined, sku: string, thumbnail?: string | null | undefined, title: string, category_id?: number | null | undefined, base_id?: number | null | undefined, producer: { __typename?: 'producers', title: string } }>, products_aggregate: { __typename?: 'products_aggregate', aggregate?: { __typename?: 'products_aggregate_fields', count: number } | null | undefined } };
 
 
+export const InsertCategoryDocument = gql`
+    mutation InsertCategory($object: categories_insert_input!) {
+  insert_categories_one(object: $object) {
+    id
+    is_active
+    name
+    category_type
+  }
+}
+    `;
+export type InsertCategoryMutationFn = Apollo.MutationFunction<InsertCategoryMutation, InsertCategoryMutationVariables>;
+
+/**
+ * __useInsertCategoryMutation__
+ *
+ * To run a mutation, you first call `useInsertCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertCategoryMutation, { data, loading, error }] = useInsertCategoryMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useInsertCategoryMutation(baseOptions?: Apollo.MutationHookOptions<InsertCategoryMutation, InsertCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertCategoryMutation, InsertCategoryMutationVariables>(InsertCategoryDocument, options);
+      }
+export type InsertCategoryMutationHookResult = ReturnType<typeof useInsertCategoryMutation>;
+export type InsertCategoryMutationResult = Apollo.MutationResult<InsertCategoryMutation>;
+export type InsertCategoryMutationOptions = Apollo.BaseMutationOptions<InsertCategoryMutation, InsertCategoryMutationVariables>;
+export const ListCategoriesDocument = gql`
+    query ListCategories($limit: Int = 10, $offset: Int = 0) {
+  categories(limit: $limit, offset: $offset, order_by: {id: desc}) {
+    id
+    is_active
+    name
+    parent_id
+    category_type
+  }
+  categories_aggregate {
+    aggregate {
+      count(distinct: true, columns: id)
+    }
+  }
+}
+    `;
+
+/**
+ * __useListCategoriesQuery__
+ *
+ * To run a query within a React component, call `useListCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListCategoriesQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useListCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<ListCategoriesQuery, ListCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListCategoriesQuery, ListCategoriesQueryVariables>(ListCategoriesDocument, options);
+      }
+export function useListCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListCategoriesQuery, ListCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListCategoriesQuery, ListCategoriesQueryVariables>(ListCategoriesDocument, options);
+        }
+export type ListCategoriesQueryHookResult = ReturnType<typeof useListCategoriesQuery>;
+export type ListCategoriesLazyQueryHookResult = ReturnType<typeof useListCategoriesLazyQuery>;
+export type ListCategoriesQueryResult = Apollo.QueryResult<ListCategoriesQuery, ListCategoriesQueryVariables>;
 export const ListProductsByProducerDocument = gql`
     query ListProductsByProducer($limit: Int = 100, $offset: Int = 0, $producer_id: Int = 3) {
   products(
