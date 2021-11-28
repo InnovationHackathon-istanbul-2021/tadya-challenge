@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useList_OffersQuery } from '../../generated/graphql';
+import { useList_Offer_By_RefQuery } from '../../generated/graphql';
 import { Table } from '../../components/ui/table/table';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchInput from '../../components/ui/form/SearchInput';
@@ -19,7 +19,7 @@ export const ListOffers = () => {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('');
 
-  const { data, loading, error } = useList_OffersQuery({
+  const { data, loading, error } = useList_Offer_By_RefQuery({
     variables: {
       offset, // value for 'offset'
       limit: pageLimit, // value for 'limit'
@@ -37,7 +37,7 @@ export const ListOffers = () => {
       setTimeout(() => {
         setLoad(false);
       }, 1000)
-      setTotal(data?.offers_aggregate.aggregate?.count as number);
+      setTotal(data?.offers_aggregate?.aggregate?.count as number);
     }
   }, [data]);
 
@@ -48,8 +48,8 @@ export const ListOffers = () => {
         accessor: 'id',
       },
       {
-        Header: 'Producer Id',
-        accessor: 'producer_id',
+        Header: 'Ref',
+        accessor: 'ref',
       },
       {
         Header: 'Start Date',
@@ -74,23 +74,26 @@ export const ListOffers = () => {
         },
       },
       {
-        Header: 'Products',
-        accessor: 'created_ate',
+        Header: 'Active',
+        accessor: 'is_active',
         Cell: ({ row }: any) => {
           return (
-            <div onClick={() => navigate('/offers/'+row.original?.id)} className="text-blue-500 hover:text-blue-600 cursor-pointer">
-              View Products
+            <div >
+              {row.original.is_active? "true" : "false"}
             </div>
           );
         },
       },
+
       {
         Header: 'Action',
         width: "20%",
         Cell: ({ row }: any) => {
           return (
             <div className="inline-flex space-x-2 text-blue-300	">
-              <button className="mx-2 my-2 bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-6 py-2 text-xs">
+              <button
+              onClick={() => navigate('/offers/'+row.original?.ref)}
+              className="mx-2 my-2 bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-6 py-2 text-xs">
                 Manage
               </button>
               <button className="mx-2 my-2 bg-red-500 transition duration-150 ease-in-out hover:bg-red-600 rounded text-white px-6 py-2 text-xs">

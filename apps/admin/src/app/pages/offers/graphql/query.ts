@@ -77,3 +77,40 @@ export const FIND_OFFER_PRODUCTS = gql`
     }
   }
 `;
+
+export const LIST_OFFER_DETAIl_BY_REF = gql`
+  query LIST_OFFER_DETAIl_BY_REF(
+    $limit: Int = 10
+    $offset: Int = 0
+    $refId: String = "9cc26d49-10a9-430b-8706-29b2f3566d0a"
+  ) {
+    offers(
+      order_by: { id: desc }
+      limit: $limit
+      offset: $offset
+      where: { ref: { _eq: $refId } }
+    ) {
+      end_date
+      id
+      offer_products(order_by: { id: desc }) {
+        id
+        price
+        quantity
+        product {
+          title
+          quote_on_call
+          price
+          packing_type
+          measure_unit
+          id
+          quantity
+          sku
+          producer {
+            title
+            id
+          }
+        }
+      }
+    }
+  }
+`;

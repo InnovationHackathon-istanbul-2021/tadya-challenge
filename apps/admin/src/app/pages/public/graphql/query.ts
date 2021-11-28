@@ -73,7 +73,8 @@ export const GET_OFFER_BY_REF = gql`
   query GET_OFFER_BY_REF(
     $limit: Int = 10
     $offset: Int = 0
-    $offerRef: String
+    $offerRef: String = ""
+    $ref: String_comparison_exp = {}
   ) {
     offers(
       order_by: { id: desc }
@@ -90,6 +91,16 @@ export const GET_OFFER_BY_REF = gql`
         title
       }
       ref
+      offer_products_aggregate {
+        aggregate {
+          count(columns: product_id)
+        }
+      }
+    }
+    offers_aggregate(where: { ref: { _eq: $offerRef } }) {
+      aggregate {
+        count(columns: ref)
+      }
     }
   }
 `;
@@ -111,6 +122,11 @@ export const LIST_OFFER_BY_REF = gql`
         title
       }
       ref
+    }
+    offers_aggregate(distinct_on: ref) {
+      aggregate {
+        count(columns: ref, distinct: true)
+      }
     }
   }
 `;
