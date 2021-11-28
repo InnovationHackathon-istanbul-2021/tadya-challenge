@@ -21,6 +21,7 @@ import { PublicPage } from '../pages/public';
 import { ListOrders } from '../pages/order/list';
 import { SidebarNavigation } from '../components/sidebar/navigation';
 import { ListFeedback } from '../pages/feedback/list';
+import { PublicOfferPage } from '../pages/public/offer';
 
 const AppRouter = () => {
   return (
@@ -32,6 +33,7 @@ const AppRouter = () => {
       <Route path={'/customer'} element={<Customer/>} />
       <Route path={'/volunteer'} element={<Volunteer/>} />
       <Route path={'/feedback'} element={<GiveFeedback/>} />
+      <Route path={'/public/offer'} element={<PublicOfferPage/>} />
       <Route path={'/public'} element={<PublicPage/>} />
 
       <Route path={'/producers'} element={<ListProducers/>} />

@@ -53,7 +53,7 @@ export const OfferProductList = () => {
 
   useEffect(() => {
     if (offersWithProduct) {
-      console.log(offersWithProduct.offers);
+
       const flatResult: any[] = [];
       _.each(offersWithProduct.offers, (offer) => {
         const { offer_products, ...rest } = offer;

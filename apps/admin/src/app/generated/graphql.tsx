@@ -5799,7 +5799,7 @@ export const List_Offer_By_DateDocument = gql`
     order_by: {id: desc}
     limit: $limit
     offset: $offset
-    where: {end_date: {_gt: $_gt}, is_active: {_eq: true}}
+    where: {end_date: {_gte: $_gt}}
   ) {
     created_ate
     end_date
