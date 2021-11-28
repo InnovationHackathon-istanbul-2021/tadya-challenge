@@ -24,8 +24,9 @@ const createApolloClient = () => {
     cache: new InMemoryCache(),
   });
 };
-console.log(process.env.REACT_AUTH_TOKEN,"---", window.location.pathname)
+
 const filterPath = window.location.pathname !== '/login' && window.location.pathname !== '/order'
+&& window.location.pathname !== '/feedback'
 ReactDOM.render(
   <StrictMode>
     <Router>

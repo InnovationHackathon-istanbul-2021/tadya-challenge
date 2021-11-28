@@ -51,3 +51,29 @@ export const LIST_OFFERS = gql`
     }
   }
 `;
+
+export const FIND_OFFER_PRODUCTS = gql`
+  query FIND_OFFER_PRODUCTS(
+    $offer_id: Int = 15
+    $limit: Int = 10
+    $offset: Int = 0
+  ) {
+    offer_products(
+      where: { offer_id: { _eq: $offer_id } }
+      limit: $limit
+      offset: $offset
+    ) {
+      id
+      is_active
+      offer_id
+      price
+      product_id
+      quantity
+    }
+    offer_products_aggregate(where: { offer_id: { _eq: $offer_id } }) {
+      aggregate {
+        count(columns: id)
+      }
+    }
+  }
+`;

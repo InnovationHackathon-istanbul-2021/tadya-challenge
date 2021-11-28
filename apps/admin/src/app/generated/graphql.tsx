@@ -4712,6 +4712,15 @@ export type List_OffersQueryVariables = Exact<{
 
 export type List_OffersQuery = { __typename?: 'query_root', offers: Array<{ __typename?: 'offers', created_ate: any, end_date: any, id: number, is_active: boolean, producer_id: number, start_date: any, offer_products: Array<{ __typename?: 'offer_products', id: number, is_active: boolean, offer_id: number, price?: any | null | undefined, product_id: number, quantity?: any | null | undefined }> }>, offers_aggregate: { __typename?: 'offers_aggregate', aggregate?: { __typename?: 'offers_aggregate_fields', count: number } | null | undefined } };
 
+export type Find_Offer_ProductsQueryVariables = Exact<{
+  offer_id?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type Find_Offer_ProductsQuery = { __typename?: 'query_root', offer_products: Array<{ __typename?: 'offer_products', id: number, is_active: boolean, offer_id: number, price?: any | null | undefined, product_id: number, quantity?: any | null | undefined }>, offer_products_aggregate: { __typename?: 'offer_products_aggregate', aggregate?: { __typename?: 'offer_products_aggregate_fields', count: number } | null | undefined } };
+
 export type Insert_ProducerMutationVariables = Exact<{
   payload: Producers_Insert_Input;
 }>;
@@ -4980,6 +4989,57 @@ export function useList_OffersLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type List_OffersQueryHookResult = ReturnType<typeof useList_OffersQuery>;
 export type List_OffersLazyQueryHookResult = ReturnType<typeof useList_OffersLazyQuery>;
 export type List_OffersQueryResult = Apollo.QueryResult<List_OffersQuery, List_OffersQueryVariables>;
+export const Find_Offer_ProductsDocument = gql`
+    query FIND_OFFER_PRODUCTS($offer_id: Int = 15, $limit: Int = 10, $offset: Int = 0) {
+  offer_products(
+    where: {offer_id: {_eq: $offer_id}}
+    limit: $limit
+    offset: $offset
+  ) {
+    id
+    is_active
+    offer_id
+    price
+    product_id
+    quantity
+  }
+  offer_products_aggregate(where: {offer_id: {_eq: $offer_id}}) {
+    aggregate {
+      count(columns: id)
+    }
+  }
+}
+    `;
+
+/**
+ * __useFind_Offer_ProductsQuery__
+ *
+ * To run a query within a React component, call `useFind_Offer_ProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFind_Offer_ProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFind_Offer_ProductsQuery({
+ *   variables: {
+ *      offer_id: // value for 'offer_id'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useFind_Offer_ProductsQuery(baseOptions?: Apollo.QueryHookOptions<Find_Offer_ProductsQuery, Find_Offer_ProductsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Find_Offer_ProductsQuery, Find_Offer_ProductsQueryVariables>(Find_Offer_ProductsDocument, options);
+      }
+export function useFind_Offer_ProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Find_Offer_ProductsQuery, Find_Offer_ProductsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Find_Offer_ProductsQuery, Find_Offer_ProductsQueryVariables>(Find_Offer_ProductsDocument, options);
+        }
+export type Find_Offer_ProductsQueryHookResult = ReturnType<typeof useFind_Offer_ProductsQuery>;
+export type Find_Offer_ProductsLazyQueryHookResult = ReturnType<typeof useFind_Offer_ProductsLazyQuery>;
+export type Find_Offer_ProductsQueryResult = Apollo.QueryResult<Find_Offer_ProductsQuery, Find_Offer_ProductsQueryVariables>;
 export const Insert_ProducerDocument = gql`
     mutation INSERT_PRODUCER($payload: producers_insert_input!) {
   insert_producers_one(object: $payload) {

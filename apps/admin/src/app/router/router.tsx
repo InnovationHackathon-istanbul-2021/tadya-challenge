@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Welcome } from '../pages';
 import { CreateCategory } from '../pages/categories/create';
 import { ListCategories } from '../pages/categories/list';
+import { GiveFeedback } from '../pages/feedback';
 import Login from '../pages/login/login';
 import { CreateOffers } from '../pages/offers/create';
 import { ListOffers } from '../pages/offers/list';
@@ -17,6 +18,8 @@ const AppRouter = () => {
     <Routes>
       <Route path={'/login'} element={<Login/>} />
       <Route path={'/order'} element={<Order/>} />
+      <Route path={'/feedback'} element={<GiveFeedback/>} />
+
       <Route path={'/producers'} element={<ListProducers/>} />
       <Route  path={'/producers/*'}>
         <Route path={'create'} element={<CreateProducer />} />
