@@ -2,6 +2,7 @@ import {  useLocation, useNavigate, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Icon } from '../ui/icon/Icon';
 import { IconProps } from '../ui/icon/types';
+import logoImg from '../../../assets/logo_tada_black.png';
 
 export interface MenuItemProps extends IconProps {
   route: string;
@@ -59,7 +60,7 @@ export const SidebarNavigation = () => {
 
   useEffect(() => {
     console.log(filterNavigation)
-    filterNavigation && navigate(filterNavigation[0]?.route);
+    window.location.pathname === '/' && filterNavigation && navigate(filterNavigation[0]?.route);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterNavigation])
 
@@ -69,10 +70,10 @@ export const SidebarNavigation = () => {
       <div className="flex items-center flex-shrink-0 px-4 space-y-5">
         <h3 onClick={() => navigate("/")}
          className="text-center cursor-pointer w-full text-xl text-gray-700 capitalize tracking-wide font-bold">
-          Tadya
+          <img className="w-24 h-24 mx-auto align-center" alt="logo" src={logoImg} />
         </h3>
       </div>
-      <div className="mt-5 flex-grow flex flex-col ">
+      <div className="flex-grow flex flex-col ">
         <nav className="flex-1  " aria-label="Sidebar">
           <ul className="font-semibold text-sm mt-6">
             {filterNavigation?.map((item: any) => (

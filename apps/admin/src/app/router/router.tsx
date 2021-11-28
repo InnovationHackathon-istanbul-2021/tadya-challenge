@@ -18,6 +18,8 @@ import { CreateProduct } from '../pages/products/create';
 import { ListProducts } from '../pages/products/list';
 import { Volunteer } from '../pages/volunteer/volunteer';
 import { PublicPage } from '../pages/public';
+import { ListOrders } from '../pages/order/list';
+import { SidebarNavigation } from '../components/sidebar/navigation';
 
 const AppRouter = () => {
   return (
@@ -51,16 +53,16 @@ const AppRouter = () => {
         <Route path={'create'} element={<>Create Feedback</>} />
         <Route path={'*'} element={<>Manage Feedback</>} />
       </Route>
-      <Route path={'/order'}>
+      <Route path={'/orders'} element={<ListOrders />} />
+      <Route path={'/orders/*'}>
         <Route path={'create'} element={<>Create order</>} />
-        <Route path={'*'} element={<>Manage order</>} />
       </Route>
       <Route path={'/offers'} element={<ListOffers />} />
       <Route path={'/offers/*'}>
         <Route path={':id'} element={<OfferProductList/>} />
         <Route path={'create'} element={<CreateOffers/>} />
       </Route>
-      <Route path={'*'} element={<Welcome />} />
+      <Route path={'*'} element={<SidebarNavigation />} />
     </Routes>
   );
 };

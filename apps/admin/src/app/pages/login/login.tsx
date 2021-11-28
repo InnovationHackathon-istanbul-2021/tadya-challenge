@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import logoImg from '../../../assets/logo.svg';
-import logoTopImg from '../../../assets/logo_top.svg';
+import logoImg from '../../../assets/logo_tada_white.png';
+import logoTopImg from '../../../assets/logo.svg';
 import logoBottomImg from '../../../assets/logo_bottom.svg';
 
 const Login = () => {
@@ -22,13 +22,12 @@ const Login = () => {
                 <div className="mx-auto flex lg:justify-center h-full flex-col lg:flex-row">
                     <div className="w-full lg:w-1/2 px-2 py-20 sm:py-40 sm:px-12 flex flex-col justify-center items-center bg-indigo-600 relative">
                         <div className="absolute left-0 top-0 pl-3 pt-3">
-                          <img alt="logo" src={logoImg} />
+                          <img alt="logo" src={logoTopImg} />
                         </div>
                         <div className="flex relative z-30 flex-col justify-center px-4 md:pr-12">
-                            <div className="px-2 flex flex-col items-center justify-center">
-                              <img alt="logo" src={logoTopImg} />
+                            <div className="w-44 h-44 px-2 flex flex-col items-center justify-center">
+                              <img alt="logo" src={logoImg} />
                             </div>
-                            <h3 className="text-4xl pt-8 leading-tight text-white text-center">The Tadya</h3>
                         </div>
                         <div className="absolute right-0 bottom-0">
                           <img alt="logo" src={logoBottomImg} />
