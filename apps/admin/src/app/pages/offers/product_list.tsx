@@ -7,7 +7,7 @@ import SpinLoader from '../../components/ui/loader';
 const ProductTableBody = styled.div`
   min-height: 250px;
   height: 100%;
-  max-height: 500px;
+  max-height: 400px;
   overflow-y: scroll;
 `;
 export const ProductList = ({ products , values, loading }: any) => {

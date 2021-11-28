@@ -33,29 +33,42 @@ export const CreateOffers = () => {
   useEffect(() => {
     if (startDate > endDate) setEndDate(startDate);
   }, [startDate]);
+
   const [insertOfferMutation, { data, loading, error }] = useInsertOfferMutation();
   const handleQuery = (values: any, resetForm: any) => {
-    console.log(values);
+    console.log({
+      start_date: startDate.toLocaleDateString("en-US"),
+      end_date: new Date(endDate).toLocaleDateString("en-US"),
+      producer_id: product[0]?.producer_id,
+      is_active: true,
+      offer_products: {
+        data: {
+          id: product[0]?.product_id,
+          price: product[0]?.price,
+          quantity: product[0]?.stock,
+          is_active: true,
+        }
+      }
+    });
     insertOfferMutation({
       variables: {
         object: {
-          start_date: values.start_date,
-          end_date: values.end_date,
-          producer_id: product?.producer_id,
+          start_date: startDate.toLocaleDateString("en-US"),
+          end_date: new Date(endDate).toLocaleDateString("en-US"),
+          producer_id: product[0]?.producer_id,
           is_active: true,
           offer_products: {
-            data: {
-              id: product?.product_id,
-              price: product?.price,
-              quantity: product?.stock,
+            data:[ {
+              product_id: product[0]?.product_id,
+              price: product[0]?.price,
+              quantity: product[0]?.stock,
               is_active: true,
-            }
+            }]
           }
         }
       }
     }).
     then((res: any) => {
-      alert('Generated Successfully');
       setNotification({
         title: 'Generated Successfully',
         message: 'New Offer created successfully.',
@@ -146,7 +159,6 @@ export const CreateOffers = () => {
                   Cancel
                 </button>
                 <button
-                  onClick={() => handleSubmit()}
                   className="bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm focus:outline-none"
                   type="submit"
                 >

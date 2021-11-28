@@ -28,7 +28,6 @@ const SelectInput = ({ options, title, name, value, onChange, styles, placeholde
         <Field
           as="select"
           name={name}
-          required
           id={name}
           placeholder={placeholder}
           className="bg-white dark:bg-gray-800 appearance-none z-10 pl-3 py-3 w-full text-sm border border-transparent focus:outline-none focus:border-blue-700  text-gray-800 dark:text-gray-100 rounded"

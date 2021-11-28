@@ -21,6 +21,7 @@ export const FIND_PRODUCTS_BY_PRODUCERS = gql`
       sku
       thumbnail
       title
+      producer_id
     }
   }
 `;
