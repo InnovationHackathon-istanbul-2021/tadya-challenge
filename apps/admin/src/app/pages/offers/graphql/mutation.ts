@@ -16,3 +16,28 @@ export const INSERT_PRODUCT_OFFER = gql`
     }
   }
 `;
+
+export const DISABLE_ALL_OFFERS = gql`
+  mutation DISABLE_ALL_OFFERS {
+    update_offers(
+      where: { is_active: { _eq: true } }
+      _set: { is_active: false }
+    ) {
+      returning {
+        id
+      }
+      affected_rows
+    }
+  }
+`;
+
+export const ENABLE_OFFER = gql`
+  mutation ENABLE_OFFER($_eq: String = "") {
+    update_offers(where: { ref: { _eq: $_eq } }, _set: { is_active: true }) {
+      returning {
+        id
+      }
+      affected_rows
+    }
+  }
+`;

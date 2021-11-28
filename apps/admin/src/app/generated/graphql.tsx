@@ -4853,6 +4853,18 @@ export type InsertOfferMutationVariables = Exact<{
 
 export type InsertOfferMutation = { __typename?: 'mutation_root', insert_offers_one?: { __typename?: 'offers', id: number, is_active: boolean, producer_id: number, end_date: any, created_ate: any, offer_products: Array<{ __typename?: 'offer_products', id: number, is_active: boolean, quantity?: any | null | undefined, price?: any | null | undefined }> } | null | undefined };
 
+export type Disable_All_OffersMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Disable_All_OffersMutation = { __typename?: 'mutation_root', update_offers?: { __typename?: 'offers_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'offers', id: number }> } | null | undefined };
+
+export type Enable_OfferMutationVariables = Exact<{
+  _eq?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type Enable_OfferMutation = { __typename?: 'mutation_root', update_offers?: { __typename?: 'offers_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'offers', id: number }> } | null | undefined };
+
 export type ListProductsByProducerQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -5190,6 +5202,77 @@ export function useInsertOfferMutation(baseOptions?: Apollo.MutationHookOptions<
 export type InsertOfferMutationHookResult = ReturnType<typeof useInsertOfferMutation>;
 export type InsertOfferMutationResult = Apollo.MutationResult<InsertOfferMutation>;
 export type InsertOfferMutationOptions = Apollo.BaseMutationOptions<InsertOfferMutation, InsertOfferMutationVariables>;
+export const Disable_All_OffersDocument = gql`
+    mutation DISABLE_ALL_OFFERS {
+  update_offers(where: {is_active: {_eq: true}}, _set: {is_active: false}) {
+    returning {
+      id
+    }
+    affected_rows
+  }
+}
+    `;
+export type Disable_All_OffersMutationFn = Apollo.MutationFunction<Disable_All_OffersMutation, Disable_All_OffersMutationVariables>;
+
+/**
+ * __useDisable_All_OffersMutation__
+ *
+ * To run a mutation, you first call `useDisable_All_OffersMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDisable_All_OffersMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [disableAllOffersMutation, { data, loading, error }] = useDisable_All_OffersMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useDisable_All_OffersMutation(baseOptions?: Apollo.MutationHookOptions<Disable_All_OffersMutation, Disable_All_OffersMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<Disable_All_OffersMutation, Disable_All_OffersMutationVariables>(Disable_All_OffersDocument, options);
+      }
+export type Disable_All_OffersMutationHookResult = ReturnType<typeof useDisable_All_OffersMutation>;
+export type Disable_All_OffersMutationResult = Apollo.MutationResult<Disable_All_OffersMutation>;
+export type Disable_All_OffersMutationOptions = Apollo.BaseMutationOptions<Disable_All_OffersMutation, Disable_All_OffersMutationVariables>;
+export const Enable_OfferDocument = gql`
+    mutation ENABLE_OFFER($_eq: String = "") {
+  update_offers(where: {ref: {_eq: $_eq}}, _set: {is_active: true}) {
+    returning {
+      id
+    }
+    affected_rows
+  }
+}
+    `;
+export type Enable_OfferMutationFn = Apollo.MutationFunction<Enable_OfferMutation, Enable_OfferMutationVariables>;
+
+/**
+ * __useEnable_OfferMutation__
+ *
+ * To run a mutation, you first call `useEnable_OfferMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEnable_OfferMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [enableOfferMutation, { data, loading, error }] = useEnable_OfferMutation({
+ *   variables: {
+ *      _eq: // value for '_eq'
+ *   },
+ * });
+ */
+export function useEnable_OfferMutation(baseOptions?: Apollo.MutationHookOptions<Enable_OfferMutation, Enable_OfferMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<Enable_OfferMutation, Enable_OfferMutationVariables>(Enable_OfferDocument, options);
+      }
+export type Enable_OfferMutationHookResult = ReturnType<typeof useEnable_OfferMutation>;
+export type Enable_OfferMutationResult = Apollo.MutationResult<Enable_OfferMutation>;
+export type Enable_OfferMutationOptions = Apollo.BaseMutationOptions<Enable_OfferMutation, Enable_OfferMutationVariables>;
 export const ListProductsByProducerDocument = gql`
     query ListProductsByProducer($limit: Int = 100, $offset: Int = 0, $producer_id: Int = 3) {
   products(
