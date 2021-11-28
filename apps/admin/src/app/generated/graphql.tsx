@@ -2017,6 +2017,8 @@ export type Offer_Products = {
   is_active: Scalars['Boolean'];
   offer_id: Scalars['Int'];
   price?: Maybe<Scalars['numeric']>;
+  /** An object relationship */
+  product: Products;
   product_id: Scalars['Int'];
   quantity?: Maybe<Scalars['numeric']>;
 };
@@ -2101,6 +2103,7 @@ export type Offer_Products_Bool_Exp = {
   is_active?: InputMaybe<Boolean_Comparison_Exp>;
   offer_id?: InputMaybe<Int_Comparison_Exp>;
   price?: InputMaybe<Numeric_Comparison_Exp>;
+  product?: InputMaybe<Products_Bool_Exp>;
   product_id?: InputMaybe<Int_Comparison_Exp>;
   quantity?: InputMaybe<Numeric_Comparison_Exp>;
 };
@@ -2128,6 +2131,7 @@ export type Offer_Products_Insert_Input = {
   is_active?: InputMaybe<Scalars['Boolean']>;
   offer_id?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['numeric']>;
+  product?: InputMaybe<Products_Obj_Rel_Insert_Input>;
   product_id?: InputMaybe<Scalars['Int']>;
   quantity?: InputMaybe<Scalars['numeric']>;
 };
@@ -2192,6 +2196,7 @@ export type Offer_Products_Order_By = {
   is_active?: InputMaybe<Order_By>;
   offer_id?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
+  product?: InputMaybe<Products_Order_By>;
   product_id?: InputMaybe<Order_By>;
   quantity?: InputMaybe<Order_By>;
 };
@@ -2387,7 +2392,10 @@ export type Offers = {
   offer_products: Array<Offer_Products>;
   /** An aggregate relationship */
   offer_products_aggregate: Offer_Products_Aggregate;
+  /** An object relationship */
+  producer: Producers;
   producer_id: Scalars['Int'];
+  ref?: Maybe<Scalars['String']>;
   start_date: Scalars['timestamp'];
 };
 
@@ -2458,7 +2466,9 @@ export type Offers_Bool_Exp = {
   id?: InputMaybe<Int_Comparison_Exp>;
   is_active?: InputMaybe<Boolean_Comparison_Exp>;
   offer_products?: InputMaybe<Offer_Products_Bool_Exp>;
+  producer?: InputMaybe<Producers_Bool_Exp>;
   producer_id?: InputMaybe<Int_Comparison_Exp>;
+  ref?: InputMaybe<String_Comparison_Exp>;
   start_date?: InputMaybe<Timestamp_Comparison_Exp>;
 };
 
@@ -2483,7 +2493,9 @@ export type Offers_Insert_Input = {
   id?: InputMaybe<Scalars['Int']>;
   is_active?: InputMaybe<Scalars['Boolean']>;
   offer_products?: InputMaybe<Offer_Products_Arr_Rel_Insert_Input>;
+  producer?: InputMaybe<Producers_Obj_Rel_Insert_Input>;
   producer_id?: InputMaybe<Scalars['Int']>;
+  ref?: InputMaybe<Scalars['String']>;
   start_date?: InputMaybe<Scalars['timestamp']>;
 };
 
@@ -2494,6 +2506,7 @@ export type Offers_Max_Fields = {
   end_date?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['Int']>;
   producer_id?: Maybe<Scalars['Int']>;
+  ref?: Maybe<Scalars['String']>;
   start_date?: Maybe<Scalars['timestamp']>;
 };
 
@@ -2504,6 +2517,7 @@ export type Offers_Min_Fields = {
   end_date?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['Int']>;
   producer_id?: Maybe<Scalars['Int']>;
+  ref?: Maybe<Scalars['String']>;
   start_date?: Maybe<Scalars['timestamp']>;
 };
 
@@ -2530,7 +2544,9 @@ export type Offers_Order_By = {
   id?: InputMaybe<Order_By>;
   is_active?: InputMaybe<Order_By>;
   offer_products_aggregate?: InputMaybe<Offer_Products_Aggregate_Order_By>;
+  producer?: InputMaybe<Producers_Order_By>;
   producer_id?: InputMaybe<Order_By>;
+  ref?: InputMaybe<Order_By>;
   start_date?: InputMaybe<Order_By>;
 };
 
@@ -2552,6 +2568,8 @@ export enum Offers_Select_Column {
   /** column name */
   ProducerId = 'producer_id',
   /** column name */
+  Ref = 'ref',
+  /** column name */
   StartDate = 'start_date'
 }
 
@@ -2562,6 +2580,7 @@ export type Offers_Set_Input = {
   id?: InputMaybe<Scalars['Int']>;
   is_active?: InputMaybe<Scalars['Boolean']>;
   producer_id?: InputMaybe<Scalars['Int']>;
+  ref?: InputMaybe<Scalars['String']>;
   start_date?: InputMaybe<Scalars['timestamp']>;
 };
 
@@ -2605,6 +2624,8 @@ export enum Offers_Update_Column {
   IsActive = 'is_active',
   /** column name */
   ProducerId = 'producer_id',
+  /** column name */
+  Ref = 'ref',
   /** column name */
   StartDate = 'start_date'
 }
@@ -3578,6 +3599,13 @@ export type Products_Mutation_Response = {
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Products>;
+};
+
+/** input type for inserting object relation for remote table "products" */
+export type Products_Obj_Rel_Insert_Input = {
+  data: Products_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Products_On_Conflict>;
 };
 
 /** on conflict condition type for table "products" */
@@ -4896,6 +4924,32 @@ export type List_All_ProductsQueryVariables = Exact<{
 
 export type List_All_ProductsQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'products', alias: string, category_id?: number | null | undefined, description?: string | null | undefined, id: number, measure_unit: string, packing_type?: string | null | undefined, price: any, quantity: any, quote_on_call?: boolean | null | undefined, sku?: string | null | undefined, title: string, thumbnail?: string | null | undefined, producer_id: number, producer: { __typename?: 'producers', id: number, title: string, alias: string } }> };
 
+export type List_Offer_By_DateQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  _gt?: InputMaybe<Scalars['timestamp']>;
+}>;
+
+
+export type List_Offer_By_DateQuery = { __typename?: 'query_root', offers: Array<{ __typename?: 'offers', created_ate: any, end_date: any, id: number, is_active: boolean, offer_products: Array<{ __typename?: 'offer_products', price?: any | null | undefined, quantity?: any | null | undefined, product: { __typename?: 'products', title: string, alias: string, thumbnail?: string | null | undefined, quote_on_call?: boolean | null | undefined, price: any, packing_type?: string | null | undefined, measure_unit: string, image?: string | null | undefined, id: number, description?: string | null | undefined, category_id?: number | null | undefined, base_id?: number | null | undefined, quantity: any, sku?: string | null | undefined, producer: { __typename?: 'producers', title: string, id: number } } }> }> };
+
+export type Get_Offer_By_RefQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  offerRef?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type Get_Offer_By_RefQuery = { __typename?: 'query_root', offers: Array<{ __typename?: 'offers', created_ate: any, end_date: any, id: number, is_active: boolean, start_date: any, ref?: string | null | undefined, producer: { __typename?: 'producers', title: string } }> };
+
+export type List_Offer_By_RefQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type List_Offer_By_RefQuery = { __typename?: 'query_root', offers: Array<{ __typename?: 'offers', created_ate: any, end_date: any, id: number, is_active: boolean, start_date: any, ref?: string | null | undefined, producer: { __typename?: 'producers', title: string } }> };
+
 
 export const InsertCategoryDocument = gql`
     mutation InsertCategory($object: categories_insert_input!) {
@@ -5584,3 +5638,166 @@ export function useList_All_ProductsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type List_All_ProductsQueryHookResult = ReturnType<typeof useList_All_ProductsQuery>;
 export type List_All_ProductsLazyQueryHookResult = ReturnType<typeof useList_All_ProductsLazyQuery>;
 export type List_All_ProductsQueryResult = Apollo.QueryResult<List_All_ProductsQuery, List_All_ProductsQueryVariables>;
+export const List_Offer_By_DateDocument = gql`
+    query LIST_OFFER_BY_DATE($limit: Int = 10, $offset: Int = 0, $_gt: timestamp = "2021-11-29") {
+  offers(
+    order_by: {id: desc}
+    limit: $limit
+    offset: $offset
+    where: {end_date: {_gt: $_gt}, is_active: {_eq: true}}
+  ) {
+    created_ate
+    end_date
+    id
+    is_active
+    offer_products(order_by: {id: desc}) {
+      price
+      quantity
+      product {
+        title
+        alias
+        thumbnail
+        quote_on_call
+        price
+        packing_type
+        measure_unit
+        image
+        id
+        description
+        category_id
+        base_id
+        quantity
+        sku
+        producer {
+          title
+          id
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useList_Offer_By_DateQuery__
+ *
+ * To run a query within a React component, call `useList_Offer_By_DateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useList_Offer_By_DateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useList_Offer_By_DateQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      _gt: // value for '_gt'
+ *   },
+ * });
+ */
+export function useList_Offer_By_DateQuery(baseOptions?: Apollo.QueryHookOptions<List_Offer_By_DateQuery, List_Offer_By_DateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<List_Offer_By_DateQuery, List_Offer_By_DateQueryVariables>(List_Offer_By_DateDocument, options);
+      }
+export function useList_Offer_By_DateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<List_Offer_By_DateQuery, List_Offer_By_DateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<List_Offer_By_DateQuery, List_Offer_By_DateQueryVariables>(List_Offer_By_DateDocument, options);
+        }
+export type List_Offer_By_DateQueryHookResult = ReturnType<typeof useList_Offer_By_DateQuery>;
+export type List_Offer_By_DateLazyQueryHookResult = ReturnType<typeof useList_Offer_By_DateLazyQuery>;
+export type List_Offer_By_DateQueryResult = Apollo.QueryResult<List_Offer_By_DateQuery, List_Offer_By_DateQueryVariables>;
+export const Get_Offer_By_RefDocument = gql`
+    query GET_OFFER_BY_REF($limit: Int = 10, $offset: Int = 0, $offerRef: String) {
+  offers(
+    order_by: {id: desc}
+    limit: $limit
+    offset: $offset
+    where: {ref: {_eq: $offerRef}}
+  ) {
+    created_ate
+    end_date
+    id
+    is_active
+    start_date
+    producer {
+      title
+    }
+    ref
+  }
+}
+    `;
+
+/**
+ * __useGet_Offer_By_RefQuery__
+ *
+ * To run a query within a React component, call `useGet_Offer_By_RefQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGet_Offer_By_RefQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGet_Offer_By_RefQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      offerRef: // value for 'offerRef'
+ *   },
+ * });
+ */
+export function useGet_Offer_By_RefQuery(baseOptions?: Apollo.QueryHookOptions<Get_Offer_By_RefQuery, Get_Offer_By_RefQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Get_Offer_By_RefQuery, Get_Offer_By_RefQueryVariables>(Get_Offer_By_RefDocument, options);
+      }
+export function useGet_Offer_By_RefLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Get_Offer_By_RefQuery, Get_Offer_By_RefQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Get_Offer_By_RefQuery, Get_Offer_By_RefQueryVariables>(Get_Offer_By_RefDocument, options);
+        }
+export type Get_Offer_By_RefQueryHookResult = ReturnType<typeof useGet_Offer_By_RefQuery>;
+export type Get_Offer_By_RefLazyQueryHookResult = ReturnType<typeof useGet_Offer_By_RefLazyQuery>;
+export type Get_Offer_By_RefQueryResult = Apollo.QueryResult<Get_Offer_By_RefQuery, Get_Offer_By_RefQueryVariables>;
+export const List_Offer_By_RefDocument = gql`
+    query LIST_OFFER_BY_REF($limit: Int = 10, $offset: Int = 0) {
+  offers(order_by: {ref: desc}, limit: $limit, offset: $offset, distinct_on: ref) {
+    created_ate
+    end_date
+    id
+    is_active
+    start_date
+    producer {
+      title
+    }
+    ref
+  }
+}
+    `;
+
+/**
+ * __useList_Offer_By_RefQuery__
+ *
+ * To run a query within a React component, call `useList_Offer_By_RefQuery` and pass it any options that fit your needs.
+ * When your component renders, `useList_Offer_By_RefQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useList_Offer_By_RefQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useList_Offer_By_RefQuery(baseOptions?: Apollo.QueryHookOptions<List_Offer_By_RefQuery, List_Offer_By_RefQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<List_Offer_By_RefQuery, List_Offer_By_RefQueryVariables>(List_Offer_By_RefDocument, options);
+      }
+export function useList_Offer_By_RefLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<List_Offer_By_RefQuery, List_Offer_By_RefQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<List_Offer_By_RefQuery, List_Offer_By_RefQueryVariables>(List_Offer_By_RefDocument, options);
+        }
+export type List_Offer_By_RefQueryHookResult = ReturnType<typeof useList_Offer_By_RefQuery>;
+export type List_Offer_By_RefLazyQueryHookResult = ReturnType<typeof useList_Offer_By_RefLazyQuery>;
+export type List_Offer_By_RefQueryResult = Apollo.QueryResult<List_Offer_By_RefQuery, List_Offer_By_RefQueryVariables>;

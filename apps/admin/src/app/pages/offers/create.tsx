@@ -10,6 +10,7 @@ import TextAreaInput from '../../components/ui/form/TextareaInput';
 import DateInput from '../../components/ui/form/DateInput';
 import Notification from '../../components/ui/Notification';
 import { useInsertOfferMutation } from '../../generated/graphql';
+import { v4 as uuidv4 } from 'uuid';
 
 const Content = styled.div``;
 
@@ -36,10 +37,26 @@ export const CreateOffers = () => {
 
   const [insertOfferMutation, { data, loading, error }] = useInsertOfferMutation();
 
-  const createOffers = (values: any, resetForm: any, products: any, producerId: any) => {
+  const createOffers = (uuid: any, resetForm: any, products: any, producerId: any) => {
+    console.log({
+      variables: {
+        object: {
+          ref: uuid,
+          start_date: startDate.toLocaleDateString("en-US"),
+          end_date: new Date(endDate).toLocaleDateString("en-US"),
+          producer_id: producerId,
+          is_active: false,
+          offer_products: {
+            data:[ ...products ]
+          }
+        }
+      }
+    })
+
     insertOfferMutation({
       variables: {
         object: {
+          ref: uuid,
           start_date: startDate.toLocaleDateString("en-US"),
           end_date: new Date(endDate).toLocaleDateString("en-US"),
           producer_id: producerId,
@@ -90,9 +107,10 @@ export const CreateOffers = () => {
       filterData.push({[proId]: [...producerProducts]})
       return proId;
     })
+    const uuid = uuidv4();
     filterData.length > 0 && filterData.map((producerId: any, index: any) => {
       const prodts = producerId[producerIds[index]];
-      createOffers(values, resetForm, prodts, producerIds[index]);
+      createOffers(uuid, resetForm, prodts, producerIds[index]);
       return producerId;
     })
   };
@@ -149,6 +167,9 @@ export const CreateOffers = () => {
                       <SelectInput name="category_id" title="Category" options={[]} />
                     </div>
                     <TextAreaInput name="description" title="Description" placeholder="Enter Description" />
+                    <code>
+                    {product && JSON.stringify(product,' '  as any,2)}
+                    </code>
                     <div className="flex flex-col mb-6">
                       <button
                         onClick={() => setShowModal(true)}

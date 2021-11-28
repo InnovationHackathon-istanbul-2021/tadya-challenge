@@ -13,7 +13,7 @@ const ProductTableBody = styled.div`
 export const ProductList = ({ products , values, loading }: any) => {
   const [show, setshow] = useState(0);
   products.forEach((product: any) => {
-    console.log(`${product.producer_id}-${product.id}`, product)
+
     if(!values[`${product.producer_id}-${product.id}`]) {
       values[`${product.producer_id}-${product.id}`] = {price: '0', stock: '0'}
     }

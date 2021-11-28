@@ -12,10 +12,11 @@ interface ISelectInput {
   value?: string,
   styles?: string,
   onChange?: unknown,
+  optionalMessage?: boolean,
   options: any,
 }
 
-const SelectInput = ({ options, title, name, value, onChange, styles, placeholder }: ISelectInput) => {
+const SelectInput = ({ options, title, name, value, onChange, styles, placeholder ,optionalMessage }: ISelectInput) => {
   return (
     <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
       <label
@@ -32,6 +33,7 @@ const SelectInput = ({ options, title, name, value, onChange, styles, placeholde
           placeholder={placeholder}
           className="bg-white dark:bg-gray-800 appearance-none z-10 pl-3 py-3 w-full text-sm border border-transparent focus:outline-none focus:border-blue-700  text-gray-800 dark:text-gray-100 rounded"
         >
+          {optionalMessage?  <option value="None">Please Select</option>: null}
           {options.length > 0 &&  options.map((opt: any) =>
             <option key={opt.id} value={opt.id}>{opt.title}</option>
           )}

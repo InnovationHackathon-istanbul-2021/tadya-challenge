@@ -70,11 +70,12 @@ export const ModalExample = ({ showModal, setShowModal , handleSelectProduct }: 
               <div className="w-full">
                 <Formik
                   initialValues={{
-                    producer_id: 'None',
+                    producer_id: producerList && producerList.length>0? producerList[0].id: 'None',
                   }}
                   onSubmit={async (values, { resetForm }) => {
                     console.log(values)
                   }}
+                  enableReinitialize={false}
                   render={({
                     values,
                     errors,
@@ -90,7 +91,9 @@ export const ModalExample = ({ showModal, setShowModal , handleSelectProduct }: 
                         </p>
                         <br />
                         <div className="xl:flex lg:flex md:flex flex-wrap">
-                          <SelectInput name="producer_id" title="Producer / Family" options={producerList} />
+                          <SelectInput
+                          optionalMessage={true}
+                          name="producer_id" title="Producer / Family" options={producerList} />
                           <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col ml-5 mb-6">
                             <label
                               htmlFor="producer_id"
@@ -124,7 +127,7 @@ export const ModalExample = ({ showModal, setShowModal , handleSelectProduct }: 
                             handleSelectProduct(values)
                             setShowModal(!showModal)}}
                           className="bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm focus:outline-none"
-                          type="submit"
+                          type="button"
                         >
                           Save
                         </button>
