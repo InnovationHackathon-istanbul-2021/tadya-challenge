@@ -535,11 +535,35 @@ export type Feedback_Form = {
   alias: Scalars['String'];
   category_id?: Maybe<Scalars['Int']>;
   created_at: Scalars['timestamptz'];
+  /** fetch data from the table: "feedback_questions" */
+  feedback_questions: Array<Feedback_Questions>;
+  /** fetch aggregated fields from the table: "feedback_questions" */
+  feedback_questions_aggregate: Feedback_Questions_Aggregate;
   id: Scalars['Int'];
   is_active: Scalars['Boolean'];
   producer_id?: Maybe<Scalars['Int']>;
   product_id?: Maybe<Scalars['Int']>;
   title: Scalars['String'];
+};
+
+
+/** columns and relationships of "feedback_form" */
+export type Feedback_FormFeedback_QuestionsArgs = {
+  distinct_on?: InputMaybe<Array<Feedback_Questions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Feedback_Questions_Order_By>>;
+  where?: InputMaybe<Feedback_Questions_Bool_Exp>;
+};
+
+
+/** columns and relationships of "feedback_form" */
+export type Feedback_FormFeedback_Questions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Feedback_Questions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Feedback_Questions_Order_By>>;
+  where?: InputMaybe<Feedback_Questions_Bool_Exp>;
 };
 
 /** aggregated selection of "feedback_form" */
@@ -589,6 +613,7 @@ export type Feedback_Form_Bool_Exp = {
   alias?: InputMaybe<String_Comparison_Exp>;
   category_id?: InputMaybe<Int_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  feedback_questions?: InputMaybe<Feedback_Questions_Bool_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   is_active?: InputMaybe<Boolean_Comparison_Exp>;
   producer_id?: InputMaybe<Int_Comparison_Exp>;
@@ -615,6 +640,7 @@ export type Feedback_Form_Insert_Input = {
   alias?: InputMaybe<Scalars['String']>;
   category_id?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  feedback_questions?: InputMaybe<Feedback_Questions_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['Int']>;
   is_active?: InputMaybe<Scalars['Boolean']>;
   producer_id?: InputMaybe<Scalars['Int']>;
@@ -667,6 +693,7 @@ export type Feedback_Form_Order_By = {
   alias?: InputMaybe<Order_By>;
   category_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  feedback_questions_aggregate?: InputMaybe<Feedback_Questions_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   is_active?: InputMaybe<Order_By>;
   producer_id?: InputMaybe<Order_By>;
@@ -834,11 +861,39 @@ export type Feedback_Questions_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "feedback_questions" */
+export type Feedback_Questions_Aggregate_Order_By = {
+  avg?: InputMaybe<Feedback_Questions_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Feedback_Questions_Max_Order_By>;
+  min?: InputMaybe<Feedback_Questions_Min_Order_By>;
+  stddev?: InputMaybe<Feedback_Questions_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Feedback_Questions_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Feedback_Questions_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Feedback_Questions_Sum_Order_By>;
+  var_pop?: InputMaybe<Feedback_Questions_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Feedback_Questions_Var_Samp_Order_By>;
+  variance?: InputMaybe<Feedback_Questions_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "feedback_questions" */
+export type Feedback_Questions_Arr_Rel_Insert_Input = {
+  data: Array<Feedback_Questions_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<Feedback_Questions_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Feedback_Questions_Avg_Fields = {
   __typename?: 'feedback_questions_avg_fields';
   feedback_form_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "feedback_questions" */
+export type Feedback_Questions_Avg_Order_By = {
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "feedback_questions". All fields are combined with a logical 'AND'. */
@@ -883,6 +938,14 @@ export type Feedback_Questions_Max_Fields = {
   title?: Maybe<Scalars['String']>;
 };
 
+/** order by max() on columns of table "feedback_questions" */
+export type Feedback_Questions_Max_Order_By = {
+  category?: InputMaybe<Order_By>;
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Feedback_Questions_Min_Fields = {
   __typename?: 'feedback_questions_min_fields';
@@ -890,6 +953,14 @@ export type Feedback_Questions_Min_Fields = {
   feedback_form_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "feedback_questions" */
+export type Feedback_Questions_Min_Order_By = {
+  category?: InputMaybe<Order_By>;
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "feedback_questions" */
@@ -952,11 +1023,23 @@ export type Feedback_Questions_Stddev_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev() on columns of table "feedback_questions" */
+export type Feedback_Questions_Stddev_Order_By = {
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Feedback_Questions_Stddev_Pop_Fields = {
   __typename?: 'feedback_questions_stddev_pop_fields';
   feedback_form_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "feedback_questions" */
+export type Feedback_Questions_Stddev_Pop_Order_By = {
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -966,11 +1049,23 @@ export type Feedback_Questions_Stddev_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev_samp() on columns of table "feedback_questions" */
+export type Feedback_Questions_Stddev_Samp_Order_By = {
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+};
+
 /** aggregate sum on columns */
 export type Feedback_Questions_Sum_Fields = {
   __typename?: 'feedback_questions_sum_fields';
   feedback_form_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "feedback_questions" */
+export type Feedback_Questions_Sum_Order_By = {
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "feedback_questions" */
@@ -994,6 +1089,12 @@ export type Feedback_Questions_Var_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_pop() on columns of table "feedback_questions" */
+export type Feedback_Questions_Var_Pop_Order_By = {
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Feedback_Questions_Var_Samp_Fields = {
   __typename?: 'feedback_questions_var_samp_fields';
@@ -1001,11 +1102,23 @@ export type Feedback_Questions_Var_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_samp() on columns of table "feedback_questions" */
+export type Feedback_Questions_Var_Samp_Order_By = {
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type Feedback_Questions_Variance_Fields = {
   __typename?: 'feedback_questions_variance_fields';
   feedback_form_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "feedback_questions" */
+export type Feedback_Questions_Variance_Order_By = {
+  feedback_form_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "feedbacks" */
@@ -4688,6 +4801,23 @@ export type ListCategoriesQueryVariables = Exact<{
 
 export type ListCategoriesQuery = { __typename?: 'query_root', categories: Array<{ __typename?: 'categories', id: number, is_active: boolean, name: string, parent_id?: number | null | undefined, category_type?: string | null | undefined }>, categories_aggregate: { __typename?: 'categories_aggregate', aggregate?: { __typename?: 'categories_aggregate_fields', count: number } | null | undefined } };
 
+export type List_Feedback_FormsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type List_Feedback_FormsQuery = { __typename?: 'query_root', feedback_form: Array<{ __typename?: 'feedback_form', alias: string, created_at: any, id: number, is_active: boolean, producer_id?: number | null | undefined, product_id?: number | null | undefined, title: string, feedback_questions: Array<{ __typename?: 'feedback_questions', title: string, is_active: boolean, category?: string | null | undefined }>, feedback_questions_aggregate: { __typename?: 'feedback_questions_aggregate', aggregate?: { __typename?: 'feedback_questions_aggregate_fields', count: number } | null | undefined } }>, feedback_form_aggregate: { __typename?: 'feedback_form_aggregate', aggregate?: { __typename?: 'feedback_form_aggregate_fields', count: number } | null | undefined } };
+
+export type Find_Feedback_Form_By_IdQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  id: Int_Comparison_Exp;
+}>;
+
+
+export type Find_Feedback_Form_By_IdQuery = { __typename?: 'query_root', feedback_form: Array<{ __typename?: 'feedback_form', alias: string, created_at: any, id: number, is_active: boolean, producer_id?: number | null | undefined, product_id?: number | null | undefined, title: string, feedback_questions: Array<{ __typename?: 'feedback_questions', title: string, is_active: boolean, category?: string | null | undefined }>, feedback_questions_aggregate: { __typename?: 'feedback_questions_aggregate', aggregate?: { __typename?: 'feedback_questions_aggregate_fields', count: number } | null | undefined } }> };
+
 export type InsertOfferMutationVariables = Exact<{
   object: Offers_Insert_Input;
 }>;
@@ -4848,6 +4978,121 @@ export function useListCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type ListCategoriesQueryHookResult = ReturnType<typeof useListCategoriesQuery>;
 export type ListCategoriesLazyQueryHookResult = ReturnType<typeof useListCategoriesLazyQuery>;
 export type ListCategoriesQueryResult = Apollo.QueryResult<ListCategoriesQuery, ListCategoriesQueryVariables>;
+export const List_Feedback_FormsDocument = gql`
+    query LIST_FEEDBACK_FORMS($limit: Int = 10, $offset: Int = 0) {
+  feedback_form(limit: $limit, offset: $offset, order_by: {id: desc}) {
+    alias
+    created_at
+    id
+    is_active
+    producer_id
+    product_id
+    title
+    feedback_questions {
+      title
+      is_active
+      category
+    }
+    feedback_questions_aggregate {
+      aggregate {
+        count(columns: id, distinct: true)
+      }
+    }
+  }
+  feedback_form_aggregate {
+    aggregate {
+      count(columns: id)
+    }
+  }
+}
+    `;
+
+/**
+ * __useList_Feedback_FormsQuery__
+ *
+ * To run a query within a React component, call `useList_Feedback_FormsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useList_Feedback_FormsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useList_Feedback_FormsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useList_Feedback_FormsQuery(baseOptions?: Apollo.QueryHookOptions<List_Feedback_FormsQuery, List_Feedback_FormsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<List_Feedback_FormsQuery, List_Feedback_FormsQueryVariables>(List_Feedback_FormsDocument, options);
+      }
+export function useList_Feedback_FormsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<List_Feedback_FormsQuery, List_Feedback_FormsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<List_Feedback_FormsQuery, List_Feedback_FormsQueryVariables>(List_Feedback_FormsDocument, options);
+        }
+export type List_Feedback_FormsQueryHookResult = ReturnType<typeof useList_Feedback_FormsQuery>;
+export type List_Feedback_FormsLazyQueryHookResult = ReturnType<typeof useList_Feedback_FormsLazyQuery>;
+export type List_Feedback_FormsQueryResult = Apollo.QueryResult<List_Feedback_FormsQuery, List_Feedback_FormsQueryVariables>;
+export const Find_Feedback_Form_By_IdDocument = gql`
+    query FIND_FEEDBACK_FORM_BY_ID($limit: Int = 10, $offset: Int = 0, $id: Int_comparison_exp!) {
+  feedback_form(
+    limit: $limit
+    offset: $offset
+    order_by: {id: desc}
+    where: {id: $id}
+  ) {
+    alias
+    created_at
+    id
+    is_active
+    producer_id
+    product_id
+    title
+    feedback_questions {
+      title
+      is_active
+      category
+    }
+    feedback_questions_aggregate {
+      aggregate {
+        count(columns: id, distinct: true)
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFind_Feedback_Form_By_IdQuery__
+ *
+ * To run a query within a React component, call `useFind_Feedback_Form_By_IdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFind_Feedback_Form_By_IdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFind_Feedback_Form_By_IdQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFind_Feedback_Form_By_IdQuery(baseOptions: Apollo.QueryHookOptions<Find_Feedback_Form_By_IdQuery, Find_Feedback_Form_By_IdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Find_Feedback_Form_By_IdQuery, Find_Feedback_Form_By_IdQueryVariables>(Find_Feedback_Form_By_IdDocument, options);
+      }
+export function useFind_Feedback_Form_By_IdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Find_Feedback_Form_By_IdQuery, Find_Feedback_Form_By_IdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Find_Feedback_Form_By_IdQuery, Find_Feedback_Form_By_IdQueryVariables>(Find_Feedback_Form_By_IdDocument, options);
+        }
+export type Find_Feedback_Form_By_IdQueryHookResult = ReturnType<typeof useFind_Feedback_Form_By_IdQuery>;
+export type Find_Feedback_Form_By_IdLazyQueryHookResult = ReturnType<typeof useFind_Feedback_Form_By_IdLazyQuery>;
+export type Find_Feedback_Form_By_IdQueryResult = Apollo.QueryResult<Find_Feedback_Form_By_IdQuery, Find_Feedback_Form_By_IdQueryVariables>;
 export const InsertOfferDocument = gql`
     mutation InsertOffer($object: offers_insert_input!) {
   insert_offers_one(object: $object) {
