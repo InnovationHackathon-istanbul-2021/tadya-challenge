@@ -148,7 +148,7 @@ export const Table = ({
   return (
     <>
       <Styles className={props.className}>
-        <div className="mt-4 flex flex-col">
+        <div className="mt-4 flex flex-col border border-gray-200 rounded-md">
           <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className=" overflow-hidden ">

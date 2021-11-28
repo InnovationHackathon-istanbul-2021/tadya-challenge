@@ -57,11 +57,17 @@ export const SidebarNavigation = () => {
     }
   }, [location])
 
+  useEffect(() => {
+    console.log(filterNavigation)
+    filterNavigation && navigate(filterNavigation[0]?.route);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterNavigation])
+
   // const location = useLocation();
   return (
     <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 pb-4 bg-gray-100 overflow-y-auto fixed left-0 top-0  w-64 min-h-full shadow">
       <div className="flex items-center flex-shrink-0 px-4 space-y-5">
-        <h3  onClick={() => navigate("/")}
+        <h3 onClick={() => navigate("/")}
          className="text-center cursor-pointer w-full text-xl text-gray-700 capitalize tracking-wide font-bold">
           Tadya
         </h3>
