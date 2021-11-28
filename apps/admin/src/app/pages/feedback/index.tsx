@@ -35,7 +35,7 @@ export const GiveFeedback = () => {
   return (
     <Content className="absolute bg-gray-300 w-full h-full overflow-auto">
       {notification.title && (<Notification title={notification.title} message={notification.message} type={notification.type} />)}
-      <div className="mx-auto flex-auto w-9/12">
+      <div className="mx-auto w-9/12">
         <div className="flex text-xl  justify-center font-semibold pb-8">
           <div className="flex items-center justify-center py-8 bg-gray-300 px-4">
             <div className="bg-white rounded-lg xl:w-10/12 md:w-11/12 w-full px-5 py-10 sm:py-10 sm:px-10">

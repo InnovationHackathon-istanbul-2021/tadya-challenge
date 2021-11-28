@@ -20,6 +20,7 @@ import { Volunteer } from '../pages/volunteer/volunteer';
 import { PublicPage } from '../pages/public';
 import { ListOrders } from '../pages/order/list';
 import { SidebarNavigation } from '../components/sidebar/navigation';
+import { ListFeedback } from '../pages/feedback/list';
 
 const AppRouter = () => {
   return (
@@ -45,13 +46,13 @@ const AppRouter = () => {
       <Route path={'/categories/*'}>
         <Route path={'create'} element={<CreateCategory/>} />
       </Route>
-      <Route path={'/feedback-forms'}>
-        <Route path={'create'} element={<>Create Feedback Forms</>} />
-        <Route path={'*'} element={<>Manage Feedback Forms</>} />
-      </Route>
-      <Route path={'/feedback'}>
+      <Route path={'/feedbacks-forms'} element={<ListFeedback />} />
+      <Route path={'/feedbacks-forms/*'}>
         <Route path={'create'} element={<>Create Feedback</>} />
-        <Route path={'*'} element={<>Manage Feedback</>} />
+      </Route>
+      <Route path={'/feedbacks'} element={<ListFeedback />} />
+      <Route path={'/feedbacks/*'}>
+        <Route path={'create'} element={<>Create order</>} />
       </Route>
       <Route path={'/orders'} element={<ListOrders />} />
       <Route path={'/orders/*'}>

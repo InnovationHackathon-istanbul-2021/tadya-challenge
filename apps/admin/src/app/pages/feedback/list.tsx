@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
-  useListCategoriesQuery,
+  Int_Comparison_Exp,
+  useFind_Feedback_Form_By_IdQuery,
 } from '../../generated/graphql';
 import { Table } from '../../components/ui/table/table';
-import { Link } from 'react-router-dom';
 import SearchInput from '../../components/ui/form/SearchInput';
 import Select from '../../components/ui/form/Select';
+import { useNavigate } from 'react-router-dom';
+
 const Content = styled.div``;
 
-export const ListOrders = () => {
+export const ListFeedback = () => {
+  const navigate = useNavigate();
   const [total, setTotal] = useState(0);
   const [pageLimit, setPageLimit] = useState(10);
   const [offset, setOffset] = useState(0);
@@ -17,44 +20,37 @@ export const ListOrders = () => {
   const [search, setSearch] = useState('');
   const [load, setLoad] = useState(true);
   const [filter, setFilter] = useState('');
-  const [orderList, setOrderList] = useState([{
+  const [feedbackList, setFeedbackList] = useState([{
     id: 12,
-    order_id: 41523,
-    quantity: 8,
-    price: '$200',
+    email: 'john@gmail.com',
     is_active: true,
   },{
-    id: 12,
-    order_id: 41523,
-    quantity: 8,
-    price: '$200',
+    id: 13,
+    email: 'john@gmail.com',
     is_active: true,
   },{
-    id: 12,
-    order_id: 41523,
-    quantity: 8,
-    price: '$200',
+    id: 14,
+    email: 'john@gmail.com',
     is_active: true,
   },{
-    id: 12,
-    order_id: 41523,
-    quantity: 8,
-    price: '$200',
+    id: 15,
+    email: 'john@gmail.com',
     is_active: true,
   },{
-    id: 12,
-    order_id: 41523,
-    quantity: 8,
-    price: '$200',
+    id: 16,
+    email: 'john@gmail.com',
     is_active: true,
   }]);
 
-  const { data, loading, error } = useListCategoriesQuery({
+  const { data, loading, error } = useFind_Feedback_Form_By_IdQuery({
     variables: {
       limit: pageLimit, // value for 'limit'
-      offset // value for 'offset'
+      offset, // value for 'offset'
+      id: {_eq: 10} as Int_Comparison_Exp
     },
   });
+
+  console.log(data);
 
   useEffect(() => {
     loading && setLoad(true);
@@ -62,7 +58,7 @@ export const ListOrders = () => {
 
   useEffect(() => {
     // if (data) {
-      // setOrderList(data.categories);
+      // setFeedbackList(data.categories);
       setTimeout(() => {
         setLoad(false);
       }, 1000)
@@ -77,31 +73,17 @@ export const ListOrders = () => {
         accessor: 'id',
       },
       {
-        Header: 'Order Id',
-        accessor: 'order_id',
-      },
-      {
-        Header: 'Quantity',
-        accessor: 'quantity',
-      },
-      {
-        Header: 'Price',
-        accessor: 'price',
+        Header: 'Email',
+        accessor: 'email',
       },
       {
         Header: 'Status',
         accessor: 'is_active',
-        Cell: ({ row }: any) => {
-          return row.values.is_active ? (
-            <div className="inline-flex space-x-2 text-blue-400	">
-              Active
-            </div>
-          ): (
-            <div className="inline-flex space-x-2 text-gray-500	">
-              In Active
-            </div>
-          );
-        },
+        Cell: ({ row }: any) => (
+          <div onClick={() => window.location.href = '/feedback'} className="inline-flex hover:text-blue-700 cursor-pointer space-x-2 text-blue-500">
+            View Details
+          </div>
+        )
       },
       {
         Header: 'Action',
@@ -120,7 +102,7 @@ export const ListOrders = () => {
         },
       },
     ],
-    [orderList]
+    [feedbackList]
   );
 
   return (
@@ -131,7 +113,7 @@ export const ListOrders = () => {
             <div className="px-4 md:px-10 py-4 md:py-7">
               <div className="lg:flex items-center justify-between">
                 <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
-                  List Orders
+                  List Feedback
                 </p>
                 <div className="md:flex items-center mt-6 lg:mt-0">
                   <SearchInput placeholder="Search" value={search} onChange={setSearch} />
@@ -159,7 +141,7 @@ export const ListOrders = () => {
                 pageIndex={pageIndex}
                 perPage={pageLimit}
                 columns={columns}
-                data={orderList}
+                data={feedbackList}
               />
             </div>
           </div>

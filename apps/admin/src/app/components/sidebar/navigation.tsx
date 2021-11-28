@@ -17,6 +17,7 @@ export const ADMINNAVIGATION: MenuItemProps[] = [
   { name: 'Products',  icon: 'HiOutlineDatabase', route: '/products' },
   { name: 'Orders',  icon: 'HiOutlineInboxIn', route: '/orders' },
   { name: 'Feedback Forms', icon: 'HiOutlinePencilAlt',  route: '/feedback-forms' },
+  { name: 'Feedback', icon: 'HiOutlinePencilAlt',  route: '/feedbacks' },
   { name: 'Offers',  icon: 'HiOutlineScale', route: '/offers' }
 ]
 
@@ -24,20 +25,19 @@ export const PRODUCERNAVIGATION: MenuItemProps[] = [
   { name: 'Home',  icon: 'HiOutlineHome', route: '/producer' },
   { name: 'Products',  icon: 'HiOutlineDatabase', route: '/products' },
   { name: 'Orders',  icon: 'HiOutlineInboxIn', route: '/orders' },
-  { name: 'Feedbacks', icon: 'HiOutlinePencilAlt',  route: '/feedback' },
+  { name: 'Feedbacks', icon: 'HiOutlinePencilAlt',  route: '/feedbacks' },
   { name: 'Offers',  icon: 'HiOutlineScale', route: '/offers' }
 ]
 
 export const CUSTOMERNAVIGATION: MenuItemProps[] = [
   { name: 'Home',  icon: 'HiOutlineHome', route: '/customer' },
   { name: 'Orders',  icon: 'HiOutlineInboxIn', route: '/orders' },
-  { name: 'Feedbacks', icon: 'HiOutlinePencilAlt',  route: '/feedback' },
 ]
 
 export const VOLUNTERNAVIGATION: MenuItemProps[] = [
   { name: 'Home',  icon: 'HiOutlineHome', route: '/volunteer' },
   { name: 'Orders',  icon: 'HiOutlineInboxIn', route: '/orders' },
-  { name: 'Feedbacks', icon: 'HiOutlinePencilAlt',  route: '/feedback' },
+  { name: 'Feedbacks', icon: 'HiOutlinePencilAlt',  route: '/feedbacks' },
 ]
 
 export const SidebarNavigation = () => {
