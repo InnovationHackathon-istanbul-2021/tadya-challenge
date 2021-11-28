@@ -4758,6 +4758,14 @@ export type Get_Producer_By_TitleQueryVariables = Exact<{
 
 export type Get_Producer_By_TitleQuery = { __typename?: 'query_root', producers: Array<{ __typename?: 'producers', id: number, title: string }> };
 
+export type List_All_ProductsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type List_All_ProductsQuery = { __typename?: 'query_root', products: Array<{ __typename?: 'products', alias: string, category_id?: number | null | undefined, description?: string | null | undefined, id: number, measure_unit: string, packing_type?: string | null | undefined, price: any, quantity: any, quote_on_call?: boolean | null | undefined, sku?: string | null | undefined, title: string, thumbnail?: string | null | undefined, producer_id: number, producer: { __typename?: 'producers', id: number, title: string, alias: string } }> };
+
 
 export const InsertCategoryDocument = gql`
     mutation InsertCategory($object: categories_insert_input!) {
@@ -5278,3 +5286,56 @@ export function useGet_Producer_By_TitleLazyQuery(baseOptions?: Apollo.LazyQuery
 export type Get_Producer_By_TitleQueryHookResult = ReturnType<typeof useGet_Producer_By_TitleQuery>;
 export type Get_Producer_By_TitleLazyQueryHookResult = ReturnType<typeof useGet_Producer_By_TitleLazyQuery>;
 export type Get_Producer_By_TitleQueryResult = Apollo.QueryResult<Get_Producer_By_TitleQuery, Get_Producer_By_TitleQueryVariables>;
+export const List_All_ProductsDocument = gql`
+    query LIST_ALL_PRODUCTS($limit: Int = 50, $offset: Int = 0) {
+  products(limit: $limit, offset: $offset) {
+    alias
+    category_id
+    description
+    id
+    measure_unit
+    packing_type
+    price
+    quantity
+    quote_on_call
+    sku
+    title
+    thumbnail
+    producer_id
+    producer {
+      id
+      title
+      alias
+    }
+  }
+}
+    `;
+
+/**
+ * __useList_All_ProductsQuery__
+ *
+ * To run a query within a React component, call `useList_All_ProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useList_All_ProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useList_All_ProductsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useList_All_ProductsQuery(baseOptions?: Apollo.QueryHookOptions<List_All_ProductsQuery, List_All_ProductsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<List_All_ProductsQuery, List_All_ProductsQueryVariables>(List_All_ProductsDocument, options);
+      }
+export function useList_All_ProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<List_All_ProductsQuery, List_All_ProductsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<List_All_ProductsQuery, List_All_ProductsQueryVariables>(List_All_ProductsDocument, options);
+        }
+export type List_All_ProductsQueryHookResult = ReturnType<typeof useList_All_ProductsQuery>;
+export type List_All_ProductsLazyQueryHookResult = ReturnType<typeof useList_All_ProductsLazyQuery>;
+export type List_All_ProductsQueryResult = Apollo.QueryResult<List_All_ProductsQuery, List_All_ProductsQueryVariables>;

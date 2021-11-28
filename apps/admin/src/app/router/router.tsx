@@ -17,6 +17,7 @@ import { Producer } from '../pages/producers/producer';
 import { CreateProduct } from '../pages/products/create';
 import { ListProducts } from '../pages/products/list';
 import { Volunteer } from '../pages/volunteer/volunteer';
+import { PublicPage } from '../pages/public';
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
       <Route path={'/customer'} element={<Customer/>} />
       <Route path={'/volunteer'} element={<Volunteer/>} />
       <Route path={'/feedback'} element={<GiveFeedback/>} />
+      <Route path={'/public'} element={<PublicPage/>} />
 
       <Route path={'/producers'} element={<ListProducers/>} />
       <Route  path={'/producers/*'}>
