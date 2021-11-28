@@ -13,6 +13,7 @@ import { CreateProducer } from '../pages/producers/create';
 import { ListProducers } from '../pages/producers/list';
 import { CreateProduct } from '../pages/products/create';
 import { ListProducts } from '../pages/products/list';
+import { PublicPage } from '../pages/public';
 
 const AppRouter = () => {
   return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
       <Route path={'/login'} element={<Login/>} />
       <Route path={'/order'} element={<Order/>} />
       <Route path={'/feedback'} element={<GiveFeedback/>} />
+      <Route path={'/public'} element={<PublicPage/>} />
 
       <Route path={'/producers'} element={<ListProducers/>} />
       <Route  path={'/producers/*'}>

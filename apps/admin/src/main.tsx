@@ -26,7 +26,7 @@ const createApolloClient = () => {
 };
 
 const filterPath = window.location.pathname !== '/login' && window.location.pathname !== '/order'
-&& window.location.pathname !== '/feedback'
+&& window.location.pathname !== '/feedback' && window.location.pathname !== '/public'
 ReactDOM.render(
   <StrictMode>
     <Router>

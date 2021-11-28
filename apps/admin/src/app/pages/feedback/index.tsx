@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Rating from 'react-rating';
-import { Icon } from '../../components/ui/icon/Icon';
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import TextAreaInput from '../../components/ui/form/TextareaInput';
 import { Form, Formik } from 'formik';
