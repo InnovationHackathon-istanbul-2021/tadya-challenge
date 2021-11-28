@@ -16,26 +16,28 @@ export const PublicPage = () => {
   useEffect(() => {
     if (data) {
       setProductList(data.products);
-      searchImages('24555346-4772f27513bbc7064b64bf8b9', 'dairy', {per_page: 50}).then((r) =>
-      setRandomPic(r.hits)
-      );
+      searchImages('24555346-4772f27513bbc7064b64bf8b9', 'dairy', {
+        per_page: 50,
+      }).then((r) => setRandomPic(r.hits));
     }
   }, [data]);
-
 
   return (
     <Content className="container mx-auto w-full h-full ">
       <div className="bg-white rounded py-6 xl:px-24 px-4 flex items-center justify-center">
-      <div>
-                <div className="mx-auto container">
-                    {/* Hero */}
-                    <div className="flex w-full flex-col items-center justif-center pt-16 lg:px-0 px-4">
-                        <h1 className="lg:text-6xl text-3xl dark-blue font-bold text-center">What are you looking for?</h1>
-                        <h2 className="lg:text-2xl text-lg light-gray pt-6 text-centerlg:mb-0 mb-4">Tahtacıörencik Doğal Yaşam Kolektifi</h2>
-                    </div>
-                </div>
+        <div>
+          <div className="mx-auto container">
+            {/* Hero */}
+            <div className="flex w-full flex-col items-center justif-center pt-16 lg:px-0 px-4">
+              <h1 className="lg:text-6xl text-3xl dark-blue font-bold text-center">
+                What are you looking for?
+              </h1>
+              <h2 className="lg:text-2xl text-lg light-gray pt-6 text-centerlg:mb-0 mb-4">
+                Tahtacıörencik Doğal Yaşam Kolektifi
+              </h2>
             </div>
-
+          </div>
+        </div>
       </div>
       <div>
         <Formik
@@ -195,11 +197,13 @@ export const PublicPage = () => {
                           <div className="shadow">
                             <div className="w-72 lg:mb-0 mb-8">
                               <div>
-                               {randomPics.length>0 && <img
-                                  src={`${randomPics[index].previewURL}`}
-                                  className="w-full h-44"
-                                  alt="a"
-                                />}
+                                {randomPics.length > 0 && (
+                                  <img
+                                    src={`${randomPics[index].previewURL}`}
+                                    className="w-full h-44"
+                                    alt="a"
+                                  />
+                                )}
                               </div>
                               <div className="bg-white">
                                 <div className="p-4">
@@ -208,36 +212,35 @@ export const PublicPage = () => {
                                       {product.producer.title}
                                     </p>
                                     <span className="px-2 bg-dot-color">•</span>
-                                    <p className="text-xs light-gray">
-                                      {' '}
-                                    </p>
+                                    <p className="text-xs light-gray"> </p>
                                   </div>
                                   <h2 className="text-lg font-semibold dark-gray">
                                     {product.title}
                                   </h2>
                                   <p className="text-xs light-gray mt-2">
-                                      {product.quantity} {product.measure_unit}
-                                    </p>
+                                    {product.quantity} {product.measure_unit}
+                                  </p>
                                   <div className="flex items-center justify-between py-4">
-                                  <Rating
-                                        initialRating={Math.floor(
-                                          Math.random() * 10
-                                        )}
-                                        emptySymbol={
-                                          <FaRegStar className="w-3 h-3 text-sm" />
-                                        }
-                                        fullSymbol={[1, 2, 3, 4, 5].map((n) => (
-                                          <FaStar className="w-3 h-3 text-sm" />
-                                        ))}
-                                      />
+                                    <Rating
+                                      initialRating={Math.floor(
+                                        Math.random() * 10
+                                      )}
+                                      emptySymbol={
+                                        <FaRegStar className="w-3 h-3 text-sm" />
+                                      }
+                                      fullSymbol={[1, 2, 3, 4, 5].map((n) => (
+                                        <FaStar className="w-3 h-3 text-sm" />
+                                      ))}
+                                    />
                                     <h3 className="purple text-xl font-semibold">
                                       &#x20BA;{product.price}TL
                                     </h3>
                                   </div>
 
                                   <div className="flex items-center">
-                                  <button className="mx-auto py-3 bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-6 py-2 text-xs">Add to Cart</button>
-
+                                    <button className="mx-auto py-3 bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-6 py-2 text-xs">
+                                      Add to Cart
+                                    </button>
                                   </div>
                                 </div>
                               </div>

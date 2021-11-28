@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../../components/ui/icon/Icon';
-import MeterImg from '../../../assets/meter.svg';
+import TimeImg from '../../../assets/time.svg';
+import ShippingImg from '../../../assets/shipping.svg';
+import UserImg from '../../../assets/user.svg';
+import ProjectImg from '../../../assets/project.svg';
 
 const Content = styled.div``;
 
@@ -9,98 +12,240 @@ export const Producer = () => {
   return (
     <Content className="mx-auto bg-gray-300 w-full h-full overflow-auto">
       <div className="bg-white py-4 px-5 ">
-        <h1 className="cursor-pointer w-full text-xl text-gray-700 tracking-wide font-bold">Welcome to Producer Dashboard</h1>
+        <h1 className="cursor-pointer w-full text-sm text-gray-700 tracking-wide font-bold">
+          Welcome to Producer Dashboard
+        </h1>
       </div>
+
       <div>
-        <div className="py-7 px-5 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          <div className="bg-white dark:bg-gray-800 rounded shadow p-6">
-              <div className="flex items-center justify-between w-full sm:w-full mb-8">
-                  <div className="flex items-center">
-                      <div className="p-4 bg-blue-200 rounded-lg">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-discount" width={32} height={32} viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2B6CB0" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <line x1={9} y1={15} x2={15} y2={9} />
-                              <circle cx="9.5" cy="9.5" r=".5" />
-                              <circle cx="14.5" cy="14.5" r=".5" />
-                              <path d="M5 7.2a2.2 2.2 0 0 1 2.2 -2.2h1a2.2 2.2 0 0 0 1.55 -.64l.7 -.7a2.2 2.2 0 0 1 3.12 0l.7 .7a2.2 2.2 0 0 0 1.55 .64h1a2.2 2.2 0 0 1 2.2 2.2v1a2.2 2.2 0 0 0 .64 1.55l.7 .7a2.2 2.2 0 0 1 0 3.12l-.7 .7a2.2 2.2 0 0 0 -.64 1.55 v1a2.2 2.2 0 0 1 -2.2 2.2h-1a2.2 2.2 0 0 0 -1.55 .64l-.7 .7a2.2 2.2 0 0 1 -3.12 0l-.7 -.7a2.2 2.2 0 0 0 -1.55 -.64h-1a2.2 2.2 0 0 1 -2.2 -2.2v-1a2.2 2.2 0 0 0 -.64 -1.55l-.7 -.7a2.2 2.2 0 0 1 0 -3.12l.7 -.7a2.2 2.2 0 0 0 .64 -1.55 v-1" />
-                          </svg>
-                      </div>
-                      <div className="ml-6">
-                          <h3 className="mb-1 leading-5 text-gray-800 dark:text-gray-100 font-bold text-2xl">2,330</h3>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm tracking-normal font-normal leading-5">Avg Sales</p>
-                      </div>
+        <div className="flex px-5 w-full pt-3">
+          <div className="w-full rounded shadow bg-white dark:bg-gray-800 py-6 pl-10 pr-12">
+            <div className="flex justify-between">
+              <p className="text-lg md:pr-96 font-semibold leading-4 text-gray-800 dark:text-gray-100">
+                {' '}
+                Current Offer Sales Report
+              </p>
+              <p className="text-xs leading-3 pl-6 text-right text-gray-500 dark:text-gray-400"></p>
+            </div>
+            <div className="md:flex items-center justify-between pt-8">
+              <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div className="flex justify-center w-full lg:border-r border-gray-300 py-6">
+                  <img className="w-12" src={UserImg} alt="user" />
+                  <div className="text-gray-800 pl-12 w-1/2">
+                    <h1 className="font-bold text-2xl lg:text-5xl tracking-1px">
+                      5
+                    </h1>
+                    <h2 className="text-base lg:text-lg mt-4 leading-8 tracking-wide">
+                      New Customer.
+                    </h2>
                   </div>
-                  <div>
-                      <div className="flex items-center pl-3 text-green-400">
-                          <Icon className="w-5 h-5" icon={'HiOutlineTrendingUp'} />
-                          <p className="text-green-400 text-xs tracking-wide font-bold leading-normal pl-1">7.2%</p>
-                      </div>
-                      <p className="font-normal text-xs text-right leading-4 text-green-400 tracking-normal">Increase</p>
+                </div>
+
+                <div className="flex w-full lg:border-r border-gray-300 py-6">
+                  <img className="w-12" src={TimeImg} alt="time" />
+                  <div className="text-gray-800 w-1/2 pl-12">
+                    <h1 className="font-bold text-2xl lg:text-5xl tracking-1px">
+                      15
+                    </h1>
+                    <h2 className="text-base lg:text-lg mt-4 leading-8 tracking-wide">
+                      Order Pending
+                    </h2>
                   </div>
+                </div>
+                <div className="flex w-full lg:border-r border-gray-300 py-6">
+                  <img className="w-12" src={ShippingImg} alt="shipping" />
+                  <div className="text-gray-800 w-1/2 pl-12">
+                    <h1 className="font-bold text-2xl lg:text-5xl tracking-1px">
+                      10
+                    </h1>
+                    <h2 className="text-base lg:text-lg mt-4 leading-8 tracking-wide">
+                      Order Processing
+                    </h2>
+                  </div>
+                </div>
+                <div className="flex justify-center w-full py-6">
+                  <img className="w-12" src={ProjectImg} alt="project" />
+                  <div className="text-gray-800 w-1/2 pl-12">
+                    <h1 className="font-bold text-2xl lg:text-5xl tracking-1px">
+                      50
+                    </h1>
+                    <h2 className="text-base lg:text-lg mt-4 leading-8 tracking-wide">
+                      Order Completed
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <div className="relative mb-3">
-                  <hr className="h-1 rounded-sm bg-gray-200" />
-                  <hr className="absolute top-0 h-1 w-7/12 rounded-sm bg-indigo-700 border-indigo-700 left-0" />
-              </div>
-              <h4 className="text-base text-gray-600 dark:text-gray-400 font-normal tracking-normal leading-5">Yearly Goal</h4>
+            </div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded shadow p-6">
-              <div className="flex items-center justify-between w-full sm:w-full mb-8">
-                  <div className="flex items-center">
-                      <div className="p-4 bg-yellow-200 rounded-lg text-green-800">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-click" width={32} height={32} viewBox="0 0 24 24" strokeWidth="1.5" stroke="#C05621" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <line x1={3} y1={12} x2={6} y2={12} />
-                              <line x1={12} y1={3} x2={12} y2={6} />
-                              <line x1="7.8" y1="7.8" x2="5.6" y2="5.6" />
-                              <line x1="16.2" y1="7.8" x2="18.4" y2="5.6" />
-                              <line x1="7.8" y1="16.2" x2="5.6" y2="18.4" />
-                              <path d="M12 12l9 3l-4 2l-2 4l-3 -9" />
-                          </svg>
-                      </div>
-                      <div className="ml-6">
-                          <h3 className="mb-1 leading-5 text-gray-800 dark:text-gray-100 font-bold text-2xl">2,330</h3>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm tracking-normal font-normal leading-5">Avg Clicks</p>
-                      </div>
-                  </div>
-                  <div>
-                      <div className="flex items-center text-red-400">
-                          <Icon className="w-5 h-5" icon={'HiOutlineTrendingDown'} />
-                          <p className="text-red-400 text-xs tracking-wide font-bold leading-normal pl-1">3.4%</p>
-                      </div>
-                      <p className="font-normal text-right text-xs leading-4 text-red-400 tracking-normal pb-1">Decrease</p>
-                  </div>
+        </div>
+      </div>
+
+      <div>
+        <div className="flex px-5 w-full pt-3">
+          <div className="w-full rounded shadow bg-white dark:bg-gray-800 py-6 pl-10 pr-12">
+            <div className="flex justify-between">
+              <p className="text-lg md:pr-96 font-semibold leading-4 text-gray-800 dark:text-gray-100">
+                Statistics
+              </p>
+              <p className="text-xs leading-3 pl-6 text-right text-gray-500 dark:text-gray-400"></p>
+            </div>
+            <div className="md:flex items-center w-6/12 justify-between pt-8">
+              <div className="flex items-center">
+                <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full">
+                  <Icon
+                    className="w-6 h-6 text-purple-700"
+                    icon={'HiOutlineTrendingUp'}
+                  />
+                </div>
+                <div className="pl-4">
+                  <p className="w-11 text-lg font-semibold leading-none text-gray-800 dark:text-gray-100">
+                    100
+                  </p>
+                  <p className="text-xs leading-3 text-gray-500 pt-2 dark:text-gray-400">
+                    Sales
+                  </p>
+                </div>
               </div>
-              <div className="relative mb-3">
-                  <hr className="h-1 rounded-sm bg-gray-200" />
-                  <hr className="absolute top-0 h-1 w-7/12 rounded-sm bg-indigo-700 border-indigo-700 left-0" />
+              <div className="flex items-center md:pt-0 pt-4 md:pl-10">
+                <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full">
+                  <Icon
+                    className="w-6 h-6 text-blue-700"
+                    icon={'HiOutlineCurrencyDollar'}
+                  />
+                </div>
+                <div className="pl-4">
+                  <p className="w-11 text-lg font-semibold leading-none text-gray-800 dark:text-gray-100">
+                    &#x20BA;8.549k
+                  </p>
+                  <p className="text-xs leading-3 text-gray-500 pt-2 dark:text-gray-400">
+                    Cost
+                  </p>
+                </div>
               </div>
-              <h4 className="text-base text-gray-600 dark:text-gray-400 font-normal tracking-normal leading-5">Yearly Goal</h4>
+              <div className="flex items-center  md:pt-0 pt-4 md:pl-10">
+                <div className="flex items-center justify-center w-12 h-12 bg-red-100 rounded-full">
+                  <Icon className="h-6 text-red-700" icon={'HiOutlineCube'} />
+                </div>
+                <div className="pl-4">
+                  <p className="w-11 text-lg font-semibold leading-none text-gray-800 dark:text-gray-100">
+                    5
+                  </p>
+                  <p className="text-xs leading-3 text-gray-500 pt-2 dark:text-gray-400">
+                    Order Cancel
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded shadow p-6">
-              <div className="flex items-center justify-between w-full sm:w-full mb-8">
+        </div>
+      </div>
+      <div className=" flex px-5 w-full pt-3 items-start justify-between">
+        <div className="flex flex-col justify-between lg:flex-row w-full items-start rounded bg-white">
+          <div className="w-full lg:w-2/6 mr-5">
+            <div className="mt-0">
+              <div className="max-w-sm bg-white p-6">
+                <div className="flex items-center justify-between">
+                  <p className="text-xl font-semibold leading-5 text-gray-800 pr-40">
+                    Recent Orders
+                  </p>
+                </div>
+                <div className="flex items-start justify-between mt-6 w-full">
                   <div className="flex items-center">
-                      <div className="p-4 bg-green-200 rounded-lg">
-                        <Icon className="text-green-800 w-8 h-8" icon={'HiOutlineCreditCard'} />
-                      </div>
-                      <div className="ml-6">
-                          <h3 className="mb-1 leading-5 text-gray-800 dark:text-gray-100 font-bold text-2xl">2,330</h3>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm tracking-normal font-normal leading-5">Profit Earned</p>
-                      </div>
+                    <div className="w-8 h-8 bg-gray-100 rounded">
+                      <img
+                        src="https://cdn.tuk.dev/assets/components/misc/profile-img-1.png"
+                        alt="profile"
+                        className="w-full h-full"
+                      />
+                    </div>
+                    <div className="pl-3">
+                      <p className="text-sm font-medium leading-normal text-gray-800">
+                        Sandra Rogers
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                      <div className="flex items-center pl-3 text-green-400">
-                        <Icon className="w-5 h-5" icon={'HiOutlineTrendingUp'} />
-                        <p className="text-green-400 text-xs tracking-wide font-bold leading-normal pl-1">12%</p>
-                      </div>
-                      <p className="font-normal text-xs text-right leading-4 text-green-400 tracking-normal pb-1">Increase</p>
+                  <p className="text-sm font-medium leading-normal text-right text-green-500">
+                    &#x20BA;12,847
+                  </p>
+                </div>
+                <div className="flex items-start justify-between mt-6 w-full">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
+                      <img
+                        src="https://cdn.tuk.dev/assets/components/misc/RT.png"
+                        alt="profile"
+                      />
+                    </div>
+                    <div className="pl-3">
+                      <p className="text-sm font-medium leading-normal text-gray-800">
+                        Raymond Tusk
+                      </p>
+                    </div>
                   </div>
+                  <p className="text-sm font-medium leading-normal text-right text-green-500">
+                    &#x20BA;11,847
+                  </p>
+                </div>
+                <div className="flex items-start justify-between mt-6 w-full">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
+                      <img
+                        src="https://cdn.tuk.dev/assets/components/misc/JR.png"
+                        alt="profile"
+                      />
+                    </div>
+                    <div className="pl-3">
+                      <p className="text-sm font-medium leading-normal text-gray-800">
+                        Jane Roberts
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm font-medium leading-normal text-right text-green-500">
+                    &#x20BA;21,847
+                  </p>
+                </div>
+                <div className="flex items-start justify-between mt-6 w-full">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
+                      <img
+                        src="https://cdn.tuk.dev/assets/components/misc/profile-img-2.png"
+                        alt="profile"
+                      />
+                    </div>
+                    <div className="pl-3">
+                      <p className="text-sm font-medium leading-normal text-gray-800">
+                        Maia Kelly
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm font-medium leading-normal text-right text-green-500">
+                    &#x20BA;2,847
+                  </p>
+                </div>
+
+                <div className="flex items-start justify-between mt-6 w-full">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
+                      <img
+                        src="https://cdn.tuk.dev/assets/components/misc/LW.png"
+                        alt="profile"
+                      />
+                    </div>
+                    <div className="pl-3">
+                      <p className="text-sm font-medium leading-normal text-gray-800">
+                        Laurine Watson
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm font-medium leading-normal text-right text-green-500">
+                    &#x20BA;2,847
+                  </p>
+                </div>
               </div>
-              <div className="relative mb-3">
-                  <hr className="h-1 rounded-sm bg-gray-200" />
-                  <hr className="absolute top-0 h-1 w-7/12 rounded-sm bg-indigo-700 border-indigo-700 left-0" />
-              </div>
-              <h4 className="text-base text-gray-600 dark:text-gray-400 font-normal tracking-normal leading-5">Yearly Goal</h4>
+            </div>
+          </div>
+
+          <div className="w-full lg:w-4/6 ">
           </div>
         </div>
       </div>
