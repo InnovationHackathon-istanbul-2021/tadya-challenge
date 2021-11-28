@@ -7,7 +7,6 @@ import { Table } from '../../components/ui/table/table';
 import { Link } from 'react-router-dom';
 import SearchInput from '../../components/ui/form/SearchInput';
 import Select from '../../components/ui/form/Select';
-import Notification from '../../components/ui/Notification';
 
 const Content = styled.div``;
 

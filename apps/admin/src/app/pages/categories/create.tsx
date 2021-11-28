@@ -1,9 +1,8 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Categories_Insert_Input, useInsertCategoryMutation } from '../../generated/graphql';
+import { useInsertCategoryMutation } from '../../generated/graphql';
 import TextInput  from '../../components/ui/form/TextInput';
-import SelectInput from '../../components/ui/form/SelectInput';
 import Notification from '../../components/ui/Notification';
 
 const Content = styled.div``;

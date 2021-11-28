@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Rating from 'react-rating';
-import { Icon } from '../../components/ui/icon/Icon';
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import TextAreaInput from '../../components/ui/form/TextareaInput';
 import { Form, Formik } from 'formik';
+import Notification from '../../components/ui/Notification';
 
 const Content = styled.div``;
 export const GiveFeedback = () => {
+  const [active, setActive] = useState(1);
+  const [notification, setNotification] = useState({
+    title: '',
+    message: '',
+    type: ''
+  });
+
+  const handleNext = () => {
+    active >= 3 &&
+    setNotification({
+      title: 'Submit Successfully',
+      message: 'Thank you! Your feedback is submit successfully.',
+      type: 'success',
+    })
+    setActive(active <= 3 ? active + 1 : 4)
+    setTimeout(() => {
+      setNotification({
+        title: '',
+        message: '',
+        type: '',
+      })
+    }, 1500)
+  }
+
   return (
-    <Content className="absolute bg-gray-300 w-full h-full overflow-auto	 ">
-      <div className="mx-auto flex-auto w-6/12">
+    <Content className="absolute bg-gray-300 w-full h-full overflow-auto">
+      {notification.title && (<Notification title={notification.title} message={notification.message} type={notification.type} />)}
+      <div className="mx-auto flex-auto w-9/12">
         <div className="flex text-xl  justify-center font-semibold pb-8">
           <div className="flex items-center justify-center py-8 bg-gray-300 px-4">
             <div className="bg-white rounded-lg xl:w-10/12 md:w-11/12 w-full px-5 py-10 sm:py-10 sm:px-10">
@@ -23,61 +48,28 @@ export const GiveFeedback = () => {
               <div className="bg-gray-50 rounded py-6 xl:px-24 px-4 flex items-center justify-center">
                 <div className="grid sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 items-center">
                   <div className="flex items-center">
-                    <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                    <div className={`w-8 h-8 ${active > 1 ? 'bg-green-600' : (active === 1 ? 'bg-blue-500' : 'bg-gray-500')} rounded-full flex items-center justify-center`}>
                       <p className="text-base text-white">1</p>
                     </div>
-                    <p className="text-base leading-4 ml-6 md:ml-3 lg:ml-6  text-green-600">
+                    <p className={`text-base leading-4 ml-6 md:ml-3 lg:ml-6 ${active > 1 ? 'text-green-600' : (active === 1 ? 'text-blue-500' : 'text-gray-500')}`}>
                       Product
                     </p>
                   </div>
-                  <div className="mx-8 sm:block hidden ">
-                    <svg
-                      width="47"
-                      height="2"
-                      viewBox="0 0 47 2"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <line
-                        y1="1"
-                        x2="47"
-                        y2="1"
-                        stroke="#059669"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
+                  <div className={`sm:mx-4 md:mx-8 border ${active > 1 ? 'border-green-600' : 'border-gray-500 border-dashed'} sm:block hidden`} />
                   <div className="flex items-center sm:mt-0 mt-4">
-                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                    <div className={`w-8 h-8 ${active > 2 ? 'bg-green-600' : (active === 2 ? 'bg-blue-500' : 'bg-gray-500')} rounded-full flex items-center justify-center`}>
                       <p className="text-base text-white">2</p>
                     </div>
-                    <p className="text-base leading-4 ml-6 md:ml-3 lg:ml-6 text-blue-500">
+                    <p className={`text-base leading-4 ml-6 md:ml-3 lg:ml-6 ${active > 2 ? 'text-green-600' : (active === 2 ? 'text-blue-500' : 'text-gray-500')}`}>
                       Producer
                     </p>
                   </div>
-                  <div className="sm:mx-4  md:mx-8 sm:block hidden">
-                    <svg
-                      width="47"
-                      height="2"
-                      viewBox="0 0 47 2"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <line
-                        y1="1"
-                        x2="47"
-                        y2="1"
-                        stroke="#9CA3AF"
-                        stroke-width="2"
-                        stroke-dasharray="5 5"
-                      />
-                    </svg>
-                  </div>
+                  <div className={`sm:mx-4 md:mx-8 border ${active > 2 ? 'border-green-600' : 'border-gray-500 border-dashed'} sm:block hidden`} />
                   <div className="flex items-center md:mt-0 mt-4">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <p className="text-base text-gray-900">3</p>
+                    <div className={`w-8 h-8 ${active > 3 ? 'bg-green-600' : (active === 3 ? 'bg-blue-500' : 'bg-gray-500')} rounded-full flex items-center justify-center`}>
+                      <p className="text-base text-white">3</p>
                     </div>
-                    <p className="text-base leading-4 ml-6 md:ml-3 lg:ml-6 text-gray-900">
+                    <p className={`text-base leading-4 ml-6 md:ml-3 lg:ml-6 ${active > 3 ? 'text-green-600' : (active === 3 ? 'text-blue-500' : 'text-gray-500')}`}>
                       Tadya
                     </p>
                   </div>
@@ -250,8 +242,8 @@ export const GiveFeedback = () => {
                       </div>
                     </div>
                     <div className="flex items-center justify-between space-x-2 flex-row mt-12">
-                      <button className="text-base font-medium leading-4 py-3.5 px-6 bg-blue-500 rounded  text-center text-white hover:bg-indigo-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:outline-none w-2/3 sm:w-auto">
-                        Continue
+                      <button onClick={() => handleNext()} className="text-base font-medium leading-4 py-3.5 px-6 bg-blue-500 rounded  text-center text-white hover:bg-indigo-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:outline-none w-2/3 sm:w-auto">
+                        {active >= 3 ? 'Submit' : 'Continue'}
                       </button>
                     </div>
                   </Form>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Welcome } from '../pages';
+import { Admin } from '../pages/admin/admin';
 import { CreateCategory } from '../pages/categories/create';
 import { ListCategories } from '../pages/categories/list';
+import { Customer } from '../pages/customer/customer';
 import { GiveFeedback } from '../pages/feedback';
 import Login from '../pages/login/login';
 import { CreateOffers } from '../pages/offers/create';
@@ -11,14 +13,20 @@ import { OfferProductList } from '../pages/offers/offerProductList';
 import Order from '../pages/order/order';
 import { CreateProducer } from '../pages/producers/create';
 import { ListProducers } from '../pages/producers/list';
+import { Producer } from '../pages/producers/producer';
 import { CreateProduct } from '../pages/products/create';
 import { ListProducts } from '../pages/products/list';
+import { Volunteer } from '../pages/volunteer/volunteer';
 
 const AppRouter = () => {
   return (
     <Routes>
       <Route path={'/login'} element={<Login/>} />
       <Route path={'/order'} element={<Order/>} />
+      <Route path={'/admin'} element={<Admin/>} />
+      <Route path={'/producer'} element={<Producer/>} />
+      <Route path={'/customer'} element={<Customer/>} />
+      <Route path={'/volunteer'} element={<Volunteer/>} />
       <Route path={'/feedback'} element={<GiveFeedback/>} />
 
       <Route path={'/producers'} element={<ListProducers/>} />
