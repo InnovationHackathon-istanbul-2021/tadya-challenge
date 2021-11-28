@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   useListCategoriesQuery,
-  useListProducersQuery,
 } from '../../generated/graphql';
 import { Table } from '../../components/ui/table/table';
 import { Link } from 'react-router-dom';
@@ -17,6 +16,7 @@ export const ListCategories = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const [categoryList, setCategoryList] = useState([] as any[]);
   const [search, setSearch] = useState('');
+  const [load, setLoad] = useState(true);
   const [filter, setFilter] = useState('');
 
   const { data, loading, error } = useListCategoriesQuery({
@@ -27,8 +27,15 @@ export const ListCategories = () => {
   });
 
   useEffect(() => {
+    loading && setLoad(true);
+  }, [loading]);
+
+  useEffect(() => {
     if (data) {
       setCategoryList(data.categories);
+      setTimeout(() => {
+        setLoad(false);
+      }, 1000)
       setTotal(data?.categories_aggregate.aggregate?.count as number);
     }
   }, [data]);
@@ -115,7 +122,7 @@ export const ListCategories = () => {
             <div>
               <Table
                 className="product-table"
-                loading={loading}
+                loading={load}
                 numOfPages={Math.ceil(total / pageLimit)}
                 manualPagination={true}
                 onFetchData={(_pageIndex: any, _pageSize: any) => {

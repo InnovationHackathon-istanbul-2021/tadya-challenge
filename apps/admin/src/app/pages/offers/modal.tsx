@@ -73,7 +73,7 @@ export const ModalExample = ({ showModal, setShowModal , handleSelectProduct }: 
                     producer_id: 'None',
                   }}
                   onSubmit={async (values, { resetForm }) => {
-
+                    console.log(values)
                   }}
                   render={({
                     values,

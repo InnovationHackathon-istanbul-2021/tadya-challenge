@@ -7,6 +7,7 @@ import { GiveFeedback } from '../pages/feedback';
 import Login from '../pages/login/login';
 import { CreateOffers } from '../pages/offers/create';
 import { ListOffers } from '../pages/offers/list';
+import { OfferProductList } from '../pages/offers/offerProductList';
 import Order from '../pages/order/order';
 import { CreateProducer } from '../pages/producers/create';
 import { ListProducers } from '../pages/producers/list';
@@ -46,6 +47,7 @@ const AppRouter = () => {
       </Route>
       <Route path={'/offers'} element={<ListOffers />} />
       <Route path={'/offers/*'}>
+        <Route path={':id'} element={<OfferProductList/>} />
         <Route path={'create'} element={<CreateOffers/>} />
       </Route>
       <Route path={'*'} element={<Welcome />} />

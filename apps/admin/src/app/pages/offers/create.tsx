@@ -35,35 +35,17 @@ export const CreateOffers = () => {
   }, [startDate]);
 
   const [insertOfferMutation, { data, loading, error }] = useInsertOfferMutation();
-  const handleQuery = (values: any, resetForm: any) => {
-    console.log({
-      start_date: startDate.toLocaleDateString("en-US"),
-      end_date: new Date(endDate).toLocaleDateString("en-US"),
-      producer_id: product[0]?.producer_id,
-      is_active: true,
-      offer_products: {
-        data: {
-          id: product[0]?.product_id,
-          price: product[0]?.price,
-          quantity: product[0]?.stock,
-          is_active: true,
-        }
-      }
-    });
+
+  const createOffers = (values: any, resetForm: any, products: any, producerId: any) => {
     insertOfferMutation({
       variables: {
         object: {
           start_date: startDate.toLocaleDateString("en-US"),
           end_date: new Date(endDate).toLocaleDateString("en-US"),
-          producer_id: product[0]?.producer_id,
+          producer_id: producerId,
           is_active: true,
           offer_products: {
-            data:[ {
-              product_id: product[0]?.product_id,
-              price: product[0]?.price,
-              quantity: product[0]?.stock,
-              is_active: true,
-            }]
+            data:[ ...products ]
           }
         }
       }
@@ -75,7 +57,7 @@ export const CreateOffers = () => {
         type: 'success',
       })
       resetForm();
-      window.location.href = '/products';
+      window.location.href = '/offers';
     })
     .catch((err: any) => {
       resetForm();
@@ -86,7 +68,35 @@ export const CreateOffers = () => {
       })
       console.log(err);
     });
+  }
+
+  const handleQuery = (values: any, resetForm: any) => {
+    const filterData: any = [];
+    let producerProducts: any = [];
+    const producerIds: any = _.uniq(_.map(product, 'producer_id'));
+    producerIds.length > 0 && producerIds.map((proId: any) => {
+      producerProducts = [];
+      product.length > 0 && product.map((pro: any) => {
+        if (proId === pro.producer_id) {
+          producerProducts.push({
+            product_id: pro?.product_id,
+            price: pro?.price,
+            quantity: pro?.stock,
+            is_active: true,
+          });
+        }
+        return pro;
+      })
+      filterData.push({[proId]: [...producerProducts]})
+      return proId;
+    })
+    filterData.length > 0 && filterData.map((producerId: any, index: any) => {
+      const prodts = producerId[producerIds[index]];
+      createOffers(values, resetForm, prodts, producerIds[index]);
+      return producerId;
+    })
   };
+
   const handleSelectProduct = ({ producer_id, ...data }: any) => {
     const selectProducts: any[] = [];
 
