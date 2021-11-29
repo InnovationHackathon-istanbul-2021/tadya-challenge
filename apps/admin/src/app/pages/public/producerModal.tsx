@@ -4,7 +4,7 @@ import { FaRegStar, FaStar, FaPhoneAlt } from 'react-icons/fa';
 import { Icon } from '../../components/ui/icon/Icon';
 import { searchImages } from 'pixabay-api';
 
-export const ProducerModal = () => {
+export const ProducerModal = ({setShowProducerInfo, showProducerInfo}: any) => {
   const [randomPics, setRandomPic] = useState([] as any[]);
 
   useEffect(() => {
@@ -151,7 +151,7 @@ export const ProducerModal = () => {
               </div>
             </div>
             <div
-              onClick={() => alert('close')}
+              onClick={() => setShowProducerInfo(!showProducerInfo)}
               className="cursor-pointer absolute top-0 right-0 m-3 text-gray-800 dark:text-gray-100 transition duration-150 ease-in-out"
             >
               <Icon

@@ -277,7 +277,7 @@ export const PublicOfferPage = () => {
           )}
         />
       </div>
-      {showProducerInfo?<ProducerModal/>: ''}
+      {showProducerInfo?<ProducerModal setShowProducerInfo={setShowProducerInfo} showProducerInfo={showProducerInfo} />: ''}
     </Content>
   );
 };
