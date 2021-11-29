@@ -4,15 +4,9 @@ import { FaRegStar, FaStar, FaPhoneAlt } from 'react-icons/fa';
 import { Icon } from '../../components/ui/icon/Icon';
 import { searchImages } from 'pixabay-api';
 
-export const ProducerModal = ({setShowProducerInfo, showProducerInfo}: any) => {
+export const ProducerModal = ({setShowProducerInfo, showProducerInfo, modalData}: any) => {
   const [randomPics, setRandomPic] = useState([] as any[]);
 
-  useEffect(() => {
-    console.log("1 time")
-    searchImages('24555346-4772f27513bbc7064b64bf8b9', 'turkey farmer', {
-      per_page: 3,
-    }).then((r) => setRandomPic(r.hits));
-  },[])
   return (
     <div
       className={`absolute inset-0 z-40 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center`}
@@ -27,16 +21,14 @@ export const ProducerModal = ({setShowProducerInfo, showProducerInfo}: any) => {
               <div className="xl:w-2/5 lg:w-2/5 bg-gray-100 dark:bg-gray-800 py-8 border-gray-300 dark:border-gray-200 xl:border-r rounded-tl xl:rounded-bl rounded-tr xl:rounded-tr-none lg:border-r-2 border-b xl:border-b-0 flex justify-center items-center">
                 <div className="flex flex-col items-center">
                   <div className="h-24 w-24 rounded-full mb-3">
-                    {randomPics.length > 0 && (
-                      <img
-                        src={`${randomPics[0].previewURL}`}
-                        className="h-full w-full object-cover rounded-full shadow"
-                        alt="a"
-                      />
-                    )}
+                    <img
+                      src={`${modalData.image}`}
+                      className="h-full w-full object-cover rounded-full shadow"
+                      alt="a"
+                    />
                   </div>
                   <p className="mb-2 text-lg font-bold text-gray-900 dark:text-gray-100">
-                  Minaz Ailesi
+                  {modalData.product.producer.title}
                   </p>
                   <p className="mb-1 text-sm text-gray-700 items-center align-center ">
                     <Rating
@@ -71,7 +63,7 @@ export const ProducerModal = ({setShowProducerInfo, showProducerInfo}: any) => {
                     </div>
                     <div className="flex flex-col items-center w-4/12 border-r border-l border-gray-200">
                       <p className="text-gray-600 dark:text-gray-400 text-2xl">
-                        58
+                        {modalData.quantity}
                       </p>
                       <p className="text-gray-800 dark:text-gray-100 text-sm">
                         Produts
@@ -92,7 +84,7 @@ export const ProducerModal = ({setShowProducerInfo, showProducerInfo}: any) => {
                         Member Since
                       </p>
                       <p className="text-sm text-gray-700 dark:text-gray-400">
-                        29 Jan, 2010
+                        {new Date(modalData.created_ate).toLocaleDateString("en-US")}
                       </p>
                     </div>
                   </div>

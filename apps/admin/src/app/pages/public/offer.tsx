@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Rating from 'react-rating';
 import { FaRegStar, FaStar } from 'react-icons/fa';
-import { useList_All_ProductsQuery, useList_Offer_By_DateQuery } from '../../generated/graphql';
+import { useList_Offer_By_DateQuery } from '../../generated/graphql';
 import { searchImages } from 'pixabay-api';
 import { useSearchParams } from 'react-router-dom'
 import _ from 'lodash'
@@ -13,10 +13,11 @@ import { AddToCartModal } from './addToCartModal';
 const Content = styled.div``;
 export const PublicOfferPage = () => {
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get('date'))
   const [products, setProductList] = useState([] as any[]);
   const [randomPics, setRandomPic] = useState([] as any[]);
-  const [showProducerInfo, setShowProducerInfo] = useState(false)
+  const [showProducerInfo, setShowProducerInfo] = useState(false);
+  const [cartModal, setCartModal] = useState(false);
+  const [modalData, setModalData] = useState<any>(null);
   const { data, loading, error } = useList_Offer_By_DateQuery({
     variables:{
       _gt: searchParams.get('date')
@@ -41,6 +42,8 @@ export const PublicOfferPage = () => {
       }).then((r) => setRandomPic(r.hits));
     }
   }, [data]);
+
+  console.log(products);
 
   return (
     <Content className="container mx-auto w-full ">
@@ -229,7 +232,10 @@ export const PublicOfferPage = () => {
                                 <div className="p-4">
                                   <div className="flex items-center">
                                     <p
-                                      onClick={() => setShowProducerInfo(true)}
+                                      onClick={() => {
+                                        setShowProducerInfo(!showProducerInfo);
+                                        setModalData({ ...offer, image: randomPics[index].previewURL})
+                                      }}
                                     className="text-xs light-gray cursor-pointer mt-2">
                                       {offer.product.producer.title}
                                     </p>
@@ -261,7 +267,11 @@ export const PublicOfferPage = () => {
                                   </div>
 
                                   <div className="flex items-center">
-                                    <button className="mx-auto py-3 bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-6 py-2 text-xs">
+                                    <button onClick={() => {
+                                        setCartModal(!cartModal);
+                                        setModalData({ ...offer, image: randomPics[index].previewURL})
+                                      }}
+                                      className="mx-auto py-3 bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-6 py-2 text-xs">
                                       Add to Cart
                                     </button>
                                   </div>
@@ -278,8 +288,8 @@ export const PublicOfferPage = () => {
           )}
         />
       </div>
-      {showProducerInfo?<ProducerModal/>: ''}
-      <AddToCartModal/>
+      {showProducerInfo?<ProducerModal modalData={modalData} showProducerInfo={showProducerInfo} setShowProducerInfo={setShowProducerInfo} />: ''}
+      {cartModal && <AddToCartModal  modalData={modalData} cartModal={cartModal} setCartModal={setCartModal}/>}
     </Content>
   );
 };

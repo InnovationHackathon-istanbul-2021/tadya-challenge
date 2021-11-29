@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Rating from 'react-rating';
-import { FaRegStar, FaStar, FaPhoneAlt } from 'react-icons/fa';
+import { FaRegStar, FaStar } from 'react-icons/fa';
 import { Icon } from '../../components/ui/icon/Icon';
-import { searchImages } from 'pixabay-api';
 
-export const AddToCartModal = () => {
-  const [randomPics, setRandomPic] = useState([] as any[]);
-
-  useEffect(() => {
-    searchImages('24555346-4772f27513bbc7064b64bf8b9', 'turkey farmer', {
-      per_page: 3,
-    }).then((r) => setRandomPic(r.hits));
-  }, []);
+export const AddToCartModal = ({modalData, cartModal, setCartModal}: any) => {
   return (
     <div
       className={`absolute inset-0 z-40 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center`}
@@ -27,17 +19,15 @@ export const AddToCartModal = () => {
             </p>
             <hr className="w-full border-gray-200 mt-4 mb-6" />
             <div className="flex flex-col px-4 md:px-12">
-              {randomPics.length > 0 && (
-                <img
-                  src={`${randomPics[0].previewURL}`}
-                  className="h-full w-full object-cover shadow"
-                  alt="a"
-                />
-              )}
+              <img
+                src={`${modalData.image}`}
+                className="h-full w-full object-cover shadow"
+                alt="a"
+              />
               <p className="text-base sm:text-lg md:text-2xl font-bold md:leading-6 mt-6 text-gray-800 text-center dark:text-gray-100">
-                Kuru Soğan (küçük boy baş)
+                {modalData.product.title}
               </p>
-              <p className="text-s light-gray mx-1 mt-2">1KG</p>
+              <p className="text-s light-gray mx-1 mt-2">{modalData.product.quantity} {modalData.product.measure_unit}</p>
               <p className="text-xs sm:text-sm leading-5 mt-2 sm:mt-4 text-left text-gray-600 dark:text-gray-300">Get yourself ready for the whole new collection of premium and attractive products made just for you.</p>
 
               <div className="flex items-center justify-between py-4">
@@ -49,7 +39,7 @@ export const AddToCartModal = () => {
                     <FaStar className="w-3 h-3 text-sm" />
                   ))}
                 />
-                <h3 className="purple text-xl font-semibold">&#x20BA;4TL</h3>
+                <h3 className="purple text-xl font-semibold">&#x20BA;{modalData.price}TL</h3>
               </div>
               <div className="flex items-center mt-4 sm:mt-6 w-full">
                 <div className="bg-white border rounded border-gray-200  w-1/3">
@@ -63,7 +53,7 @@ export const AddToCartModal = () => {
                 </button>
               </div>
             </div>
-            <div className="cursor-pointer absolute top-0 right-0 m-3 text-gray-800 dark:text-gray-100 transition duration-150 ease-in-out">
+            <div onClick={() => setCartModal(!cartModal)} className="cursor-pointer absolute top-0 right-0 m-3 text-gray-800 dark:text-gray-100 transition duration-150 ease-in-out">
               <Icon
                 className="text-gray-500 hover:text-gray-700 w-5 h-5"
                 icon={'HiX'}
