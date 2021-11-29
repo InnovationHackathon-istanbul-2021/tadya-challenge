@@ -8,6 +8,7 @@ import { searchImages } from 'pixabay-api';
 import { useSearchParams } from 'react-router-dom'
 import _ from 'lodash'
 import { ProducerModal } from './producerModal';
+import { AddToCartModal } from './addToCartModal';
 
 const Content = styled.div``;
 export const PublicOfferPage = () => {
@@ -277,7 +278,8 @@ export const PublicOfferPage = () => {
           )}
         />
       </div>
-      {showProducerInfo?<ProducerModal setShowProducerInfo={setShowProducerInfo} showProducerInfo={showProducerInfo} />: ''}
+      {showProducerInfo?<ProducerModal/>: ''}
+      <AddToCartModal/>
     </Content>
   );
 };
