@@ -7,13 +7,15 @@ import { useList_All_ProductsQuery, useList_Offer_By_DateQuery } from '../../gen
 import { searchImages } from 'pixabay-api';
 import { useSearchParams } from 'react-router-dom'
 import _ from 'lodash'
+import { ProducerModal } from './producerModal';
+
 const Content = styled.div``;
 export const PublicOfferPage = () => {
   const [searchParams] = useSearchParams();
   console.log(searchParams.get('date'))
   const [products, setProductList] = useState([] as any[]);
   const [randomPics, setRandomPic] = useState([] as any[]);
-
+  const [showProducerInfo, setShowProducerInfo] = useState(false)
   const { data, loading, error } = useList_Offer_By_DateQuery({
     variables:{
       _gt: searchParams.get('date')
@@ -34,13 +36,13 @@ export const PublicOfferPage = () => {
       });
       setProductList(flatResult);
       searchImages('24555346-4772f27513bbc7064b64bf8b9', 'dairy', {
-        per_page: 10,
+        per_page: 30,
       }).then((r) => setRandomPic(r.hits));
     }
   }, [data]);
 
   return (
-    <Content className="container mx-auto w-full h-full ">
+    <Content className="container mx-auto w-full ">
       <div className="bg-white rounded py-6 xl:px-24 px-4 flex items-center justify-center">
         <div>
           <div className="mx-auto container">
@@ -74,7 +76,7 @@ export const PublicOfferPage = () => {
           }) => (
             <Form className="flex items-center justify-between w-full">
               <div className="flex flex-col justify-between lg:flex-row w-full items-start lg:items-center rounded bg-white">
-                <div className="w-full lg:w-1/6 mr-5 h-full h-screen">
+                <div className="w-full lg:w-1/6 mr-5 h-full ">
                   <div>
                     <h4 className="font-semibold leading-6 mt-8 text-gray-900">
                       Filters
@@ -203,7 +205,7 @@ export const PublicOfferPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-full lg:w-5/6 h-full h-screen">
+                <div className="w-full lg:w-5/6 h-full">
                   <h2 className="text-xl font-semibold leading-6 mt-8 text-gray-900 mb-5">
                     Produts
                   </h2>
@@ -225,7 +227,9 @@ export const PublicOfferPage = () => {
                               <div className="bg-white">
                                 <div className="p-4">
                                   <div className="flex items-center">
-                                    <p className="text-xs light-gray mt-2">
+                                    <p
+                                      onClick={() => setShowProducerInfo(true)}
+                                    className="text-xs light-gray cursor-pointer mt-2">
                                       {offer.product.producer.title}
                                     </p>
                                     <span className="px-2 bg-dot-color">•</span>
@@ -242,6 +246,7 @@ export const PublicOfferPage = () => {
                                       initialRating={Math.floor(
                                         Math.random() * 10
                                       )}
+                                      readonly
                                       emptySymbol={
                                         <FaRegStar className="w-3 h-3 text-sm" />
                                       }
@@ -272,6 +277,7 @@ export const PublicOfferPage = () => {
           )}
         />
       </div>
+      {showProducerInfo?<ProducerModal/>: ''}
     </Content>
   );
 };

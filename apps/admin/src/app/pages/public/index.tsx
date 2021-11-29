@@ -228,6 +228,7 @@ export const PublicPage = () => {
                                       emptySymbol={
                                         <FaRegStar className="w-3 h-3 text-sm" />
                                       }
+                                      readonly
                                       fullSymbol={[1, 2, 3, 4, 5].map((n) => (
                                         <FaStar className="w-3 h-3 text-sm" />
                                       ))}
