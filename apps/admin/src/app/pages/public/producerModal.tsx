@@ -6,7 +6,10 @@ import { searchImages } from 'pixabay-api';
 
 export const ProducerModal = ({setShowProducerInfo, showProducerInfo, modalData}: any) => {
   const [randomPics, setRandomPic] = useState([] as any[]);
-
+  useEffect((): any => {
+    document.body.style.overflow = 'hidden';
+    return ()=> document.body.style.overflow = 'unset';
+ }, []);
   return (
     <div
       className={`absolute inset-0 z-40 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center`}

@@ -5,8 +5,8 @@ import Rating from 'react-rating';
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import { useList_Offer_By_DateQuery } from '../../generated/graphql';
 import { searchImages } from 'pixabay-api';
-import { useSearchParams } from 'react-router-dom'
-import _ from 'lodash'
+import { useSearchParams } from 'react-router-dom';
+import _ from 'lodash';
 import { ProducerModal } from './producerModal';
 import { AddToCartModal } from './addToCartModal';
 
@@ -19,9 +19,9 @@ export const PublicOfferPage = () => {
   const [cartModal, setCartModal] = useState(false);
   const [modalData, setModalData] = useState<any>(null);
   const { data, loading, error } = useList_Offer_By_DateQuery({
-    variables:{
-      _gt: searchParams.get('date')
-    }
+    variables: {
+      _gt: searchParams.get('date'),
+    },
   });
 
   useEffect(() => {
@@ -246,7 +246,8 @@ export const PublicOfferPage = () => {
                                     {offer.product.title}
                                   </h2>
                                   <p className="text-xs light-gray mt-2">
-                                    {offer.product.quantity} {offer.product.measure_unit}
+                                    {offer.product.quantity}{' '}
+                                    {offer.product.measure_unit}
                                   </p>
                                   <div className="flex items-center justify-between py-4">
                                     <Rating

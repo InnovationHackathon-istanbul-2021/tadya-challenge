@@ -5,12 +5,16 @@ import Rating from 'react-rating';
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import { useList_All_ProductsQuery } from '../../generated/graphql';
 import { searchImages } from 'pixabay-api';
+import { ProducerModal } from './producerModal';
+import { AddToCartModal } from './addToCartModal';
 
 const Content = styled.div``;
 export const PublicPage = () => {
   const [products, setProductList] = useState([] as any[]);
   const [randomPics, setRandomPic] = useState([] as any[]);
-
+  const [showProducerInfo, setShowProducerInfo] = useState(false);
+  const [cartModal, setCartModal] = useState(false);
+  const [modalData, setModalData] = useState<any>(null);
   const { data, loading, error } = useList_All_ProductsQuery();
 
   useEffect(() => {
@@ -55,9 +59,9 @@ export const PublicPage = () => {
             resetForm,
             setFieldValue,
           }) => (
-            <Form className="flex items-center justify-between w-full">
-              <div className="flex flex-col justify-between lg:flex-row w-full items-start lg:items-center rounded bg-white">
-                <div className="w-full lg:w-1/6 mr-5 h-full h-screen">
+            <Form className="flex items-start justify-between w-full">
+              <div className="flex flex-col justify-between overflow-hidden lg:flex-row w-full items-start  rounded bg-white">
+                <div className="w-full lg:w-1/6 mr-5">
                   <div>
                     <h4 className="font-semibold leading-6 mt-8 text-gray-900">
                       Filters
@@ -186,7 +190,7 @@ export const PublicPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-full lg:w-5/6 h-full h-screen">
+                <div className="w-full lg:w-5/6 ">
                   <h2 className="text-xl font-semibold leading-6 mt-8 text-gray-900 mb-5">
                     Produts
                   </h2>
@@ -208,7 +212,12 @@ export const PublicPage = () => {
                               <div className="bg-white">
                                 <div className="p-4">
                                   <div className="flex items-center">
-                                    <p className="text-xs light-gray mt-2">
+                                    <p
+                                     onClick={() => {
+                                      setShowProducerInfo(!showProducerInfo);
+                                      setModalData({ ...product, product, image: randomPics[index].previewURL})
+                                    }}
+                                    className="text-xs light-gray mt-2 cursor cursor-pointer">
                                       {product.producer.title}
                                     </p>
                                     <span className="px-2 bg-dot-color">•</span>
@@ -239,7 +248,12 @@ export const PublicPage = () => {
                                   </div>
 
                                   <div className="flex items-center">
-                                    <button className="mx-auto py-3 bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-6 py-2 text-xs">
+                                    <button
+onClick={() => {
+  setCartModal(!cartModal);
+  setModalData({ ...product, product, image: randomPics[index].previewURL})
+}}
+                                    className="mx-auto py-3 bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-6 py-2 text-xs">
                                       Add to Cart
                                     </button>
                                   </div>
@@ -256,6 +270,9 @@ export const PublicPage = () => {
           )}
         />
       </div>
+      {showProducerInfo?<ProducerModal modalData={modalData} showProducerInfo={showProducerInfo} setShowProducerInfo={setShowProducerInfo} />: ''}
+      {cartModal && <AddToCartModal  modalData={modalData} cartModal={cartModal} setCartModal={setCartModal}/>}
+
     </Content>
   );
 };
