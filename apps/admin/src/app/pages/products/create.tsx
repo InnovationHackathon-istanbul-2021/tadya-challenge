@@ -714,9 +714,9 @@ export const CreateProduct = () => {
                       Cancel
                     </button>
                     <button
-                      onClick={() => handleJsonProductImport()}
+                      //onClick={() => handleJsonProductImport()}
                       className="bg-blue-500 transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm focus:outline-none"
-                      type="button"
+                      type="submit"
                     >
                       Save
                     </button>

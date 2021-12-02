@@ -36,7 +36,7 @@ const TextInput = ({ type, title, name, icon, value, onChange, styles, placehold
           type={type}
           id={name}
           name={name}
-          required
+
           className={ styles + " w-full border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow rounded text-sm focus:outline-none bg-transparent focus:border--700 text-gray-800 dark:text-gray-100"}
           placeholder={placeholder}
         />
